@@ -1,566 +1,230 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Talha Khan | Senior QA Engineer</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg:      #080b0f;
-      --bg2:     #0c1017;
-      --bg3:     #10161f;
-      --card:    #0e1520;
-      --border:  #192233;
-      --border2: #1e2d42;
-      --accent:  #00e5c0;
-      --accent2: #0a8fff;
-      --accent3: #8b5cf6;
-      --text:    #ddeaf7;
-      --muted:   #5c7a96;
-      --mono:    'Space Mono', monospace;
-      --sans:    'Syne', sans-serif;
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.7; overflow-x: hidden; }
-    body::after {
-      content: '';
-      position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-      pointer-events: none; z-index: 9999; opacity: 0.35;
-    }
-    ::-webkit-scrollbar { width: 3px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
-
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1.1rem 4rem;
-      background: rgba(8,11,15,0.92);
-      backdrop-filter: blur(24px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-brand { display: flex; align-items: center; gap: 0.8rem; }
-    .nav-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: blink 2.4s ease-in-out infinite; }
-    .nav-logo { font-family: var(--mono); font-size: 0.8rem; color: var(--text); letter-spacing: 0.06em; }
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-    .nav-links a { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--accent); }
-    .nav-cta { font-family: var(--mono); font-size: 0.7rem; padding: 0.5rem 1.1rem; background: transparent; border: 1px solid rgba(0,229,192,0.35); color: var(--accent); border-radius: 3px; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: all 0.2s; }
-    .nav-cta:hover { background: rgba(0,229,192,0.08); border-color: var(--accent); }
-
-    .hero {
-      min-height: 100vh;
-      display: grid; grid-template-columns: 1.1fr 0.9fr;
-      align-items: center;
-      padding: 8rem 4rem 5rem;
-      position: relative; overflow: hidden; gap: 5rem;
-    }
-    .hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background-image: linear-gradient(rgba(0,229,192,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,192,0.025) 1px, transparent 1px);
-      background-size: 64px 64px; pointer-events: none;
-    }
-    .glow-tr { position: absolute; top: 10%; right: 0; width: 600px; height: 600px; background: radial-gradient(ellipse at top right, rgba(0,229,192,0.07) 0%, transparent 65%); pointer-events: none; }
-    .glow-bl { position: absolute; bottom: 0; left: 5%; width: 450px; height: 450px; background: radial-gradient(ellipse at bottom left, rgba(10,143,255,0.06) 0%, transparent 65%); pointer-events: none; }
-    .hero-left { position: relative; z-index: 1; }
-
-    .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.6rem; font-family: var(--mono); font-size: 0.68rem; color: var(--accent); border: 1px solid rgba(0,229,192,0.25); padding: 0.35rem 0.9rem; border-radius: 2px; margin-bottom: 2rem; letter-spacing: 0.12em; text-transform: uppercase; animation: slideIn 0.7s ease both; }
-    .blink-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: blink 1.8s infinite; flex-shrink: 0; }
-
-    .hero-name { font-size: clamp(3rem, 5.5vw, 5rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 0.6rem; animation: slideIn 0.7s 0.1s ease both; }
-    .hero-name em { font-style: normal; -webkit-text-stroke: 1.5px var(--accent); color: transparent; }
-    .hero-title { font-family: var(--mono); font-size: 0.82rem; color: var(--muted); letter-spacing: 0.06em; margin-bottom: 2.2rem; animation: slideIn 0.7s 0.18s ease both; }
-    .hero-bio { font-size: 0.98rem; color: #7a9ab8; max-width: 500px; line-height: 1.85; margin-bottom: 2.8rem; animation: slideIn 0.7s 0.26s ease both; }
-    .hero-bio strong { color: var(--text); font-weight: 600; }
-
-    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; animation: slideIn 0.7s 0.34s ease both; }
-    .btn { font-family: var(--mono); font-size: 0.75rem; padding: 0.8rem 1.8rem; border-radius: 3px; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; cursor: pointer; border: none; transition: all 0.22s; display: inline-flex; align-items: center; gap: 0.5rem; }
-    .btn-primary { background: var(--accent); color: #070a0e; font-weight: 700; }
-    .btn-primary:hover { background: #1affd9; transform: translateY(-2px); box-shadow: 0 10px 35px rgba(0,229,192,0.28); }
-    .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border2); }
-    .btn-outline:hover { border-color: rgba(0,229,192,0.4); color: var(--accent); transform: translateY(-2px); }
-
-    .hero-right { position: relative; z-index: 1; animation: slideIn 0.8s 0.2s ease both; }
-    .about-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
-    .about-card-header { padding: 1.1rem 1.6rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 0.6rem; }
-    .dot { width: 10px; height: 10px; border-radius: 50%; }
-    .dot-red { background: #ff5f57; } .dot-yellow { background: #febc2e; } .dot-green { background: #28c840; }
-    .about-card-header span { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); margin-left: auto; letter-spacing: 0.06em; }
-    .about-card-body { padding: 1.6rem; }
-    .about-row { display: flex; gap: 1rem; padding: 0.8rem 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
-    .about-row:last-child { border-bottom: none; padding-bottom: 0; }
-    .about-key { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; min-width: 90px; padding-top: 0.1rem; flex-shrink: 0; }
-    .about-val { font-size: 0.86rem; color: var(--text); line-height: 1.5; }
-    .about-val a { color: var(--accent2); text-decoration: none; }
-    .about-val a:hover { text-decoration: underline; }
-    .avail-badge { display: inline-flex; align-items: center; gap: 0.45rem; background: rgba(0,229,192,0.08); border: 1px solid rgba(0,229,192,0.2); color: var(--accent); font-family: var(--mono); font-size: 0.62rem; padding: 0.22rem 0.65rem; border-radius: 20px; letter-spacing: 0.06em; }
-
-    .hero-contact-bar { margin-top: 1.2rem; padding: 1.1rem 1.5rem; background: var(--bg3); border: 1px solid var(--border); border-radius: 6px; display: flex; flex-wrap: wrap; gap: 1.2rem; }
-    .contact-pill { font-family: var(--mono); font-size: 0.67rem; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 0.45rem; transition: color 0.2s; }
-    .contact-pill:hover { color: var(--accent); }
-    .cpill-icon { color: var(--accent); }
-
-    section { padding: 6rem 4rem; position: relative; z-index: 1; }
-    .section-eyebrow { font-family: var(--mono); font-size: 0.65rem; color: var(--accent); letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 0.7rem; display: flex; align-items: center; gap: 0.9rem; }
-    .section-eyebrow::after { content: ''; height: 1px; width: 50px; background: linear-gradient(90deg, var(--accent), transparent); }
-    .section-title { font-size: clamp(1.7rem, 2.8vw, 2.4rem); font-weight: 800; letter-spacing: -0.025em; margin-bottom: 3rem; line-height: 1.2; }
-
-    #skills { background: var(--bg2); }
-    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1.5rem; }
-    .skill-group { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 2rem 1.8rem; transition: border-color 0.25s, transform 0.25s; }
-    .skill-group:hover { border-color: rgba(0,229,192,0.28); transform: translateY(-4px); }
-    .sg-header { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 1.4rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
-    .sg-icon { font-size: 1.2rem; }
-    .sg-title { font-family: var(--mono) ; font-size: 0.72rem; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; }
-    .tag-wrap { display: flex; flex-wrap: wrap; gap: 0.45rem; }
-    .tag { font-family: var(--mono); font-size: 0.65rem; padding: 0.28rem 0.65rem; border-radius: 2px; letter-spacing: 0.03em; }
-    .t-green  { background: rgba(0,229,192,0.07);  color: var(--accent); border: 1px solid rgba(0,229,192,0.18); }
-    .t-blue   { background: rgba(10,143,255,0.08); color: #5ab8ff;       border: 1px solid rgba(10,143,255,0.2);  }
-    .t-purple { background: rgba(139,92,246,0.09); color: #b08eff;        border: 1px solid rgba(139,92,246,0.22); }
-    .t-dim    { background: rgba(255,255,255,0.03); color: var(--muted);  border: 1px solid var(--border);         }
-
-    .exp-list { display: flex; flex-direction: column; gap: 1.5rem; }
-    .exp-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 2.4rem; position: relative; overflow: hidden; transition: border-color 0.25s; }
-    .exp-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, var(--accent), var(--accent2)); border-radius: 3px 0 0 3px; opacity: 0; transition: opacity 0.25s; }
-    .exp-card:hover { border-color: rgba(0,229,192,0.25); }
-    .exp-card:hover::before { opacity: 1; }
-    .exp-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 0.4rem; }
-    .exp-role { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.01em; }
-    .exp-badge { font-family: var(--mono); font-size: 0.62rem; padding: 0.22rem 0.6rem; background: rgba(0,229,192,0.1); color: var(--accent); border: 1px solid rgba(0,229,192,0.22); border-radius: 2px; letter-spacing: 0.08em; text-transform: uppercase; }
-    .exp-badge.upwork { background: rgba(20,180,90,0.1); color: #14b45a; border-color: rgba(20,180,90,0.25); }
-    .exp-company { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); margin-bottom: 0.25rem; }
-    .exp-meta { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); margin-bottom: 1.6rem; }
-    .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
-    .exp-bullets li { font-size: 0.88rem; color: #7a9ab8; padding-left: 1.3rem; position: relative; line-height: 1.65; }
-    .exp-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); opacity: 0.6; font-size: 0.72rem; top: 0.18em; }
-
-    #repos { background: var(--bg2); }
-    .repos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 1.5rem; }
-    .repo-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1.9rem; text-decoration: none; display: flex; flex-direction: column; transition: all 0.25s; position: relative; overflow: hidden; }
-    .repo-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
-    .repo-card:hover { border-color: rgba(0,229,192,0.28); transform: translateY(-5px); box-shadow: 0 24px 50px rgba(0,0,0,0.45); }
-    .repo-card:hover::after { transform: scaleX(1); }
-    .repo-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
-    .repo-icon { font-size: 1.6rem; }
-    .repo-label { font-family: var(--mono); font-size: 0.6rem; padding: 0.2rem 0.55rem; border-radius: 2px; letter-spacing: 0.07em; text-transform: uppercase; }
-    .rl-new    { background: rgba(0,229,192,0.1);  color: var(--accent); border: 1px solid rgba(0,229,192,0.2);   }
-    .rl-ai     { background: rgba(139,92,246,0.1); color: #b08eff;       border: 1px solid rgba(139,92,246,0.22); }
-    .rl-perf   { background: rgba(10,143,255,0.1); color: #5ab8ff;       border: 1px solid rgba(10,143,255,0.2);  }
-    .rl-docs   { background: rgba(255,255,255,0.04); color: var(--muted); border: 1px solid var(--border);         }
-    .repo-name { font-family: var(--mono); font-size: 0.82rem; color: var(--accent); margin-bottom: 0.65rem; letter-spacing: 0.02em; }
-    .repo-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.65; margin-bottom: 1.4rem; flex: 1; }
-    .repo-stack { display: flex; gap: 0.4rem; flex-wrap: wrap; }
-
-    .domains-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 1rem; }
-    .domain-card { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 1.1rem 1.4rem; display: flex; align-items: center; gap: 0.8rem; font-size: 0.85rem; transition: all 0.22s; }
-    .domain-card:hover { border-color: rgba(0,229,192,0.28); background: var(--bg3); transform: translateX(5px); }
-
-    #certifications { background: var(--bg2); }
-    .certs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
-    .cert-card { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 1.3rem 1.5rem; display: flex; flex-direction: column; gap: 0.45rem; transition: all 0.22s; }
-    .cert-card:hover { border-color: rgba(0,229,192,0.22); transform: translateY(-2px); }
-    .cert-issuer { font-family: var(--mono); font-size: 0.62rem; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; }
-    .cert-name { font-size: 0.84rem; font-weight: 600; line-height: 1.4; color: var(--text); }
-    .cert-date { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); }
-
-    #contact { text-align: center; }
-    .contact-inner { max-width: 620px; margin: 0 auto; }
-    .contact-inner p { font-size: 0.96rem; color: var(--muted); line-height: 1.85; margin-top: -1rem; }
-    .contact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 2.8rem; }
-    .clink { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 1.3rem 1.5rem; text-decoration: none; display: flex; align-items: center; gap: 0.8rem; transition: all 0.22s; }
-    .clink:hover { border-color: rgba(0,229,192,0.3); background: var(--bg3); transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,0.35); }
-    .clink-icon { font-size: 1.2rem; }
-    .clink-body { text-align: left; }
-    .clink-label { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
-    .clink-val { font-size: 0.84rem; font-weight: 600; color: var(--text); margin-top: 0.15rem; }
-
-    footer { border-top: 1px solid var(--border); padding: 1.8rem 4rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-    footer span { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); }
-    .footer-badge { display: flex; align-items: center; gap: 0.5rem; font-family: var(--mono); font-size: 0.68rem; color: var(--accent); }
-
-    @keyframes slideIn { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
-
-    @media (max-width: 960px) {
-      nav { padding: 1rem 1.5rem; }
-      .nav-links, .nav-cta { display: none; }
-      .hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; gap: 3rem; }
-      .hero-right { display: none; }
-      section { padding: 4rem 1.5rem; }
-      .contact-grid { grid-template-columns: 1fr; }
-      footer { padding: 1.5rem; }
-    }
-  </style>
-</head>
-<body>
-
-<nav>
-  <div class="nav-brand">
-    <div class="nav-dot"></div>
-    <span class="nav-logo">Talha Khan · Senior QA Engineer</span>
-  </div>
-  <ul class="nav-links">
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#repos">Portfolio</a></li>
-    <li><a href="#certifications">Certs</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <a href="mailto:contact.talhakhattak@gmail.com" class="nav-cta">Hire Me</a>
-</nav>
-
-<section class="hero">
-  <div class="glow-tr"></div>
-  <div class="glow-bl"></div>
-
-  <div class="hero-left">
-    <div class="hero-eyebrow">
-      <span class="blink-dot"></span>
-      Open to Remote &amp; Freelance Work
-    </div>
-    <h1 class="hero-name">Talha<br /><em>Khan</em></h1>
-    <p class="hero-title">Senior Software Quality Assurance Engineer</p>
-    <p class="hero-bio">
-      A <strong>detail-obsessed QA engineer</strong> with 5+ years of experience breaking software — intentionally. I specialise in <strong>manual, automation &amp; AI-focused quality assurance</strong> across web, mobile, SaaS, and AI-enabled platforms. I catch bugs before users do, validate LLMs before they go rogue, and build automation pipelines that run while you sleep. Comfortable writing a 50-page test plan or setting up an <strong>AI agent-driven test infrastructure</strong> from scratch.
-    </p>
-    <div class="hero-actions">
-      <a href="#repos" class="btn btn-primary">View Portfolio</a>
-      <a href="#contact" class="btn btn-outline">Get In Touch</a>
-    </div>
-  </div>
-
-  <div class="hero-right">
-    <div class="about-card">
-      <div class="about-card-header">
-        <div class="dot dot-red"></div>
-        <div class="dot dot-yellow"></div>
-        <div class="dot dot-green"></div>
-        <span>talha-khan.profile</span>
-      </div>
-      <div class="about-card-body">
-        <div class="about-row">
-          <div class="about-key">Status</div>
-          <div class="about-val"><span class="avail-badge"><span class="blink-dot"></span>Available Now</span></div>
-        </div>
-        <div class="about-row">
-          <div class="about-key">Experience</div>
-          <div class="about-val">5+ Years in Software QA</div>
-        </div>
-        <div class="about-row">
-          <div class="about-key">Focus</div>
-          <div class="about-val">Manual · Automation · AI/LLM Testing</div>
-        </div>
-        <div class="about-row">
-          <div class="about-key">Domains</div>
-          <div class="about-val">18+ Industries Tested</div>
-        </div>
-        <div class="about-row">
-          <div class="about-key">Platform</div>
-          <div class="about-val"><a href="https://upwork.com" target="_blank">Upwork — Freelance QA Engineer</a></div>
-        </div>
-        <div class="about-row">
-          <div class="about-key">Location</div>
-          <div class="about-val">Lahore, Pakistan · Remote Ready 🌍</div>
-        </div>
-        <div class="about-row">
-          <div class="about-key">Education</div>
-          <div class="about-val">BS Computer Science · University of South Asia</div>
-        </div>
-      </div>
-    </div>
-    <div class="hero-contact-bar">
-      <a href="mailto:contact.talhakhattak@gmail.com" class="contact-pill"><span class="cpill-icon">✉</span>contact.talhakhattak@gmail.com</a>
-      <a href="https://linkedin.com/in/talha-khan-khattak/" target="_blank" class="contact-pill"><span class="cpill-icon">↗</span>LinkedIn</a>
-      <a href="https://wa.me/923494578579" target="_blank" class="contact-pill"><span class="cpill-icon">💬</span>+92 349 457 8579</a>
-    </div>
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section id="skills">
-  <div class="section-eyebrow">02 — Expertise</div>
-  <h2 class="section-title">Skills &amp; Tools</h2>
-  <div class="skills-grid">
-    <div class="skill-group">
-      <div class="sg-header"><span class="sg-icon">🔬</span><span class="sg-title">Manual QA</span></div>
-      <div class="tag-wrap">
-        <span class="tag t-green">Functional Testing</span><span class="tag t-green">Regression Testing</span>
-        <span class="tag t-dim">UAT</span><span class="tag t-dim">Exploratory Testing</span>
-        <span class="tag t-dim">Integration Testing</span><span class="tag t-dim">Risk-Based Testing</span>
-        <span class="tag t-dim">Cross-Browser</span><span class="tag t-dim">Cross-Device</span>
-        <span class="tag t-dim">Test Plans &amp; RTMs</span><span class="tag t-dim">Bug Reports</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="sg-header"><span class="sg-icon">⚙️</span><span class="sg-title">Automation &amp; Performance</span></div>
-      <div class="tag-wrap">
-        <span class="tag t-blue">Playwright (Python)</span><span class="tag t-blue">Cypress (JS)</span>
-        <span class="tag t-blue">Postman / Newman</span><span class="tag t-blue">Apache JMeter</span>
-        <span class="tag t-dim">DataDog</span><span class="tag t-dim">Testim</span>
-        <span class="tag t-dim">Rainforest QA</span><span class="tag t-dim">SQL Server</span>
-        <span class="tag t-dim">Docker</span><span class="tag t-dim">GitHub Actions</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="sg-header"><span class="sg-icon">🤖</span><span class="sg-title">AI &amp; Modern QA</span></div>
-      <div class="tag-wrap">
-        <span class="tag t-purple">LLM Validation</span><span class="tag t-purple">AI Platform Testing</span>
-        <span class="tag t-purple">Voice Agent Testing</span><span class="tag t-purple">Chat Agent Testing</span>
-        <span class="tag t-purple">Hallucination Testing</span><span class="tag t-purple">Prompt Behavior QA</span>
-        <span class="tag t-purple">Agentic Workflows</span><span class="tag t-dim">n8n Flows</span>
-        <span class="tag t-dim">Local LLM Setup</span><span class="tag t-dim">AI Test Generation</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="sg-header"><span class="sg-icon">🛠️</span><span class="sg-title">Tools &amp; Platforms</span></div>
-      <div class="tag-wrap">
-        <span class="tag t-dim">Ollama</span><span class="tag t-dim">VAPI</span><span class="tag t-dim">ElevenLabs</span><span class="tag t-dim">n8n</span>
-        <span class="tag t-dim">Jira</span><span class="tag t-dim">TestRail</span><span class="tag t-dim">X-Ray</span><span class="tag t-dim">Zephyr</span>
-        <span class="tag t-dim">BrowserStack</span><span class="tag t-dim">TestFlight</span><span class="tag t-dim">GitLab</span><span class="tag t-dim">Confluence</span>
-        <span class="tag t-dim">Notion</span><span class="tag t-dim">Power BI</span><span class="tag t-dim">Bloomreach</span><span class="tag t-dim">Linear · Monday · Coda</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- EXPERIENCE -->
-<section id="experience">
-  <div class="section-eyebrow">03 — Career</div>
-  <h2 class="section-title">Work Experience</h2>
-  <div class="exp-list">
-    <div class="exp-card">
-      <div class="exp-top">
-        <div class="exp-role">Senior QA Engineer — Freelance</div>
-        <div class="exp-badge upwork">Current · Upwork</div>
-      </div>
-      <div class="exp-company">Self-Employed via Upwork</div>
-      <div class="exp-meta">Jan 2026 – Present &nbsp;·&nbsp; Remote (Worldwide)</div>
-      <ul class="exp-bullets">
-        <li>Delivering end-to-end QA services to international clients across web, mobile, SaaS, and AI-enabled platforms</li>
-        <li>Providing manual testing, Playwright (Python) automation, API testing, and AI/LLM feature validation</li>
-        <li>Building custom test documentation — test plans, test cases, RTMs, bug reports — tailored to client needs</li>
-        <li>Conducting performance and load testing using Apache JMeter for client web applications</li>
-        <li>Consulting on QA strategy, process setup, and test coverage optimisation in Agile environments</li>
-      </ul>
-    </div>
-    <div class="exp-card">
-      <div class="exp-top"><div class="exp-role">Senior Software Quality Assurance Engineer</div></div>
-      <div class="exp-company">ISoft Technologies</div>
-      <div class="exp-meta">Dec 2024 – Dec 2025 &nbsp;·&nbsp; Lahore, Pakistan</div>
-      <ul class="exp-bullets">
-        <li>Led end-to-end QA activities for web, mobile, SaaS, and AI-enabled products</li>
-        <li>Developed and maintained test plans, test cases, and QA reports aligned with business requirements</li>
-        <li>Performed in-depth manual, regression, and cross-browser testing across multiple environments</li>
-        <li>Drove continuous improvement in QA processes to enhance release stability</li>
-        <li>Supported automation and AI-testing initiatives by identifying high-value scenarios for automation</li>
-      </ul>
-    </div>
-    <div class="exp-card">
-      <div class="exp-top"><div class="exp-role">Senior Software Quality Assurance Engineer</div></div>
-      <div class="exp-company">Black Box Labs</div>
-      <div class="exp-meta">Jan 2022 – Dec 2024 &nbsp;·&nbsp; Lahore, Pakistan</div>
-      <ul class="exp-bullets">
-        <li>Built and maintained Cypress &amp; Playwright (Python) automation for critical workflows — auth, dashboards, checkout</li>
-        <li>Integrated regression tests with CI pipelines, reducing regression execution time by 40%</li>
-        <li>Validated AI-assisted features by testing response accuracy, edge cases, and error handling</li>
-        <li>Executed functional, regression, API, and UAT testing across Agile sprints</li>
-        <li>Participated in Scrum ceremonies including sprint planning, reviews, and retrospectives</li>
-      </ul>
-    </div>
-    <div class="exp-card">
-      <div class="exp-top"><div class="exp-role">Software Quality Assurance Engineer</div></div>
-      <div class="exp-company">Uservic3</div>
-      <div class="exp-meta">Jan 2021 – Sep 2021 &nbsp;·&nbsp; Lahore, Pakistan</div>
-      <ul class="exp-bullets">
-        <li>Created and executed test cases for web and mobile applications based on requirements and user stories</li>
-        <li>Conducted exploratory and UI/UX testing to identify user experience issues</li>
-        <li>Logged, tracked, and verified defects to support high-quality and timely releases</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- PORTFOLIO -->
-<section id="repos">
-  <div class="section-eyebrow">04 — Portfolio</div>
-  <h2 class="section-title">Featured Projects</h2>
-  <div class="repos-grid">
-    <!-- PROJECT 1: MANUAL QA -->
-    <a href="https://github.com/talha10/manual-qa-documentation-library" target="_blank" class="repo-card">
-      <div class="repo-top"><div class="repo-icon">📋</div><span class="repo-label rl-docs">Manual QA</span></div>
-      <div class="repo-name">manual-qa-documentation-library</div>
-      <div class="repo-desc">A complete QA documentation suite covering Test Plans, RTMs, Test Cases, and Bug Reports. Refined over 5 years across 18 industries.</div>
-      <div class="repo-stack"><span class="tag t-blue">Test Plans</span><span class="tag t-blue">RTM</span><span class="tag t-dim">Bug Reports</span></div>
-    </a>
-    <!-- PROJECT 2: AI AGENT -->
-    <a href="https://github.com/talha10/ai-agent-test-automation" target="_blank" class="repo-card">
-      <div class="repo-top"><div class="repo-icon">🤖</div><span class="repo-label rl-ai">AI Agent</span></div>
-      <div class="repo-name">ai-agent-test-automation</div>
-      <div class="repo-desc">Multi-agent QA pipeline using Claude Code + Playwright. Agents analyze features, generate scripts, and self-heal broken locators.</div>
-      <div class="repo-stack"><span class="tag t-purple">Claude Code</span><span class="tag t-blue">Playwright</span><span class="tag t-dim">CI/CD</span></div>
-    </a>
-    <!-- PROJECT 3: PLAYWRIGHT -->
-    <a href="https://github.com/talha10/playwright-python-automation" target="_blank" class="repo-card">
-      <div class="repo-top"><div class="repo-icon">🎭</div><span class="repo-label rl-new">Python</span></div>
-      <div class="repo-name">playwright-python-automation</div>
-      <div class="repo-desc">End-to-end framework leveraging Pytest and POM. Includes automated HTML reports and GitHub Actions integration.</div>
-      <div class="repo-stack"><span class="tag t-blue">Playwright</span><span class="tag t-blue">Python</span><span class="tag t-dim">pytest</span></div>
-    </a>
-    <!-- PROJECT 4: CYPRESS -->
-    <a href="https://github.com/talha10/cypress-regression-suite" target="_blank" class="repo-card">
-      <div class="repo-top"><div class="repo-icon">🌲</div><span class="repo-label rl-new">JavaScript</span></div>
-      <div class="repo-name">cypress-regression-suite</div>
-      <div class="repo-desc">Structured Cypress regression suite with Mochawesome reporting and automated CI/CD integration.</div>
-      <div class="repo-stack"><span class="tag t-blue">Cypress</span><span class="tag t-dim">JS</span><span class="tag t-dim">Mochawesome</span></div>
-    </a>
-    <!-- PROJECT 5: APPIUM MOBILE -->
-    <a href="https://github.com/talha10/mobile-qa-portfolio-appium" target="_blank" class="repo-card">
-      <div class="repo-top"><div class="repo-icon">📱</div><span class="repo-label rl-new">Mobile</span></div>
-      <div class="repo-name">mobile-qa-portfolio-appium</div>
-      <div class="repo-desc">Cross-platform test scripts for iOS and Android utilizing Appium. Includes wait helper classes and caps setup.</div>
-      <div class="repo-stack"><span class="tag t-purple">Appium</span><span class="tag t-blue">Python</span><span class="tag t-dim">iOS</span><span class="tag t-dim">Android</span></div>
-    </a>
-    <!-- PROJECT 6: K6 PERFORMANCE -->
-    <a href="https://github.com/talha10/k6-performance-testing" target="_blank" class="repo-card">
-      <div class="repo-top"><div class="repo-icon">📊</div><span class="repo-label rl-perf">Performance</span></div>
-      <div class="repo-name">k6-performance-testing</div>
-      <div class="repo-desc">Backend load testing covering standard patterns, spike behavior, stress limits, and soak tests.</div>
-      <div class="repo-stack"><span class="tag t-blue">k6</span><span class="tag t-dim">Load Testing</span><span class="tag t-dim">JS</span></div>
-    </a>
-    <!-- PROJECT 7: SQL DATABASE -->
-    <a href="https://github.com/talha10/sql-database-testing" target="_blank" class="repo-card">
-      <div class="repo-top"><div class="repo-icon">🗄️</div><span class="repo-label rl-docs">Database</span></div>
-      <div class="repo-name">sql-database-testing</div>
-      <div class="repo-desc">Backend validation tests interacting with PostgreSQL testing complex joins, deletions, and query plans.</div>
-      <div class="repo-stack"><span class="tag t-blue">PostgreSQL</span><span class="tag t-dim">SQL</span><span class="tag t-dim">Backend QA</span></div>
-    </a>
-    <!-- PROJECT 8: A11Y AXE -->
-    <a href="https://github.com/talha10/accessibility-testing-axe" target="_blank" class="repo-card">
-      <div class="repo-top"><div class="repo-icon">👁️</div><span class="repo-label rl-new">A11y</span></div>
-      <div class="repo-name">accessibility-testing-axe</div>
-      <div class="repo-desc">Programmatic audits for WCAG compliance using axe-core and headless Puppeteer.</div>
-      <div class="repo-stack"><span class="tag t-purple">Axe-Core</span><span class="tag t-blue">Puppeteer</span><span class="tag t-dim">Node.js</span></div>
-    </a>
-    <!-- PROJECT 9: DOCKER SELENIUM -->
-    <a href="https://github.com/talha10/docker-selenium-grid-base" target="_blank" class="repo-card">
-      <div class="repo-top"><div class="repo-icon">🐳</div><span class="repo-label rl-perf">Infrastructure</span></div>
-      <div class="repo-name">docker-selenium-grid-base</div>
-      <div class="repo-desc">Scalable Docker architecture for Selenium Grid Hub and concurrent browser execution nodes.</div>
-      <div class="repo-stack"><span class="tag t-blue">Docker</span><span class="tag t-dim">Selenium Grid</span><span class="tag t-dim">DevOps</span></div>
-    </a>
-    <!-- PROJECT 10: JMETER -->
-    <a href="https://github.com/talha10/performance-testing-jmeter" target="_blank" class="repo-card">
-      <div class="repo-top"><div class="repo-icon">⚡</div><span class="repo-label rl-perf">JMeter</span></div>
-      <div class="repo-name">performance-testing-jmeter</div>
-      <div class="repo-desc">Load and stress test plans with thread groups, ramp-up curves, and result analysis.</div>
-      <div class="repo-stack"><span class="tag t-blue">JMeter</span><span class="tag t-dim">Load Testing</span><span class="tag t-dim">Stress</span></div>
-    </a>
-    <!-- PROJECT 11: LLM QA -->
-    <a href="https://github.com/talha10/llm-ai-testing-framework" target="_blank" class="repo-card">
-      <div class="repo-top"><div class="repo-icon">🧠</div><span class="repo-label rl-ai">LLM QA</span></div>
-      <div class="repo-name">llm-ai-testing-framework</div>
-      <div class="repo-desc">Framework for validating AI platforms, voice agents, and hallucination detection.</div>
-      <div class="repo-stack"><span class="tag t-purple">LLM Testing</span><span class="tag t-dim">Prompt Engineering</span><span class="tag t-dim">AI QA</span></div>
-    </a>
-    <!-- PROJECT 12: API POSTMAN collections -->
-    <a href="https://github.com/talha10/api-testing-postman-collections" target="_blank" class="repo-card">
-      <div class="repo-top"><div class="repo-icon">📮</div><span class="repo-label rl-new">API</span></div>
-      <div class="repo-name">api-testing-postman-collections</div>
-      <div class="repo-desc">Postman collections for REST API testing including CRUD, negative tests, and schema validation.</div>
-      <div class="repo-stack"><span class="tag t-blue">Postman</span><span class="tag t-dim">Newman</span><span class="tag t-dim">REST</span></div>
-    </a>
-  </div>
-</section>
-
-<!-- DOMAINS -->
-<section id="domains">
-  <div class="section-eyebrow">05 — Industry</div>
-  <h2 class="section-title">Domain Experience</h2>
-  <div class="domains-grid">
-    <div class="domain-card"><span>🛒</span>E-Commerce &amp; Payment Gateways</div>
-    <div class="domain-card"><span>🤖</span>AI, LLM &amp; Automation Platforms</div>
-    <div class="domain-card"><span>🏦</span>Banking, Finance &amp; FinTech (BFSI)</div>
-    <div class="domain-card"><span>🏥</span>HealthTech &amp; Medical Applications</div>
-    <div class="domain-card"><span>🎓</span>Education, LMS &amp; EdTech Platforms</div>
-    <div class="domain-card"><span>🏠</span>Real Estate &amp; PropTech Systems</div>
-    <div class="domain-card"><span>🔐</span>Cybersecurity &amp; Compliance Tools</div>
-    <div class="domain-card"><span>☁️</span>SaaS &amp; Enterprise Cloud Platforms</div>
-    <div class="domain-card"><span>🎟️</span>Event Management &amp; Ticketing</div>
-    <div class="domain-card"><span>📱</span>Mobile Apps (iOS &amp; Android)</div>
-    <div class="domain-card"><span>🛍️</span>Marketplace &amp; Multi-vendor Platforms</div>
-    <div class="domain-card"><span>🚚</span>Logistics, Supply Chain &amp; Last-Mile</div>
-    <div class="domain-card"><span>🎮</span>Gaming &amp; Interactive Entertainment</div>
-    <div class="domain-card"><span>📡</span>Telecom &amp; Communication Platforms</div>
-    <div class="domain-card"><span>🧑💼</span>HR, Recruitment &amp; Workforce Tools</div>
-    <div class="domain-card"><span>📊</span>Analytics, BI &amp; Data Dashboards</div>
-    <div class="domain-card"><span>🤝</span>CRM, CMS &amp; Admin Portals</div>
-    <div class="domain-card"><span>🔗</span>API-First &amp; Microservices Platforms</div>
-  </div>
-</section>
-
-<!-- CERTIFICATIONS -->
-<section id="certifications">
-  <div class="section-eyebrow">06 — Credentials</div>
-  <h2 class="section-title">Certifications &amp; Licences</h2>
-  <div class="certs-grid">
-    <div class="cert-card"><div class="cert-issuer">Atlassian</div><div class="cert-name">Agile Project Management Professional Certificate</div><div class="cert-date">Dec 2025</div></div>
-    <div class="cert-card"><div class="cert-issuer">LambdaTest</div><div class="cert-name">Test Automation Professional Certificate</div><div class="cert-date">Dec 2025</div></div>
-    <div class="cert-card"><div class="cert-issuer">LambdaTest</div><div class="cert-name">Software Testing Professional Certificate</div><div class="cert-date">Dec 2024</div></div>
-    <div class="cert-card"><div class="cert-issuer">Snowflake</div><div class="cert-name">Generative AI Professional Certificate</div><div class="cert-date">Dec 2025</div></div>
-    <div class="cert-card"><div class="cert-issuer">Microsoft</div><div class="cert-name">Career Essentials in Generative AI</div><div class="cert-date">Dec 2025</div></div>
-    <div class="cert-card"><div class="cert-issuer">GitHub</div><div class="cert-name">Career Essentials in GitHub Copilot</div><div class="cert-date">Dec 2025</div></div>
-    <div class="cert-card"><div class="cert-issuer">Docker, Inc</div><div class="cert-name">Docker Foundations Professional Certificate</div><div class="cert-date">Dec 2024</div></div>
-    <div class="cert-card"><div class="cert-issuer">Project Management Institute</div><div class="cert-name">Scrum: The Basics</div><div class="cert-date">Dec 2024</div></div>
-    <div class="cert-card"><div class="cert-issuer">IIBA</div><div class="cert-name">Agile Foundations</div><div class="cert-date">Dec 2024</div></div>
-    <div class="cert-card"><div class="cert-issuer">NASBA</div><div class="cert-name">Mistakes to Avoid in Agile Project Management</div><div class="cert-date">Dec 2025</div></div>
-    <div class="cert-card"><div class="cert-issuer">Project Management Institute</div><div class="cert-name">Agile Project Management with Jira Cloud</div><div class="cert-date">Nov 2024</div></div>
-    <div class="cert-card"><div class="cert-issuer">LinkedIn</div><div class="cert-name">JMeter: Performance and Load Testing</div><div class="cert-date">Nov 2024</div></div>
-    <div class="cert-card"><div class="cert-issuer">LinkedIn</div><div class="cert-name">SQL for Testers</div><div class="cert-date">Nov 2024</div></div>
-    <div class="cert-card"><div class="cert-issuer">LinkedIn</div><div class="cert-name">Programming Foundations: Software Testing / QA</div><div class="cert-date">Dec 2025</div></div>
-    <div class="cert-card"><div class="cert-issuer">LinkedIn</div><div class="cert-name">Agile Testing</div><div class="cert-date">Dec 2025</div></div>
-    <div class="cert-card"><div class="cert-issuer">LinkedIn</div><div class="cert-name">Succeeding in Software Testing</div><div class="cert-date">Dec 2025</div></div>
-    <div class="cert-card"><div class="cert-issuer">Urducourses Inc</div><div class="cert-name">CyberSavvy: Navigating Linux &amp; Cybersecurity</div><div class="cert-date">Dec 2024</div></div>
-    <div class="cert-card"><div class="cert-issuer">OPSWAT Academy</div><div class="cert-name">Introduction to CIP</div><div class="cert-date">Nov 2024</div></div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="contact-inner">
-    <div class="section-eyebrow" style="justify-content:center;">07 — Let's Connect</div>
-    <h2 class="section-title">Work With Me</h2>
-    <p>Available for freelance contracts, remote QA roles, and long-term collaborations.</p>
-    <div class="contact-grid">
-      <a href="mailto:contact.talhakhattak@gmail.com" class="clink">
-        <span class="clink-icon">✉️</span>
-        <div class="clink-body"><div class="clink-label">Email</div><div class="clink-val">contact.talhakhattak@gmail.com</div></div>
-      </a>
-      <a href="https://wa.me/923494578579" target="_blank" class="clink">
-        <span class="clink-icon">💬</span>
-        <div class="clink-body"><div class="clink-label">WhatsApp</div><div class="clink-val">+92 349 457 8579</div></div>
-      </a>
-      <a href="https://linkedin.com/in/talha-khan-khattak/" target="_blank" class="clink">
-        <span class="clink-icon">🔗</span>
-        <div class="clink-body"><div class="clink-label">LinkedIn</div><div class="clink-val">talha-khan-khattak</div></div>
-      </a>
-      <a href="https://github.com/talha10" target="_blank" class="clink">
-        <span class="clink-icon">⬡</span>
-        <div class="clink-body"><div class="clink-label">GitHub</div><div class="clink-val">talha10</div></div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="footer-badge">
-    <div class="dot dot-green"></div> Active &amp; Open to Offers
-  </div>
-  <span>© 2026 Talha Khan. Specializing in QA Architecture &amp; Automation.</span>
-</footer>
-
-</body>
-</html>
+﻿— — —<—/—d—i—v—>—
+—<—/—s—e—c—t—i—o—n—>—
+—
+—<—!—-—-— —R—E—P—O—S— —-—-—>—
+—<—s—e—c—t—i—o—n— —i—d—=—"—r—e—p—o—s—"—>—
+— — —<—d—i—v— —c—l—a—s—s—=—"—s—e—c—t—i—o—n—-—e—y—e—b—r—o—w—"—>—0—4— —�— —P—o—r—t—f—o—l—i—o—<—/—d—i—v—>—
+— — —<—h—2— —c—l—a—s—s—=—"—s—e—c—t—i—o—n—-—t—i—t—l—e—"—>—G—i—t—H—u—b— —P—r—o—j—e—c—t—s—<—/—h—2—>—
+—
+— — —<—!—-—-— —M—A—N—U—A—L— —T—E—S—T—I—N—G— —�— —F—E—A—T—U—R—E—D— —F—I—R—S—T— —-—-—>—
+— — —<—d—i—v— —s—t—y—l—e—=—"—m—a—r—g—i—n—-—b—o—t—t—o—m—:—1—.—5—r—e—m—;—"—>—
+— — — — —<—d—i—v— —s—t—y—l—e—=—"—f—o—n—t—-—f—a—m—i—l—y—:—v—a—r—(—-—-—m—o—n—o—)—;—f—o—n—t—-—s—i—z—e—:—0—.—6—5—r—e—m—;—c—o—l—o—r—:—v—a—r—(—-—-—a—c—c—e—n—t—)—;—l—e—t—t—e—r—-—s—p—a—c—i—n—g—:—0—.—1—4—e—m—;—t—e—x—t—-—t—r—a—n—s—f—o—r—m—:—u—p—p—e—r—c—a—s—e—;—m—a—r—g—i—n—-—b—o—t—t—o—m—:—1—r—e—m—;—d—i—s—p—l—a—y—:—f—l—e—x—;—a—l—i—g—n—-—i—t—e—m—s—:—c—e—n—t—e—r—;—g—a—p—:—0—.—7—r—e—m—;—"—>—
+— — — — — — —<—s—p—a—n— —s—t—y—l—e—=—"—w—i—d—t—h—:—6—p—x—;—h—e—i—g—h—t—:—6—p—x—;—b—o—r—d—e—r—-—r—a—d—i—u—s—:—5—0—%—;—b—a—c—k—g—r—o—u—n—d—:—v—a—r—(—-—-—a—c—c—e—n—t—)—;—d—i—s—p—l—a—y—:—i—n—l—i—n—e—-—b—l—o—c—k—;—"—>—<—/—s—p—a—n—>—
+— — — — — — —M—a—n—u—a—l— —Q—A— —�— —D—o—c—u—m—e—n—t—a—t—i—o—n— —L—i—b—r—a—r—y—
+— — — — —<—/—d—i—v—>—
+— — — — —<—a— —h—r—e—f—=—"—h—t—t—p—s—:—/—/—g—i—t—h—u—b—.—c—o—m—/—t—a—l—h—a—1—0—/—m—a—n—u—a—l—-—q—a—-—d—o—c—u—m—e—n—t—a—t—i—o—n—-—l—i—b—r—a—r—y—"— —t—a—r—g—e—t—=—"—_—b—l—a—n—k—"— —c—l—a—s—s—=—"—r—e—p—o—-—c—a—r—d—"— —s—t—y—l—e—=—"—b—o—r—d—e—r—-—c—o—l—o—r—:—r—g—b—a—(—0—,—2—2—9—,—1—9—2—,—0—.—2—2—)—;—b—a—c—k—g—r—o—u—n—d—:—l—i—n—e—a—r—-—g—r—a—d—i—e—n—t—(—1—3—5—d—e—g—,—#—0—e—1—a—2—8—,—#—0—e—1—5—2—0—)—;—"—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—t—o—p—"—>—
+— — — — — — — — —<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—i—c—o—n—"—>—✦—<—/—d—i—v—>—
+— — — — — — — — —<—s—p—a—n— —c—l—a—s—s—=—"—r—e—p—o—-—l—a—b—e—l— —r—l—-—n—e—w—"— —s—t—y—l—e—=—"—f—o—n—t—-—s—i—z—e—:—0—.—6—5—r—e—m—;—p—a—d—d—i—n—g—:—0—.—2—5—r—e—m— —0—.—8—r—e—m—;—"—>—M—a—n—u—a—l— —Q—A— —�— —F—e—a—t—u—r—e—d—<—/—s—p—a—n—>—
+— — — — — — —<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—n—a—m—e—"— —s—t—y—l—e—=—"—f—o—n—t—-—s—i—z—e—:—0—.—9—r—e—m—;—m—a—r—g—i—n—-—b—o—t—t—o—m—:—0—.—5—r—e—m—;—"—>—m—a—n—u—a—l—-—q—a—-—d—o—c—u—m—e—n—t—a—t—i—o—n—-—l—i—b—r—a—r—y—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—d—e—s—c—"— —s—t—y—l—e—=—"—f—o—n—t—-—s—i—z—e—:—0—.—8—5—r—e—m—;—m—a—r—g—i—n—-—b—o—t—t—o—m—:—1—.—5—r—e—m—;—"—>—
+— — — — — — — — —A— —c—o—m—p—l—e—t—e—,— —p—r—o—d—u—c—t—i—o—n—-—r—e—a—d—y— —m—a—n—u—a—l— —Q—A— —d—o—c—u—m—e—n—t—a—t—i—o—n— —s—u—i—t—e— —�— —e—v—e—r—y—t—h—i—n—g— —a— —Q—A— —e—n—g—i—n—e—e—r— —p—r—o—d—u—c—e—s— —t—h—r—o—u—g—h—o—u—t— —t—h—e— —f—u—l—l— —t—e—s—t—i—n—g— —l—i—f—e—c—y—c—l—e—.— —B—u—i—l—t— —f—r—o—m— —r—e—a—l—-—w—o—r—l—d— —t—e—m—p—l—a—t—e—s— —r—e—f—i—n—e—d— —o—v—e—r— —4—+— —y—e—a—r—s— —a—c—r—o—s—s— —8— —i—n—d—u—s—t—r—i—e—s—.—
+— — — — — — —<—/—d—i—v—>—
+— — — — — — —<—!—-—-— —D—O—C—U—M—E—N—T— —T—Y—P—E—S— —G—R—I—D— —-—-—>—
+— — — — — — —<—d—i—v— —s—t—y—l—e—=—"—d—i—s—p—l—a—y—:—g—r—i—d—;—g—r—i—d—-—t—e—m—p—l—a—t—e—-—c—o—l—u—m—n—s—:—r—e—p—e—a—t—(—a—u—t—o—-—f—i—l—l—,—m—i—n—m—a—x—(—2—0—0—p—x—,—1—f—r—)—)—;—g—a—p—:—0—.—7—5—r—e—m—;—m—a—r—g—i—n—-—b—o—t—t—o—m—:—1—.—2—r—e—m—;—"—>—
+— — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—b—a—c—k—g—r—o—u—n—d—:—r—g—b—a—(—0—,—2—2—9—,—1—9—2—,—0—.—0—5—)—;—b—o—r—d—e—r—:—1—p—x— —s—o—l—i—d— —r—g—b—a—(—0—,—2—2—9—,—1—9—2—,—0—.—1—5—)—;—b—o—r—d—e—r—-—r—a—d—i—u—s—:—5—p—x—;—p—a—d—d—i—n—g—:—0—.—9—r—e—m— —1—r—e—m—;—"—>—
+— — — — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—f—o—n—t—-—f—a—m—i—l—y—:—v—a—r—(—-—-—m—o—n—o—)—;—f—o—n—t—-—s—i—z—e—:—0—.—6—2—r—e—m—;—c—o—l—o—r—:—v—a—r—(—-—-—a—c—c—e—n—t—)—;—l—e—t—t—e—r—-—s—p—a—c—i—n—g—:—0—.—1—e—m—;—t—e—x—t—-—t—r—a—n—s—f—o—r—m—:—u—p—p—e—r—c—a—s—e—;—m—a—r—g—i—n—-—b—o—t—t—o—m—:—0—.—4—r—e—m—;—"—>—✦— —B—u—g— —R—e—p—o—r—t—s—<—/—d—i—v—>—
+— — — — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—f—o—n—t—-—s—i—z—e—:—0—.—7—8—r—e—m—;—c—o—l—o—r—:—v—a—r—(—-—-—m—u—t—e—d—)—;—l—i—n—e—-—h—e—i—g—h—t—:—1—.—5—;—"—>—S—e—v—e—r—i—t—y—-—c—l—a—s—s—i—f—i—e—d— —d—e—f—e—c—t— —r—e—p—o—r—t—s— —w—i—t—h— —s—t—e—p—s— —t—o— —r—e—p—r—o—d—u—c—e—,— —e—n—v—i—r—o—n—m—e—n—t— —d—e—t—a—i—l—s—,— —s—c—r—e—e—n—s—h—o—t—s—,— —a—n—d— —e—x—p—e—c—t—e—d— —v—s— —a—c—t—u—a—l— —r—e—s—u—l—t—s—.—<—/—d—i—v—>—
+— — — — — — — — —<—/—d—i—v—>—
+— — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—b—a—c—k—g—r—o—u—n—d—:—r—g—b—a—(—0—,—2—2—9—,—1—9—2—,—0—.—0—5—)—;—b—o—r—d—e—r—:—1—p—x— —s—o—l—i—d— —r—g—b—a—(—0—,—2—2—9—,—1—9—2—,—0—.—1—5—)—;—b—o—r—d—e—r—-—r—a—d—i—u—s—:—5—p—x—;—p—a—d—d—i—n—g—:—0—.—9—r—e—m— —1—r—e—m—;—"—>—
+— — — — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—f—o—n—t—-—f—a—m—i—l—y—:—v—a—r—(—-—-—m—o—n—o—)—;—f—o—n—t—-—s—i—z—e—:—0—.—6—2—r—e—m—;—c—o—l—o—r—:—v—a—r—(—-—-—a—c—c—e—n—t—)—;—l—e—t—t—e—r—-—s—p—a—c—i—n—g—:—0—.—1—e—m—;—t—e—x—t—-—t—r—a—n—s—f—o—r—m—:—u—p—p—e—r—c—a—s—e—;—m—a—r—g—i—n—-—b—o—t—t—o—m—:—0—.—4—r—e—m—;—"—>—✦— —T—e—s—t— —P—l—a—n—s—<—/—d—i—v—>—
+— — — — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—f—o—n—t—-—s—i—z—e—:—0—.—7—8—r—e—m—;—c—o—l—o—r—:—v—a—r—(—-—-—m—u—t—e—d—)—;—l—i—n—e—-—h—e—i—g—h—t—:—1—.—5—;—"—>—C—o—m—p—r—e—h—e—n—s—i—v—e— —t—e—s—t— —s—t—r—a—t—e—g—y— —d—o—c—u—m—e—n—t—s— —c—o—v—e—r—i—n—g— —s—c—o—p—e—,— —o—b—j—e—c—t—i—v—e—s—,— —a—p—p—r—o—a—c—h—,— —s—c—h—e—d—u—l—e—,— —r—e—s—o—u—r—c—e—s—,— —r—i—s—k—s—,— —a—n—d— —e—x—i—t— —c—r—i—t—e—r—i—a—.—<—/—d—i—v—>—
+— — — — — — — — —<—/—d—i—v—>—
+— — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—b—a—c—k—g—r—o—u—n—d—:—r—g—b—a—(—0—,—2—2—9—,—1—9—2—,—0—.—0—5—)—;—b—o—r—d—e—r—:—1—p—x— —s—o—l—i—d— —r—g—b—a—(—0—,—2—2—9—,—1—9—2—,—0—.—1—5—)—;—b—o—r—d—e—r—-—r—a—d—i—u—s—:—5—p—x—;—p—a—d—d—i—n—g—:—0—.—9—r—e—m— —1—r—e—m—;—"—>—
+— — — — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—f—o—n—t—-—f—a—m—i—l—y—:—v—a—r—(—-—-—m—o—n—o—)—;—f—o—n—t—-—s—i—z—e—:—0—.—6—2—r—e—m—;—c—o—l—o—r—:—v—a—r—(—-—-—a—c—c—e—n—t—)—;—l—e—t—t—e—r—-—s—p—a—c—i—n—g—:—0—.—1—e—m—;—t—e—x—t—-—t—r—a—n—s—f—o—r—m—:—u—p—p—e—r—c—a—s—e—;—m—a—r—g—i—n—-—b—o—t—t—o—m—:—0—.—4—r—e—m—;—"—>—✦— —T—e—s—t— —C—a—s—e—s—<—/—d—i—v—>—
+— — — — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—f—o—n—t—-—s—i—z—e—:—0—.—7—8—r—e—m—;—c—o—l—o—r—:—v—a—r—(—-—-—m—u—t—e—d—)—;—l—i—n—e—-—h—e—i—g—h—t—:—1—.—5—;—"—>—S—t—r—u—c—t—u—r—e—d— —t—e—s—t— —c—a—s—e— —s—h—e—e—t—s— —w—i—t—h— —p—r—e—c—o—n—d—i—t—i—o—n—s—,— —s—t—e—p—-—b—y—-—s—t—e—p— —a—c—t—i—o—n—s—,— —e—x—p—e—c—t—e—d— —r—e—s—u—l—t—s—,— —p—r—i—o—r—i—t—y—,— —a—n—d— —t—r—a—c—e—a—b—i—l—i—t—y— —t—o— —r—e—q—u—i—r—e—m—e—n—t—s—.—<—/—d—i—v—>—
+— — — — — — — — —<—/—d—i—v—>—
+— — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—b—a—c—k—g—r—o—u—n—d—:—r—g—b—a—(—0—,—2—2—9—,—1—9—2—,—0—.—0—5—)—;—b—o—r—d—e—r—:—1—p—x— —s—o—l—i—d— —r—g—b—a—(—0—,—2—2—9—,—1—9—2—,—0—.—1—5—)—;—b—o—r—d—e—r—-—r—a—d—i—u—s—:—5—p—x—;—p—a—d—d—i—n—g—:—0—.—9—r—e—m— —1—r—e—m—;—"—>—
+— — — — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—f—o—n—t—-—f—a—m—i—l—y—:—v—a—r—(—-—-—m—o—n—o—)—;—f—o—n—t—-—s—i—z—e—:—0—.—6—2—r—e—m—;—c—o—l—o—r—:—v—a—r—(—-—-—a—c—c—e—n—t—)—;—l—e—t—t—e—r—-—s—p—a—c—i—n—g—:—0—.—1—e—m—;—t—e—x—t—-—t—r—a—n—s—f—o—r—m—:—u—p—p—e—r—c—a—s—e—;—m—a—r—g—i—n—-—b—o—t—t—o—m—:—0—.—4—r—e—m—;—"—>—✦— —R—e—q—u—i—r—e—m—e—n—t— —D—o—c—s—<—/—d—i—v—>—
+— — — — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—f—o—n—t—-—s—i—z—e—:—0—.—7—8—r—e—m—;—c—o—l—o—r—:—v—a—r—(—-—-—m—u—t—e—d—)—;—l—i—n—e—-—h—e—i—g—h—t—:—1—.—5—;—"—>—R—e—q—u—i—r—e—m—e—n—t— —a—n—a—l—y—s—i—s— —d—o—c—u—m—e—n—t—s— —r—e—v—i—e—w—i—n—g— —u—s—e—r— —s—t—o—r—i—e—s—,— —a—c—c—e—p—t—a—n—c—e— —c—r—i—t—e—r—i—a— —g—a—p—s—,— —a—n—d— —t—e—s—t—a—b—i—l—i—t—y— —n—o—t—e—s—.—<—/—d—i—v—>—
+— — — — — — — — —<—/—d—i—v—>—
+— — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—b—a—c—k—g—r—o—u—n—d—:—r—g—b—a—(—0—,—2—2—9—,—1—9—2—,—0—.—0—5—)—;—b—o—r—d—e—r—:—1—p—x— —s—o—l—i—d— —r—g—b—a—(—0—,—2—2—9—,—1—9—2—,—0—.—1—5—)—;—b—o—r—d—e—r—-—r—a—d—i—u—s—:—5—p—x—;—p—a—d—d—i—n—g—:—0—.—9—r—e—m— —1—r—e—m—;—"—>—
+— — — — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—f—o—n—t—-—f—a—m—i—l—y—:—v—a—r—(—-—-—m—o—n—o—)—;—f—o—n—t—-—s—i—z—e—:—0—.—6—2—r—e—m—;—c—o—l—o—r—:—v—a—r—(—-—-—a—c—c—e—n—t—)—;—l—e—t—t—e—r—-—s—p—a—c—i—n—g—:—0—.—1—e—m—;—t—e—x—t—-—t—r—a—n—s—f—o—r—m—:—u—p—p—e—r—c—a—s—e—;—m—a—r—g—i—n—-—b—o—t—t—o—m—:—0—.—4—r—e—m—;—"—>—✦— —R—T—M—<—/—d—i—v—>—
+— — — — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—f—o—n—t—-—s—i—z—e—:—0—.—7—8—r—e—m—;—c—o—l—o—r—:—v—a—r—(—-—-—m—u—t—e—d—)—;—l—i—n—e—-—h—e—i—g—h—t—:—1—.—5—;—"—>—R—e—q—u—i—r—e—m—e—n—t—s— —T—r—a—c—e—a—b—i—l—i—t—y— —M—a—t—r—i—x— —m—a—p—p—i—n—g— —e—v—e—r—y— —r—e—q—u—i—r—e—m—e—n—t— —t—o— —i—t—s— —t—e—s—t— —c—a—s—e—s—,— —e—n—s—u—r—i—n—g— —f—u—l—l— —c—o—v—e—r—a—g—e—.—<—/—d—i—v—>—
+— — — — — — — — —<—/—d—i—v—>—
+— — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—b—a—c—k—g—r—o—u—n—d—:—r—g—b—a—(—0—,—2—2—9—,—1—9—2—,—0—.—0—5—)—;—b—o—r—d—e—r—:—1—p—x— —s—o—l—i—d— —r—g—b—a—(—0—,—2—2—9—,—1—9—2—,—0—.—1—5—)—;—b—o—r—d—e—r—-—r—a—d—i—u—s—:—5—p—x—;—p—a—d—d—i—n—g—:—0—.—9—r—e—m— —1—r—e—m—;—"—>—
+— — — — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—f—o—n—t—-—f—a—m—i—l—y—:—v—a—r—(—-—-—m—o—n—o—)—;—f—o—n—t—-—s—i—z—e—:—0—.—6—2—r—e—m—;—c—o—l—o—r—:—v—a—r—(—-—-—a—c—c—e—n—t—)—;—l—e—t—t—e—r—-—s—p—a—c—i—n—g—:—0—.—1—e—m—;—t—e—x—t—-—t—r—a—n—s—f—o—r—m—:—u—p—p—e—r—c—a—s—e—;—m—a—r—g—i—n—-—b—o—t—t—o—m—:—0—.—4—r—e—m—;—"—>—?— —C—h—e—c—k—l—i—s—t—s—<—/—d—i—v—>—
+— — — — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—f—o—n—t—-—s—i—z—e—:—0—.—7—8—r—e—m—;—c—o—l—o—r—:—v—a—r—(—-—-—m—u—t—e—d—)—;—l—i—n—e—-—h—e—i—g—h—t—:—1—.—5—;—"—>—Q—u—i—c—k—-—r—e—f—e—r—e—n—c—e— —t—e—s—t—i—n—g— —c—h—e—c—k—l—i—s—t—s— —f—o—r— —s—m—o—k—e— —t—e—s—t—s—,— —r—e—g—r—e—s—s—i—o—n— —c—y—c—l—e—s—,— —U—I—/—U—X— —r—e—v—i—e—w—s—,— —a—n—d— —r—e—l—e—a—s—e— —r—e—a—d—i—n—e—s—s— —g—a—t—e—s—.—<—/—d—i—v—>—
+— — — — — — — — —<—/—d—i—v—>—
+— — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—b—a—c—k—g—r—o—u—n—d—:—r—g—b—a—(—0—,—2—2—9—,—1—9—2—,—0—.—0—5—)—;—b—o—r—d—e—r—:—1—p—x— —s—o—l—i—d— —r—g—b—a—(—0—,—2—2—9—,—1—9—2—,—0—.—1—5—)—;—b—o—r—d—e—r—-—r—a—d—i—u—s—:—5—p—x—;—p—a—d—d—i—n—g—:—0—.—9—r—e—m— —1—r—e—m—;—"—>—
+— — — — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—f—o—n—t—-—f—a—m—i—l—y—:—v—a—r—(—-—-—m—o—n—o—)—;—f—o—n—t—-—s—i—z—e—:—0—.—6—2—r—e—m—;—c—o—l—o—r—:—v—a—r—(—-—-—a—c—c—e—n—t—)—;—l—e—t—t—e—r—-—s—p—a—c—i—n—g—:—0—.—1—e—m—;—t—e—x—t—-—t—r—a—n—s—f—o—r—m—:—u—p—p—e—r—c—a—s—e—;—m—a—r—g—i—n—-—b—o—t—t—o—m—:—0—.—4—r—e—m—;—"—>—✦— —T—e—s—t— —R—e—p—o—r—t—s—<—/—d—i—v—>—
+— — — — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—f—o—n—t—-—s—i—z—e—:—0—.—7—8—r—e—m—;—c—o—l—o—r—:—v—a—r—(—-—-—m—u—t—e—d—)—;—l—i—n—e—-—h—e—i—g—h—t—:—1—.—5—;—"—>—S—p—r—i—n—t— —a—n—d— —r—e—l—e—a—s—e—-—l—e—v—e—l— —Q—A— —s—u—m—m—a—r—y— —r—e—p—o—r—t—s— —w—i—t—h— —p—a—s—s—/—f—a—i—l— —m—e—t—r—i—c—s—,— —d—e—f—e—c—t— —d—e—n—s—i—t—y—,— —a—n—d— —t—e—s—t— —c—o—v—e—r—a—g—e—.—<—/—d—i—v—>—
+— — — — — — — — —<—/—d—i—v—>—
+— — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—b—a—c—k—g—r—o—u—n—d—:—r—g—b—a—(—0—,—2—2—9—,—1—9—2—,—0—.—0—5—)—;—b—o—r—d—e—r—:—1—p—x— —s—o—l—i—d— —r—g—b—a—(—0—,—2—2—9—,—1—9—2—,—0—.—1—5—)—;—b—o—r—d—e—r—-—r—a—d—i—u—s—:—5—p—x—;—p—a—d—d—i—n—g—:—0—.—9—r—e—m— —1—r—e—m—;—"—>—
+— — — — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—f—o—n—t—-—f—a—m—i—l—y—:—v—a—r—(—-—-—m—o—n—o—)—;—f—o—n—t—-—s—i—z—e—:—0—.—6—2—r—e—m—;—c—o—l—o—r—:—v—a—r—(—-—-—a—c—c—e—n—t—)—;—l—e—t—t—e—r—-—s—p—a—c—i—n—g—:—0—.—1—e—m—;—t—e—x—t—-—t—r—a—n—s—f—o—r—m—:—u—p—p—e—r—c—a—s—e—;—m—a—r—g—i—n—-—b—o—t—t—o—m—:—0—.—4—r—e—m—;—"—>—✦— —E—x—p—l—o—r—a—t—o—r—y— —C—h—a—r—t—e—r—s—<—/—d—i—v—>—
+— — — — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—f—o—n—t—-—s—i—z—e—:—0—.—7—8—r—e—m—;—c—o—l—o—r—:—v—a—r—(—-—-—m—u—t—e—d—)—;—l—i—n—e—-—h—e—i—g—h—t—:—1—.—5—;—"—>—S—e—s—s—i—o—n—-—b—a—s—e—d— —e—x—p—l—o—r—a—t—o—r—y— —t—e—s—t—i—n—g— —c—h—a—r—t—e—r—s— —d—e—f—i—n—i—n—g— —m—i—s—s—i—o—n—,— —t—a—r—g—e—t— —a—r—e—a—s—,— —t—i—m—e—-—b—o—x—,— —a—n—d— —s—t—r—u—c—t—u—r—e—d— —o—b—s—e—r—v—a—t—i—o—n— —n—o—t—e—s—.—<—/—d—i—v—>—
+— — — — — — — — —<—/—d—i—v—>—
+— — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—b—a—c—k—g—r—o—u—n—d—:—r—g—b—a—(—0—,—2—2—9—,—1—9—2—,—0—.—0—5—)—;—b—o—r—d—e—r—:—1—p—x— —s—o—l—i—d— —r—g—b—a—(—0—,—2—2—9—,—1—9—2—,—0—.—1—5—)—;—b—o—r—d—e—r—-—r—a—d—i—u—s—:—5—p—x—;—p—a—d—d—i—n—g—:—0—.—9—r—e—m— —1—r—e—m—;—"—>—
+— — — — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—f—o—n—t—-—f—a—m—i—l—y—:—v—a—r—(—-—-—m—o—n—o—)—;—f—o—n—t—-—s—i—z—e—:—0—.—6—2—r—e—m—;—c—o—l—o—r—:—v—a—r—(—-—-—a—c—c—e—n—t—)—;—l—e—t—t—e—r—-—s—p—a—c—i—n—g—:—0—.—1—e—m—;—t—e—x—t—-—t—r—a—n—s—f—o—r—m—:—u—p—p—e—r—c—a—s—e—;—m—a—r—g—i—n—-—b—o—t—t—o—m—:—0—.—4—r—e—m—;—"—>—✦— —U—A—T— —S—i—g—n—-—o—f—f— —D—o—c—s—<—/—d—i—v—>—
+— — — — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—f—o—n—t—-—s—i—z—e—:—0—.—7—8—r—e—m—;—c—o—l—o—r—:—v—a—r—(—-—-—m—u—t—e—d—)—;—l—i—n—e—-—h—e—i—g—h—t—:—1—.—5—;—"—>—U—s—e—r— —A—c—c—e—p—t—a—n—c—e— —T—e—s—t—i—n—g— —d—o—c—u—m—e—n—t—s— —i—n—c—l—u—d—i—n—g— —U—A—T— —p—l—a—n—,— —t—e—s—t—e—r— —a—s—s—i—g—n—m—e—n—t—s—,— —s—i—g—n—-—o—f—f— —c—r—i—t—e—r—i—a—,— —a—n—d— —f—o—r—m—a—l— —c—l—i—e—n—t— —a—p—p—r—o—v—a—l— —r—e—c—o—r—d—s—.—<—/—d—i—v—>—
+— — — — — — — — —<—/—d—i—v—>—
+— — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—b—a—c—k—g—r—o—u—n—d—:—r—g—b—a—(—0—,—2—2—9—,—1—9—2—,—0—.—0—5—)—;—b—o—r—d—e—r—:—1—p—x— —s—o—l—i—d— —r—g—b—a—(—0—,—2—2—9—,—1—9—2—,—0—.—1—5—)—;—b—o—r—d—e—r—-—r—a—d—i—u—s—:—5—p—x—;—p—a—d—d—i—n—g—:—0—.—9—r—e—m— —1—r—e—m—;—"—>—
+— — — — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—f—o—n—t—-—f—a—m—i—l—y—:—v—a—r—(—-—-—m—o—n—o—)—;—f—o—n—t—-—s—i—z—e—:—0—.—6—2—r—e—m—;—c—o—l—o—r—:—v—a—r—(—-—-—a—c—c—e—n—t—)—;—l—e—t—t—e—r—-—s—p—a—c—i—n—g—:—0—.—1—e—m—;—t—e—x—t—-—t—r—a—n—s—f—o—r—m—:—u—p—p—e—r—c—a—s—e—;—m—a—r—g—i—n—-—b—o—t—t—o—m—:—0—.—4—r—e—m—;—"—>—✦—?— —T—e—s—t— —D—a—t—a— —D—o—c—s—<—/—d—i—v—>—
+— — — — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—f—o—n—t—-—s—i—z—e—:—0—.—7—8—r—e—m—;—c—o—l—o—r—:—v—a—r—(—-—-—m—u—t—e—d—)—;—l—i—n—e—-—h—e—i—g—h—t—:—1—.—5—;—"—>—T—e—s—t— —d—a—t—a— —p—r—e—p—a—r—a—t—i—o—n— —g—u—i—d—e—s— —d—e—f—i—n—i—n—g— —v—a—l—i—d—/—i—n—v—a—l—i—d— —i—n—p—u—t— —s—e—t—s—,— —b—o—u—n—d—a—r—y— —v—a—l—u—e—s—,— —e—q—u—i—v—a—l—e—n—c—e— —p—a—r—t—i—t—i—o—n—s—,— —a—n—d— —e—d—g—e— —c—a—s—e— —d—a—t—a—.—<—/—d—i—v—>—
+— — — — — — — — —<—/—d—i—v—>—
+— — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—b—a—c—k—g—r—o—u—n—d—:—r—g—b—a—(—0—,—2—2—9—,—1—9—2—,—0—.—0—5—)—;—b—o—r—d—e—r—:—1—p—x— —s—o—l—i—d— —r—g—b—a—(—0—,—2—2—9—,—1—9—2—,—0—.—1—5—)—;—b—o—r—d—e—r—-—r—a—d—i—u—s—:—5—p—x—;—p—a—d—d—i—n—g—:—0—.—9—r—e—m— —1—r—e—m—;—"—>—
+— — — — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—f—o—n—t—-—f—a—m—i—l—y—:—v—a—r—(—-—-—m—o—n—o—)—;—f—o—n—t—-—s—i—z—e—:—0—.—6—2—r—e—m—;—c—o—l—o—r—:—v—a—r—(—-—-—a—c—c—e—n—t—)—;—l—e—t—t—e—r—-—s—p—a—c—i—n—g—:—0—.—1—e—m—;—t—e—x—t—-—t—r—a—n—s—f—o—r—m—:—u—p—p—e—r—c—a—s—e—;—m—a—r—g—i—n—-—b—o—t—t—o—m—:—0—.—4—r—e—m—;—"—>—✦— —T—e—s—t— —C—l—o—s—u—r—e— —R—e—p—o—r—t—s—<—/—d—i—v—>—
+— — — — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—f—o—n—t—-—s—i—z—e—:—0—.—7—8—r—e—m—;—c—o—l—o—r—:—v—a—r—(—-—-—m—u—t—e—d—)—;—l—i—n—e—-—h—e—i—g—h—t—:—1—.—5—;—"—>—E—n—d—-—o—f—-—p—h—a—s—e— —c—l—o—s—u—r—e— —d—o—c—u—m—e—n—t—s— —s—u—m—m—a—r—i—s—i—n—g— —t—o—t—a—l— —e—f—f—o—r—t—,— —d—e—f—e—c—t— —l—i—f—e—c—y—c—l—e—,— —l—e—s—s—o—n—s— —l—e—a—r—n—e—d—,— —a—n—d— —o—u—t—s—t—a—n—d—i—n—g— —r—i—s—k— —i—t—e—m—s— —f—o—r— —h—a—n—d—o—v—e—r—.—<—/—d—i—v—>—
+— — — — — — — — —<—/—d—i—v—>—
+— — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—b—a—c—k—g—r—o—u—n—d—:—r—g—b—a—(—0—,—2—2—9—,—1—9—2—,—0—.—0—5—)—;—b—o—r—d—e—r—:—1—p—x— —s—o—l—i—d— —r—g—b—a—(—0—,—2—2—9—,—1—9—2—,—0—.—1—5—)—;—b—o—r—d—e—r—-—r—a—d—i—u—s—:—5—p—x—;—p—a—d—d—i—n—g—:—0—.—9—r—e—m— —1—r—e—m—;—"—>—
+— — — — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—f—o—n—t—-—f—a—m—i—l—y—:—v—a—r—(—-—-—m—o—n—o—)—;—f—o—n—t—-—s—i—z—e—:—0—.—6—2—r—e—m—;—c—o—l—o—r—:—v—a—r—(—-—-—a—c—c—e—n—t—)—;—l—e—t—t—e—r—-—s—p—a—c—i—n—g—:—0—.—1—e—m—;—t—e—x—t—-—t—r—a—n—s—f—o—r—m—:—u—p—p—e—r—c—a—s—e—;—m—a—r—g—i—n—-—b—o—t—t—o—m—:—0—.—4—r—e—m—;—"—>—✦— —Q—A— —M—e—t—r—i—c—s— —D—a—s—h—b—o—a—r—d—<—/—d—i—v—>—
+— — — — — — — — — — —<—d—i—v— —s—t—y—l—e—=—"—f—o—n—t—-—s—i—z—e—:—0—.—7—8—r—e—m—;—c—o—l—o—r—:—v—a—r—(—-—-—m—u—t—e—d—)—;—l—i—n—e—-—h—e—i—g—h—t—:—1—.—5—;—"—>—S—p—r—i—n—t—-—l—e—v—e—l— —q—u—a—l—i—t—y— —m—e—t—r—i—c—s— —t—r—a—c—k—i—n—g— —d—e—f—e—c—t— —d—e—t—e—c—t—i—o—n— —r—a—t—e—,— —t—e—s—t— —e—x—e—c—u—t—i—o—n— —p—r—o—g—r—e—s—s—,— —e—s—c—a—p—e—d— —b—u—g—s—,— —a—n—d— —r—e—g—r—e—s—s—i—o—n— —s—t—a—b—i—l—i—t—y— —o—v—e—r— —t—i—m—e—.—<—/—d—i—v—>—
+— — — — — — — — —<—/—d—i—v—>—
+— — — — — — —<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—s—t—a—c—k—"—>—
+— — — — — — — — —<—s—p—a—n— —c—l—a—s—s—=—"—t—a—g— —t—-—g—r—e—e—n—"—>—B—u—g— —R—e—p—o—r—t—s—<—/—s—p—a—n—>—<—s—p—a—n— —c—l—a—s—s—=—"—t—a—g— —t—-—g—r—e—e—n—"—>—T—e—s—t— —P—l—a—n—s—<—/—s—p—a—n—>—
+— — — — — — — — —<—s—p—a—n— —c—l—a—s—s—=—"—t—a—g— —t—-—g—r—e—e—n—"—>—T—e—s—t— —C—a—s—e—s—<—/—s—p—a—n—>—<—s—p—a—n— —c—l—a—s—s—=—"—t—a—g— —t—-—g—r—e—e—n—"—>—R—T—M—<—/—s—p—a—n—>—
+— — — — — — — — —<—s—p—a—n— —c—l—a—s—s—=—"—t—a—g— —t—-—d—i—m—"—>—U—A—T— —D—o—c—s—<—/—s—p—a—n—>—<—s—p—a—n— —c—l—a—s—s—=—"—t—a—g— —t—-—d—i—m—"—>—E—x—p—l—o—r—a—t—o—r—y— —C—h—a—r—t—e—r—s—<—/—s—p—a—n—>—
+— — — — — — — — —<—s—p—a—n— —c—l—a—s—s—=—"—t—a—g— —t—-—d—i—m—"—>—Q—A— —R—e—p—o—r—t—s—<—/—s—p—a—n—>—<—s—p—a—n— —c—l—a—s—s—=—"—t—a—g— —t—-—d—i—m—"—>—T—e—s—t— —C—l—o—s—u—r—e—<—/—s—p—a—n—>—
+— — — — — — — — —<—s—p—a—n— —c—l—a—s—s—=—"—t—a—g— —t—-—d—i—m—"—>—C—h—e—c—k—l—i—s—t—s—<—/—s—p—a—n—>—<—s—p—a—n— —c—l—a—s—s—=—"—t—a—g— —t—-—d—i—m—"—>—T—e—s—t— —D—a—t—a—<—/—s—p—a—n—>—
+— — — — — — —<—/—d—i—v—>—
+— — — — —<—/—a—>—
+— — —<—/—d—i—v—>—
+—
+— — —<—!—-—-— —O—T—H—E—R— —P—R—O—J—E—C—T—S— —-—-—>—
+— — —<—d—i—v— —s—t—y—l—e—=—"—f—o—n—t—-—f—a—m—i—l—y—:—v—a—r—(—-—-—m—o—n—o—)—;—f—o—n—t—-—s—i—z—e—:—0—.—6—5—r—e—m—;—c—o—l—o—r—:—v—a—r—(—-—-—m—u—t—e—d—)—;—l—e—t—t—e—r—-—s—p—a—c—i—n—g—:—0—.—1—4—e—m—;—t—e—x—t—-—t—r—a—n—s—f—o—r—m—:—u—p—p—e—r—c—a—s—e—;—m—a—r—g—i—n—-—b—o—t—t—o—m—:—1—r—e—m—;—d—i—s—p—l—a—y—:—f—l—e—x—;—a—l—i—g—n—-—i—t—e—m—s—:—c—e—n—t—e—r—;—g—a—p—:—0—.—7—r—e—m—;—"—>—
+— — — — —<—s—p—a—n— —s—t—y—l—e—=—"—w—i—d—t—h—:—6—p—x—;—h—e—i—g—h—t—:—6—p—x—;—b—o—r—d—e—r—-—r—a—d—i—u—s—:—5—0—%—;—b—a—c—k—g—r—o—u—n—d—:—v—a—r—(—-—-—m—u—t—e—d—)—;—d—i—s—p—l—a—y—:—i—n—l—i—n—e—-—b—l—o—c—k—;—"—>—<—/—s—p—a—n—>—
+— — — — —A—u—t—o—m—a—t—i—o—n—,— —P—e—r—f—o—r—m—a—n—c—e— —&—a—m—p—;— —A—I— —P—r—o—j—e—c—t—s—
+— — —<—/—d—i—v—>—
+— — —<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—s—-—g—r—i—d—"—>—
+—
+— — — — —<—!—-—-— —U—S—E—R—'—S— —P—R—O—V—I—D—E—D— —A—I— —A—G—E—N—T— —R—E—P—O— —-—-—>—
+— — — — —<—a— —h—r—e—f—=—"—h—t—t—p—s—:—/—/—g—i—t—h—u—b—.—c—o—m—/—t—a—l—h—a—1—0—/—a—i—-—a—g—e—n—t—-—t—e—s—t—-—a—u—t—o—m—a—t—i—o—n—"— —t—a—r—g—e—t—=—"—_—b—l—a—n—k—"— —c—l—a—s—s—=—"—r—e—p—o—-—c—a—r—d—"—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—t—o—p—"—>—<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—i—c—o—n—"—>—✦—<—/—d—i—v—>—<—s—p—a—n— —c—l—a—s—s—=—"—r—e—p—o—-—l—a—b—e—l— —r—l—-—a—i—"—>—A—I— —A—g—e—n—t—<—/—s—p—a—n—>—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—n—a—m—e—"—>—a—i—-—a—g—e—n—t—-—t—e—s—t—-—a—u—t—o—m—a—t—i—o—n—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—d—e—s—c—"—>—M—u—l—t—i—-—a—g—e—n—t— —Q—A— —p—i—p—e—l—i—n—e— —u—s—i—n—g— —C—l—a—u—d—e— —C—o—d—e— —+— —P—l—a—y—w—r—i—g—h—t— —(—P—y—t—h—o—n—)—.— —A—g—e—n—t—s— —a—n—a—l—y—s—e— —f—e—a—t—u—r—e—s—,— —a—u—t—o—-—g—e—n—e—r—a—t—e— —t—e—s—t— —s—c—r—i—p—t—s—,— —s—e—l—f—-—h—e—a—l— —b—r—o—k—e—n— —l—o—c—a—t—o—r—s—,— —a—n—d— —p—u—s—h— —t—e—s—t— —P—R—s— —�— —z—e—r—o— —m—a—n—u—a—l— —k—i—c—k—o—f—f—.— —B—u—i—l—t— —i—n—s—i—d—e— —a— —l—o—c—a—l— —V—i—r—t—u—a—l—B—o—x— —e—n—v—i—r—o—n—m—e—n—t— —w—i—t—h— —f—u—l—l— —C—I— —i—n—t—e—g—r—a—t—i—o—n—.—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—s—t—a—c—k—"—>—<—s—p—a—n— —c—l—a—s—s—=—"—t—a—g— —t—-—p—u—r—p—l—e—"—>—C—l—a—u—d—e— —C—o—d—e—<—/—s—p—a—n—>—<—s—p—a—n— —c—l—a—s—s—=—"—t—a—g— —t—-—b—l—u—e—"—>—P—l—a—y—w—r—i—g—h—t—<—/—s—p—a—n—>—<—s—p—a—n— —c—l—a—s—s—=—"—t—a—g— —t—-—d—i—m—"—>—P—y—t—h—o—n—<—/—s—p—a—n—>—<—s—p—a—n— —c—l—a—s—s—=—"—t—a—g— —t—-—d—i—m—"—>—G—i—t—H—u—b— —A—c—t—i—o—n—s—<—/—s—p—a—n—>—<—s—p—a—n— —c—l—a—s—s—=—"—t—a—g— —t—-—d—i—m—"—>—V—i—r—t—u—a—l—B—o—x—<—/—s—p—a—n—>—<—/—d—i—v—>—
+— — — — —<—/—a—>—
+—
+— — — — —<—!—-—-— —R—E—P—O— —2—:— —P—L—A—Y—W—R—I—G—H—T— —-—-—>—
+— — — — —<—a— —h—r—e—f—=—"—h—t—t—p—s—:—/—/—g—i—t—h—u—b—.—c—o—m—/—t—a—l—h—a—1—0—/—p—l—a—y—w—r—i—g—h—t—-—p—y—t—h—o—n—-—a—u—t—o—m—a—t—i—o—n—"— —t—a—r—g—e—t—=—"—_—b—l—a—n—k—"— —c—l—a—s—s—=—"—r—e—p—o—-—c—a—r—d—"—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—t—o—p—"—>—<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—i—c—o—n—"—>—✦—<—/—d—i—v—>—<—s—p—a—n— —c—l—a—s—s—=—"—r—e—p—o—-—l—a—b—e—l— —r—l—-—a—i—"—>—P—y—t—h—o—n—<—/—s—p—a—n—>—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—n—a—m—e—"—>—p—l—a—y—w—r—i—g—h—t—-—p—y—t—h—o—n—-—a—u—t—o—m—a—t—i—o—n—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—d—e—s—c—"—>—E—n—d—-—t—o—-—e—n—d— —f—r—a—m—e—w—o—r—k— —l—e—v—e—r—a—g—i—n—g— —P—y—t—e—s—t— —a—n—d— —t—h—e— —P—a—g—e— —O—b—j—e—c—t— —M—o—d—e—l—.— —C—o—m—p—l—e—t—e— —w—i—t—h— —G—i—t—H—u—b— —A—c—t—i—o—n—s— —C—I—/—C—D— —w—o—r—k—f—l—o—w—s— —a—n—d— —m—u—l—t—i—p—l—e— —s—c—e—n—a—r—i—o— —v—a—l—i—d—a—t—i—o—n—s—.—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—s—t—a—c—k—"—>—<—s—p—a—n— —c—l—a—s—s—=—"—t—a—g— —t—-—p—u—r—p—l—e—"—>—P—l—a—y—w—r—i—g—h—t—<—/—s—p—a—n—>—<—s—p—a—n— —c—l—a—s—s—=—"—t—a—g— —t—-—b—l—u—e—"—>—P—y—t—h—o—n—<—/—s—p—a—n—>—<—s—p—a—n— —c—l—a—s—s—=—"—t—a—g— —t—-—d—i—m—"—>—p—y—t—e—s—t—<—/—s—p—a—n—>—<—s—p—a—n— —c—l—a—s—s—=—"—t—a—g— —t—-—d—i—m—"—>—G—i—t—H—u—b— —A—c—t—i—o—n—s—<—/—s—p—a—n—>—<—/—d—i—v—>—
+— — — — —<—/—a—>—
+— — — — —
+— — — — —<—!—-—-— —R—E—P—O— —3—:— —C—Y—P—R—E—S—S— —-—-—>—
+— — — — —<—a— —h—r—e—f—=—"—h—t—t—p—s—:—/—/—g—i—t—h—u—b—.—c—o—m—/—t—a—l—h—a—1—0—/—c—y—p—r—e—s—s—-—r—e—g—r—e—s—s—i—o—n—-—s—u—i—t—e—"— —t—a—r—g—e—t—=—"—_—b—l—a—n—k—"— —c—l—a—s—s—=—"—r—e—p—o—-—c—a—r—d—"—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—t—o—p—"—>—<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—i—c—o—n—"—>—✦—<—/—d—i—v—>—<—s—p—a—n— —c—l—a—s—s—=—"—r—e—p—o—-—l—a—b—e—l— —r—l—-—a—i—"—>—J—a—v—a—S—c—r—i—p—t—<—/—s—p—a—n—>—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—n—a—m—e—"—>—c—y—p—r—e—s—s—-—r—e—g—r—e—s—s—i—o—n—-—s—u—i—t—e—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—d—e—s—c—"—>—S—t—r—u—c—t—u—r—e—d— —C—y—p—r—e—s—s— —r—e—g—r—e—s—s—i—o—n— —s—u—i—t—e— —t—e—s—t—i—n—g— —e—-—c—o—m—m—e—r—c—e— —c—h—e—c—k—o—u—t— —f—l—o—w—s—,— —U—I— —i—n—t—e—r—a—c—t—i—o—n—s—,— —a—n—d— —m—a—n—a—g—i—n—g— —t—e—s—t— —d—a—t—a— —f—i—x—t—u—r—e—s—.— —I—n—t—e—g—r—a—t—e—d— —w—i—t—h— —G—i—t—H—u—b— —A—c—t—i—o—n—s—.—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—s—t—a—c—k—"—>—<—s—p—a—n— —c—l—a—s—s—=—"—t—a—g— —t—-—p—u—r—p—l—e—"—>—C—y—p—r—e—s—s—<—/—s—p—a—n—>—<—s—p—a—n— —c—l—a—s—s—=—"—t—a—g— —t—-—b—l—u—e—"—>—J—a—v—a—S—c—r—i—p—t—<—/—s—p—a—n—>—<—s—p—a—n— —c—l—a—s—s—=—"—t—a—g— —t—-—d—i—m—"—>—M—o—c—h—a—<—/—s—p—a—n—>—<—s—p—a—n— —c—l—a—s—s—=—"—t—a—g— —t—-—d—i—m—"—>—C—I—/—C—D—<—/—s—p—a—n—>—<—/—d—i—v—>—
+— — — — —<—/—a—>—
+—
+— — — — —<—!—-—-— —R—E—P—O— —6—:— —A—P—P—I—U—M— —-—-—>—
+— — — — —<—a— —h—r—e—f—=—"—h—t—t—p—s—:—/—/—g—i—t—h—u—b—.—c—o—m—/—t—a—l—h—a—1—0—/—m—o—b—i—l—e—-—q—a—-—p—o—r—t—f—o—l—i—o—-—a—p—p—i—u—m—"— —t—a—r—g—e—t—=—"—_—b—l—a—n—k—"— —c—l—a—s—s—=—"—r—e—p—o—-—c—a—r—d—"—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—t—o—p—"—>—<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—i—c—o—n—"—>—✦—<—/—d—i—v—>—<—s—p—a—n— —c—l—a—s—s—=—"—r—e—p—o—-—l—a—b—e—l— —r—l—-—n—e—w—"—>—M—o—b—i—l—e—<—/—s—p—a—n—>—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—n—a—m—e—"—>—m—o—b—i—l—e—-—q—a—-—p—o—r—t—f—o—l—i—o—-—a—p—p—i—u—m—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—d—e—s—c—"—>—C—r—o—s—s—-—p—l—a—t—f—o—r—m— —t—e—s—t— —s—c—r—i—p—t—s— —f—o—r— —i—O—S— —a—n—d— —A—n—d—r—o—i—d— —u—t—i—l—i—z—i—n—g— —A—p—p—i—u—m—.— —W—a—i—t— —h—e—l—p—e—r— —c—l—a—s—s—e—s—,— —e—n—v—i—r—o—n—m—e—n—t— —c—a—p—a—b—i—l—i—t—i—e—s— —s—e—t—u—p—s—,— —a—n—d— —p—y—t—e—s—t— —s—u—i—t—e—s—.—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—s—t—a—c—k—"—>—<—s—p—a—n— —c—l—a—s—s—=—"—t—a—g— —t—-—p—u—r—p—l—e—"—>—A—p—p—i—u—m—<—/—s—p—a—n—>—<—s—p—a—n— —c—l—a—s—s—=—"—t—a—g— —t—-—b—l—u—e—"—>—P—y—t—h—o—n—<—/—s—p—a—n—>—<—s—p—a—n— —c—l—a—s—s—=—"—t—a—g— —t—-—d—i—m—"—>—i—O—S—<—/—s—p—a—n—>—<—s—p—a—n— —c—l—a—s—s—=—"—t—a—g— —t—-—d—i—m—"—>—A—n—d—r—o—i—d—<—/—s—p—a—n—>—<—/—d—i—v—>—
+— — — — —<—/—a—>—
+—
+— — — — —<—!—-—-— —R—E—P—O— —4—:— —P—O—S—T—M—A—N—/—N—E—W—M—A—N— —-—-—>—
+— — — — —<—a— —h—r—e—f—=—"—h—t—t—p—s—:—/—/—g—i—t—h—u—b—.—c—o—m—/—t—a—l—h—a—1—0—/—a—p—i—-—t—e—s—t—i—n—g—-—p—o—s—t—m—a—n—-—n—e—w—m—a—n—"— —t—a—r—g—e—t—=—"—_—b—l—a—n—k—"— —c—l—a—s—s—=—"—r—e—p—o—-—c—a—r—d—"—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—t—o—p—"—>—<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—i—c—o—n—"—>—✦—<—/—d—i—v—>—<—s—p—a—n— —c—l—a—s—s—=—"—r—e—p—o—-—l—a—b—e—l— —r—l—-—n—e—w—"—>—A—P—I—<—/—s—p—a—n—>—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—n—a—m—e—"—>—a—p—i—-—t—e—s—t—i—n—g—-—p—o—s—t—m—a—n—-—n—e—w—m—a—n—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—d—e—s—c—"—>—P—o—s—t—m—a—n— —c—o—l—l—e—c—t—i—o—n—s— —f—o—r— —R—E—S—T— —A—P—I— —t—e—s—t—i—n—g— —i—n—c—l—u—d—i—n—g— —d—y—n—a—m—i—c— —e—n—v—i—r—o—n—m—e—n—t— —v—a—r—i—a—b—l—e—s—,— —p—a—r—a—m—e—t—e—r—i—z—e—d— —r—e—q—u—e—s—t—s—,— —a—n—d— —N—e—w—m—a—n— —C—L—I— —i—n—t—e—g—r—a—t—i—o—n— —f—o—r— —a—u—t—o—m—a—t—e—d— —C—I— —e—x—e—c—u—t—i—o—n—.—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—s—t—a—c—k—"—>—<—s—p—a—n— —c—l—a—s—s—=—"—t—a—g— —t—-—b—l—u—e—"—>—P—o—s—t—m—a—n—<—/—s—p—a—n—>—<—s—p—a—n— —c—l—a—s—s—=—"—t—a—g— —t—-—d—i—m—"—>—N—e—w—m—a—n—<—/—s—p—a—n—>—<—s—p—a—n— —c—l—a—s—s—=—"—t—a—g— —t—-—d—i—m—"—>—R—E—S—T— —A—P—I—<—/—s—p—a—n—>—<—/—d—i—v—>—
+— — — — —<—/—a—>—
+—
+— — — — —<—!—-—-— —R—E—P—O— —8—:— —C—O—N—T—R—A—C—T— —P—O—S—T—M—A—N— —-—-—>—
+— — — — —<—a— —h—r—e—f—=—"—h—t—t—p—s—:—/—/—g—i—t—h—u—b—.—c—o—m—/—t—a—l—h—a—1—0—/—a—p—i—-—c—o—n—t—r—a—c—t—-—t—e—s—t—i—n—g—-—p—o—s—t—m—a—n—"— —t—a—r—g—e—t—=—"—_—b—l—a—n—k—"— —c—l—a—s—s—=—"—r—e—p—o—-—c—a—r—d—"—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—t—o—p—"—>—<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—i—c—o—n—"—>—✦—<—/—d—i—v—>—<—s—p—a—n— —c—l—a—s—s—=—"—r—e—p—o—-—l—a—b—e—l— —r—l—-—n—e—w—"—>—A—P—I—<—/—s—p—a—n—>—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—n—a—m—e—"—>—a—p—i—-—c—o—n—t—r—a—c—t—-—t—e—s—t—i—n—g—-—p—o—s—t—m—a—n—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—d—e—s—c—"—>—D—e—d—i—c—a—t—e—d— —b—a—c—k—e—n—d— —s—c—h—e—m—a— —t—e—s—t—i—n—g— —s—u—i—t—e— —u—s—i—n—g— —t—v—4— —v—a—l—i—d—a—t—i—o—n— —l—o—g—i—c— —t—o— —a—s—s—e—r—t— —d—a—t—a— —t—y—p—e—s— —a—n—d— —m—i—s—s—i—n—g— —s—t—r—u—c—t—u—r—e—s— —p—e—r— —S—w—a—g—g—e—r— —d—o—c—u—m—e—n—t—a—t—i—o—n—.—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—r—e—p—o—-—s—t—a—c—k—"—>—<—s—p—a—n— —c—l—a—s—s—=—"—t—a—g— —t—-—b—l—u—e—"—>—P—o—s—t—m—a—n—<—/—s—p—a—n—>—<—s—p—a—n— —c—l—a—s—s—=—"—t—a—g— —t—-—d—i—m—"—>—C—o—n—t—r—a—c—t— —T—e—s—t—i—n—g—<—/—s—p—a—n—>—<—s—p—a—n— —c—l—a—s—s—=—"—t—a—g— —t—-—d—i—m—"—>—S—c—h—e—m—a— —V—a—l—i—d—a—t—i—o—n—<—/—s—p—a—n—>—<—/—d—i—v—>—
+— — — — —<—/—a—>—
+—
+— — —<—/—d—i—v—>—
+—
+— — —<—!—-—-— —D—O—M—A—I—N—S— —-—-—>—
+— — —<—s—e—c—t—i—o—n— —i—d—=—"—d—o—m—a—i—n—s—"—>—
+— — — — —<—d—i—v— —c—l—a—s—s—=—"—s—e—c—t—i—o—n—-—e—y—e—b—r—o—w—"—>—0—5— —�— —I—n—d—u—s—t—r—y—<—/—d—i—v—>—
+— — — — —<—h—2— —c—l—a—s—s—=—"—s—e—c—t—i—o—n—-—t—i—t—l—e—"—>—D—o—m—a—i—n— —E—x—p—e—r—i—e—n—c—e—<—/—h—2—>—
+— — — — —<—d—i—v— —c—l—a—s—s—=—"—d—o—m—a—i—n—s—-—g—r—i—d—"—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—d—o—m—a—i—n—-—c—a—r—d—"—>—<—s—p—a—n—>—✦—<—/—s—p—a—n—>—E—-—C—o—m—m—e—r—c—e— —&—a—m—p—;— —P—a—y—m—e—n—t— —G—a—t—e—w—a—y—s—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—d—o—m—a—i—n—-—c—a—r—d—"—>—<—s—p—a—n—>—✦—<—/—s—p—a—n—>—A—I—,— —L—L—M— —&—a—m—p—;— —A—u—t—o—m—a—t—i—o—n— —P—l—a—t—f—o—r—m—s—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—d—o—m—a—i—n—-—c—a—r—d—"—>—<—s—p—a—n—>—✦—<—/—s—p—a—n—>—B—a—n—k—i—n—g—,— —F—i—n—a—n—c—e— —&—a—m—p—;— —F—i—n—T—e—c—h— —(—B—F—S—I—)—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—d—o—m—a—i—n—-—c—a—r—d—"—>—<—s—p—a—n—>—✦—<—/—s—p—a—n—>—H—e—a—l—t—h—T—e—c—h— —&—a—m—p—;— —M—e—d—i—c—a—l— —A—p—p—l—i—c—a—t—i—o—n—s—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—d—o—m—a—i—n—-—c—a—r—d—"—>—<—s—p—a—n—>—✦—<—/—s—p—a—n—>—E—d—u—c—a—t—i—o—n—,— —L—M—S— —&—a—m—p—;— —E—d—T—e—c—h— —P—l—a—t—f—o—r—m—s—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—d—o—m—a—i—n—-—c—a—r—d—"—>—<—s—p—a—n—>—✦—<—/—s—p—a—n—>—R—e—a—l— —E—s—t—a—t—e— —&—a—m—p—;— —P—r—o—p—T—e—c—h— —S—y—s—t—e—m—s—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—d—o—m—a—i—n—-—c—a—r—d—"—>—<—s—p—a—n—>—✦—<—/—s—p—a—n—>—C—y—b—e—r—s—e—c—u—r—i—t—y— —&—a—m—p—;— —C—o—m—p—l—i—a—n—c—e— —T—o—o—l—s—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—d—o—m—a—i—n—-—c—a—r—d—"—>—<—s—p—a—n—>—✦—<—/—s—p—a—n—>—S—a—a—S— —&—a—m—p—;— —E—n—t—e—r—p—r—i—s—e— —C—l—o—u—d— —P—l—a—t—f—o—r—m—s—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—d—o—m—a—i—n—-—c—a—r—d—"—>—<—s—p—a—n—>—✦—?—<—/—s—p—a—n—>—E—v—e—n—t— —M—a—n—a—g—e—m—e—n—t— —&—a—m—p—;— —T—i—c—k—e—t—i—n—g—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—d—o—m—a—i—n—-—c—a—r—d—"—>—<—s—p—a—n—>—✦—<—/—s—p—a—n—>—M—o—b—i—l—e— —A—p—p—s— —(—i—O—S— —&—a—m—p—;— —A—n—d—r—o—i—d—)—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—d—o—m—a—i—n—-—c—a—r—d—"—>—<—s—p—a—n—>—✦—?—<—/—s—p—a—n—>—M—a—r—k—e—t—p—l—a—c—e— —&—a—m—p—;— —M—u—l—t—i—-—v—e—n—d—o—r— —P—l—a—t—f—o—r—m—s—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—d—o—m—a—i—n—-—c—a—r—d—"—>—<—s—p—a—n—>—✦—<—/—s—p—a—n—>—L—o—g—i—s—t—i—c—s—,— —S—u—p—p—l—y— —C—h—a—i—n— —&—a—m—p—;— —L—a—s—t—-—M—i—l—e—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—d—o—m—a—i—n—-—c—a—r—d—"—>—<—s—p—a—n—>—✦—<—/—s—p—a—n—>—G—a—m—i—n—g— —&—a—m—p—;— —I—n—t—e—r—a—c—t—i—v—e— —E—n—t—e—r—t—a—i—n—m—e—n—t—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—d—o—m—a—i—n—-—c—a—r—d—"—>—<—s—p—a—n—>—✦—<—/—s—p—a—n—>—T—e—l—e—c—o—m— —&—a—m—p—;— —C—o—m—m—u—n—i—c—a—t—i—o—n— —P—l—a—t—f—o—r—m—s—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—d—o—m—a—i—n—-—c—a—r—d—"—>—<—s—p—a—n—>—✦—✦—<—/—s—p—a—n—>—H—R—,— —R—e—c—r—u—i—t—m—e—n—t— —&—a—m—p—;— —W—o—r—k—f—o—r—c—e— —T—o—o—l—s—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—d—o—m—a—i—n—-—c—a—r—d—"—>—<—s—p—a—n—>—✦—<—/—s—p—a—n—>—A—n—a—l—y—t—i—c—s—,— —B—I— —&—a—m—p—;— —D—a—t—a— —D—a—s—h—b—o—a—r—d—s—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—d—o—m—a—i—n—-—c—a—r—d—"—>—<—s—p—a—n—>—✦—<—/—s—p—a—n—>—C—R—M—,— —C—M—S— —&—a—m—p—;— —A—d—m—i—n— —P—o—r—t—a—l—s—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—d—o—m—a—i—n—-—c—a—r—d—"—>—<—s—p—a—n—>—✦—<—/—s—p—a—n—>—A—P—I—-—F—i—r—s—t— —&—a—m—p—;— —M—i—c—r—o—s—e—r—v—i—c—e—s— —P—l—a—t—f—o—r—m—s—<—/—d—i—v—>—
+— — — — —<—/—d—i—v—>—
+— — —<—/—s—e—c—t—i—o—n—>—
+—
+— — —<—!—-—-— —C—E—R—T—I—F—I—C—A—T—I—O—N—S— —-—-—>—
+— — —<—s—e—c—t—i—o—n— —i—d—=—"—c—e—r—t—i—f—i—c—a—t—i—o—n—s—"—>—
+— — — — —<—d—i—v— —c—l—a—s—s—=—"—s—e—c—t—i—o—n—-—e—y—e—b—r—o—w—"—>—0—6— —�— —C—r—e—d—e—n—t—i—a—l—s—<—/—d—i—v—>—
+— — — — —<—h—2— —c—l—a—s—s—=—"—s—e—c—t—i—o—n—-—t—i—t—l—e—"—>—C—e—r—t—i—f—i—c—a—t—i—o—n—s— —&—a—m—p—;— —L—i—c—e—n—c—e—s—<—/—h—2—>—
+— — — — —<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—s—-—g—r—i—d—"—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—c—a—r—d—"—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—i—s—s—u—e—r—"—>—A—t—l—a—s—s—i—a—n—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—n—a—m—e—"—>—A—g—i—l—e— —P—r—o—j—e—c—t— —M—a—n—a—g—e—m—e—n—t— —P—r—o—f—e—s—s—i—o—n—a—l— —C—e—r—t—i—f—i—c—a—t—e—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—d—a—t—e—"—>—D—e—c— —2—0—2—5—<—/—d—i—v—>—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—c—a—r—d—"—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—i—s—s—u—e—r—"—>—L—a—m—b—d—a—T—e—s—t—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—n—a—m—e—"—>—T—e—s—t— —A—u—t—o—m—a—t—i—o—n— —P—r—o—f—e—s—s—i—o—n—a—l— —C—e—r—t—i—f—i—c—a—t—e—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—d—a—t—e—"—>—D—e—c— —2—0—2—5—<—/—d—i—v—>—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—c—a—r—d—"—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—i—s—s—u—e—r—"—>—L—a—m—b—d—a—T—e—s—t—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—n—a—m—e—"—>—S—o—f—t—w—a—r—e— —T—e—s—t—i—n—g— —P—r—o—f—e—s—s—i—o—n—a—l— —C—e—r—t—i—f—i—c—a—t—e—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—d—a—t—e—"—>—D—e—c— —2—0—2—4—<—/—d—i—v—>—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—c—a—r—d—"—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—i—s—s—u—e—r—"—>—S—n—o—w—f—l—a—k—e—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—n—a—m—e—"—>—G—e—n—e—r—a—t—i—v—e— —A—I— —P—r—o—f—e—s—s—i—o—n—a—l— —C—e—r—t—i—f—i—c—a—t—e—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—d—a—t—e—"—>—D—e—c— —2—0—2—5—<—/—d—i—v—>—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—c—a—r—d—"—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—i—s—s—u—e—r—"—>—M—i—c—r—o—s—o—f—t—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—n—a—m—e—"—>—C—a—r—e—e—r— —E—s—s—e—n—t—i—a—l—s— —i—n— —G—e—n—e—r—a—t—i—v—e— —A—I—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—d—a—t—e—"—>—D—e—c— —2—0—2—5—<—/—d—i—v—>—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—c—a—r—d—"—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—i—s—s—u—e—r—"—>—G—i—t—H—u—b—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—n—a—m—e—"—>—C—a—r—e—e—r— —E—s—s—e—n—t—i—a—l—s— —i—n— —G—i—t—H—u—b— —C—o—p—i—l—o—t—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—d—a—t—e—"—>—D—e—c— —2—0—2—5—<—/—d—i—v—>—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—c—a—r—d—"—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—i—s—s—u—e—r—"—>—D—o—c—k—e—r—,— —I—n—c—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—n—a—m—e—"—>—D—o—c—k—e—r— —F—o—u—n—d—a—t—i—o—n—s— —P—r—o—f—e—s—s—i—o—n—a—l— —C—e—r—t—i—f—i—c—a—t—e—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—d—a—t—e—"—>—D—e—c— —2—0—2—4—<—/—d—i—v—>—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—c—a—r—d—"—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—i—s—s—u—e—r—"—>—P—r—o—j—e—c—t— —M—a—n—a—g—e—m—e—n—t— —I—n—s—t—i—t—u—t—e—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—n—a—m—e—"—>—S—c—r—u—m—:— —T—h—e— —B—a—s—i—c—s—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—d—a—t—e—"—>—D—e—c— —2—0—2—4—<—/—d—i—v—>—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—c—a—r—d—"—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—i—s—s—u—e—r—"—>—I—I—B—A—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—n—a—m—e—"—>—A—g—i—l—e— —F—o—u—n—d—a—t—i—o—n—s—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—d—a—t—e—"—>—D—e—c— —2—0—2—4—<—/—d—i—v—>—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—c—a—r—d—"—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—i—s—s—u—e—r—"—>—N—A—S—B—A—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—n—a—m—e—"—>—M—i—s—t—a—k—e—s— —t—o— —A—v—o—i—d— —i—n— —A—g—i—l—e— —P—r—o—j—e—c—t— —M—a—n—a—g—e—m—e—n—t—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—d—a—t—e—"—>—D—e—c— —2—0—2—5—<—/—d—i—v—>—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—c—a—r—d—"—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—i—s—s—u—e—r—"—>—P—r—o—j—e—c—t— —M—a—n—a—g—e—m—e—n—t— —I—n—s—t—i—t—u—t—e—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—n—a—m—e—"—>—A—g—i—l—e— —P—r—o—j—e—c—t— —M—a—n—a—g—e—m—e—n—t— —w—i—t—h— —J—i—r—a— —C—l—o—u—d— —(—3— —P—a—r—t—s—)—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—d—a—t—e—"—>—N—o—v— —2—0—2—4—<—/—d—i—v—>—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—c—a—r—d—"—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—i—s—s—u—e—r—"—>—L—i—n—k—e—d—I—n—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—n—a—m—e—"—>—J—M—e—t—e—r—:— —P—e—r—f—o—r—m—a—n—c—e— —a—n—d— —L—o—a—d— —T—e—s—t—i—n—g—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—d—a—t—e—"—>—N—o—v— —2—0—2—4—<—/—d—i—v—>—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—c—a—r—d—"—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—i—s—s—u—e—r—"—>—L—i—n—k—e—d—I—n—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—n—a—m—e—"—>—S—Q—L— —f—o—r— —T—e—s—t—e—r—s—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—d—a—t—e—"—>—N—o—v— —2—0—2—4—<—/—d—i—v—>—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—c—a—r—d—"—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—i—s—s—u—e—r—"—>—L—i—n—k—e—d—I—n—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—n—a—m—e—"—>—P—r—o—g—r—a—m—m—i—n—g— —F—o—u—n—d—a—t—i—o—n—s—:— —S—o—f—t—w—a—r—e— —T—e—s—t—i—n—g— —/— —Q—A—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—d—a—t—e—"—>—D—e—c— —2—0—2—5—<—/—d—i—v—>—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—c—a—r—d—"—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—i—s—s—u—e—r—"—>—L—i—n—k—e—d—I—n—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—n—a—m—e—"—>—A—g—i—l—e— —T—e—s—t—i—n—g—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—d—a—t—e—"—>—D—e—c— —2—0—2—5—<—/—d—i—v—>—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—c—a—r—d—"—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—i—s—s—u—e—r—"—>—L—i—n—k—e—d—I—n—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—n—a—m—e—"—>—S—u—c—c—e—e—d—i—n—g— —i—n— —S—o—f—t—w—a—r—e— —T—e—s—t—i—n—g—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—d—a—t—e—"—>—D—e—c— —2—0—2—5—<—/—d—i—v—>—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—c—a—r—d—"—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—i—s—s—u—e—r—"—>—U—r—d—u—c—o—u—r—s—e—s— —I—n—c—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—n—a—m—e—"—>—C—y—b—e—r—S—a—v—v—y—:— —N—a—v—i—g—a—t—i—n—g— —L—i—n—u—x— —&—a—m—p—;— —E—s—s—e—n—t—i—a—l— —C—y—b—e—r—s—e—c—u—r—i—t—y—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—d—a—t—e—"—>—D—e—c— —2—0—2—4—<—/—d—i—v—>—<—/—d—i—v—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—c—a—r—d—"—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—i—s—s—u—e—r—"—>—O—P—S—W—A—T— —A—c—a—d—e—m—y—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—n—a—m—e—"—>—I—n—t—r—o—d—u—c—t—i—o—n— —t—o— —C—I—P— —(—C—r—i—t—i—c—a—l— —I—n—f—r—a—s—t—r—u—c—t—u—r—e— —P—r—o—t—e—c—t—i—o—n—)—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—e—r—t—-—d—a—t—e—"—>—N—o—v— —2—0—2—4—<—/—d—i—v—>—<—/—d—i—v—>—
+— — — — —<—/—d—i—v—>—
+— — —<—/—s—e—c—t—i—o—n—>—
+—
+— — —<—!—-—-— —C—O—N—T—A—C—T— —-—-—>—
+— — —<—s—e—c—t—i—o—n— —i—d—=—"—c—o—n—t—a—c—t—"—>—
+— — — — —<—d—i—v— —c—l—a—s—s—=—"—c—o—n—t—a—c—t—-—i—n—n—e—r—"—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—s—e—c—t—i—o—n—-—e—y—e—b—r—o—w—"— —s—t—y—l—e—=—"—j—u—s—t—i—f—y—-—c—o—n—t—e—n—t—:—c—e—n—t—e—r—;—"—>—0—7— —�— —L—e—t—'—s— —C—o—n—n—e—c—t—<—/—d—i—v—>—
+— — — — — — —<—h—2— —c—l—a—s—s—=—"—s—e—c—t—i—o—n—-—t—i—t—l—e—"—>—W—o—r—k— —W—i—t—h— —M—e—<—/—h—2—>—
+— — — — — — —<—p—>—A—v—a—i—l—a—b—l—e— —f—o—r— —f—r—e—e—l—a—n—c—e— —c—o—n—t—r—a—c—t—s—,— —r—e—m—o—t—e— —Q—A— —r—o—l—e—s—,— —a—n—d— —l—o—n—g—-—t—e—r—m— —c—o—l—l—a—b—o—r—a—t—i—o—n—s—.— —I— —w—o—r—k— —w—i—t—h— —s—t—a—r—t—u—p—s—,— —a—g—e—n—c—i—e—s—,— —a—n—d— —p—r—o—d—u—c—t— —t—e—a—m—s— —g—l—o—b—a—l—l—y— —�— —d—e—l—i—v—e—r—i—n—g— —q—u—a—l—i—t—y— —t—h—a—t— —s—h—i—p—s— —w—i—t—h— —c—o—n—f—i—d—e—n—c—e—.—<—/—p—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—c—o—n—t—a—c—t—-—g—r—i—d—"—>—
+— — — — — — — — —<—a— —h—r—e—f—=—"—m—a—i—l—t—o—:—c—o—n—t—a—c—t—.—t—a—l—h—a—k—h—a—t—t—a—k—@—g—m—a—i—l—.—c—o—m—"— —c—l—a—s—s—=—"—c—l—i—n—k—"—>—
+— — — — — — — — — — —<—s—p—a—n— —c—l—a—s—s—=—"—c—l—i—n—k—-—i—c—o—n—"—>—✦—<—/—s—p—a—n—>—
+— — — — — — — — — — —<—d—i—v— —c—l—a—s—s—=—"—c—l—i—n—k—-—b—o—d—y—"—>—<—d—i—v— —c—l—a—s—s—=—"—c—l—i—n—k—-—l—a—b—e—l—"—>—E—m—a—i—l—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—l—i—n—k—-—v—a—l—"—>—c—o—n—t—a—c—t—.—t—a—l—h—a—k—h—a—t—t—a—k—@—g—m—a—i—l—.—c—o—m—<—/—d—i—v—>—<—/—d—i—v—>—
+— — — — — — — — —<—/—a—>—
+— — — — — — — — —<—a— —h—r—e—f—=—"—h—t—t—p—s—:—/—/—w—a—.—m—e—/—9—2—3—4—9—4—5—7—8—5—7—9—"— —t—a—r—g—e—t—=—"—_—b—l—a—n—k—"— —c—l—a—s—s—=—"—c—l—i—n—k—"—>—
+— — — — — — — — — — —<—s—p—a—n— —c—l—a—s—s—=—"—c—l—i—n—k—-—i—c—o—n—"—>—✦—<—/—s—p—a—n—>—
+— — — — — — — — — — —<—d—i—v— —c—l—a—s—s—=—"—c—l—i—n—k—-—b—o—d—y—"—>—<—d—i—v— —c—l—a—s—s—=—"—c—l—i—n—k—-—l—a—b—e—l—"—>—W—h—a—t—s—A—p—p—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—l—i—n—k—-—v—a—l—"—>—+—9—2— —3—4—9— —4—5—7— —8—5—7—9—<—/—d—i—v—>—<—/—d—i—v—>—
+— — — — — — — — —<—/—a—>—
+— — — — — — — — —<—a— —h—r—e—f—=—"—h—t—t—p—s—:—/—/—l—i—n—k—e—d—i—n—.—c—o—m—/—i—n—/—t—a—l—h—a—-—k—h—a—n—-—k—h—a—t—t—a—k—/—"— —t—a—r—g—e—t—=—"—_—b—l—a—n—k—"— —c—l—a—s—s—=—"—c—l—i—n—k—"—>—
+— — — — — — — — — — —<—s—p—a—n— —c—l—a—s—s—=—"—c—l—i—n—k—-—i—c—o—n—"—>—✦—<—/—s—p—a—n—>—
+— — — — — — — — — — —<—d—i—v— —c—l—a—s—s—=—"—c—l—i—n—k—-—b—o—d—y—"—>—<—d—i—v— —c—l—a—s—s—=—"—c—l—i—n—k—-—l—a—b—e—l—"—>—L—i—n—k—e—d—I—n—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—l—i—n—k—-—v—a—l—"—>—t—a—l—h—a—-—k—h—a—n—-—k—h—a—t—t—a—k—<—/—d—i—v—>—<—/—d—i—v—>—
+— — — — — — — — —<—/—a—>—
+— — — — — — — — —<—a— —h—r—e—f—=—"—h—t—t—p—s—:—/—/—g—i—t—h—u—b—.—c—o—m—/—t—a—l—h—a—1—0—"— —t—a—r—g—e—t—=—"—_—b—l—a—n—k—"— —c—l—a—s—s—=—"—c—l—i—n—k—"—>—
+— — — — — — — — — — —<—s—p—a—n— —c—l—a—s—s—=—"—c—l—i—n—k—-—i—c—o—n—"—>—?—<—/—s—p—a—n—>—
+— — — — — — — — — — —<—d—i—v— —c—l—a—s—s—=—"—c—l—i—n—k—-—b—o—d—y—"—>—<—d—i—v— —c—l—a—s—s—=—"—c—l—i—n—k—-—l—a—b—e—l—"—>—G—i—t—H—u—b—<—/—d—i—v—>—<—d—i—v— —c—l—a—s—s—=—"—c—l—i—n—k—-—v—a—l—"—>—t—a—l—h—a—1—0—<—/—d—i—v—>—<—/—d—i—v—>—
+— — — — — — — — —<—/—a—>—
+— — — — — — —<—/—d—i—v—>—
+— — — — —<—/—d—i—v—>—
+— — —<—/—s—e—c—t—i—o—n—>—
+—
+— — —<—f—o—o—t—e—r—>—
+— — — — —<—d—i—v— —c—l—a—s—s—=—"—f—o—o—t—e—r—-—b—a—d—g—e—"—>—
+— — — — — — —<—d—i—v— —c—l—a—s—s—=—"—d—o—t— —d—o—t—-—g—r—e—e—n—"—>—<—/—d—i—v—>— —A—c—t—i—v—e— —&—a—m—p—;— —O—p—e—n— —t—o— —O—f—f—e—r—s—
+— — — — —<—/—d—i—v—>—
+— — — — —<—s—p—a—n—>—�— —2—0—2—6— —T—a—l—h—a— —K—h—a—n—.— —S—p—e—c—i—a—l—i—z—i—n—g— —i—n— —Q—A— —A—r—c—h—i—t—e—c—t—u—r—e— —&—a—m—p—;— —A—u—t—o—m—a—t—i—o—n—.—<—/—s—p—a—n—>—
+— — —<—/—f—o—o—t—e—r—>—
+—
+—<—/—b—o—d—y—>—
+—<—/—h—t—m—l—>—
+—

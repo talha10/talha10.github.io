@@ -1,229 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Talha Khan | Senior QA Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:      #080b0f;
+      --bg2:     #0c1017;
+      --bg3:     #10161f;
+      --card:    #0e1520;
+      --border:  #192233;
+      --border2: #1e2d42;
+      --accent:  #00e5c0;
+      --accent2: #0a8fff;
+      --accent3: #8b5cf6;
+      --text:    #ddeaf7;
+      --muted:   #5c7a96;
+      --mono:    'Space Mono', monospace;
+      --sans:    'Syne', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.7; overflow-x: hidden; }
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9999; opacity: 0.35;
+    }
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 4rem;
+      background: rgba(8,11,15,0.92);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-brand { display: flex; align-items: center; gap: 0.8rem; }
+    .nav-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: blink 2.4s ease-in-out infinite; }
+    .nav-logo { font-family: var(--mono); font-size: 0.8rem; color: var(--text); letter-spacing: 0.06em; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta { font-family: var(--mono); font-size: 0.7rem; padding: 0.5rem 1.1rem; background: transparent; border: 1px solid rgba(0,229,192,0.35); color: var(--accent); border-radius: 3px; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: all 0.2s; }
+    .nav-cta:hover { background: rgba(0,229,192,0.08); border-color: var(--accent); }
+
+    .hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      padding: 8rem 4rem 5rem;
+      position: relative; overflow: hidden; gap: 5rem;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(0,229,192,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,192,0.025) 1px, transparent 1px);
+      background-size: 64px 64px; pointer-events: none;
+    }
+    .glow-tr { position: absolute; top: 10%; right: 0; width: 600px; height: 600px; background: radial-gradient(ellipse at top right, rgba(0,229,192,0.07) 0%, transparent 65%); pointer-events: none; }
+    .glow-bl { position: absolute; bottom: 0; left: 5%; width: 450px; height: 450px; background: radial-gradient(ellipse at bottom left, rgba(10,143,255,0.06) 0%, transparent 65%); pointer-events: none; }
+    .hero-left { position: relative; z-index: 1; }
+
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.6rem; font-family: var(--mono); font-size: 0.68rem; color: var(--accent); border: 1px solid rgba(0,229,192,0.25); padding: 0.35rem 0.9rem; border-radius: 2px; margin-bottom: 2rem; letter-spacing: 0.12em; text-transform: uppercase; animation: slideIn 0.7s ease both; }
+    .blink-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: blink 1.8s infinite; flex-shrink: 0; }
+
+    .hero-name { font-size: clamp(3rem, 5.5vw, 5rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 0.6rem; animation: slideIn 0.7s 0.1s ease both; }
+    .hero-name em { font-style: normal; -webkit-text-stroke: 1.5px var(--accent); color: transparent; }
+    .hero-title { font-family: var(--mono); font-size: 0.82rem; color: var(--muted); letter-spacing: 0.06em; margin-bottom: 2.2rem; animation: slideIn 0.7s 0.18s ease both; }
+    .hero-bio { font-size: 0.98rem; color: #7a9ab8; max-width: 500px; line-height: 1.85; margin-bottom: 2.8rem; animation: slideIn 0.7s 0.26s ease both; }
+    .hero-bio strong { color: var(--text); font-weight: 600; }
+
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; animation: slideIn 0.7s 0.34s ease both; }
+    .btn { font-family: var(--mono); font-size: 0.75rem; padding: 0.8rem 1.8rem; border-radius: 3px; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; cursor: pointer; border: none; transition: all 0.22s; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-primary { background: var(--accent); color: #070a0e; font-weight: 700; }
+    .btn-primary:hover { background: #1affd9; transform: translateY(-2px); box-shadow: 0 10px 35px rgba(0,229,192,0.28); }
+    .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border2); }
+    .btn-outline:hover { border-color: rgba(0,229,192,0.4); color: var(--accent); transform: translateY(-2px); }
+
+    .hero-right { position: relative; z-index: 1; animation: slideIn 0.8s 0.2s ease both; }
+    .about-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .about-card-header { padding: 1.1rem 1.6rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 0.6rem; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-red { background: #ff5f57; } .dot-yellow { background: #febc2e; } .dot-green { background: #28c840; }
+    .about-card-header span { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); margin-left: auto; letter-spacing: 0.06em; }
+    .about-card-body { padding: 1.6rem; }
+    .about-row { display: flex; gap: 1rem; padding: 0.8rem 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
+    .about-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .about-key { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; min-width: 90px; padding-top: 0.1rem; flex-shrink: 0; }
+    .about-val { font-size: 0.86rem; color: var(--text); line-height: 1.5; }
+    .about-val a { color: var(--accent2); text-decoration: none; }
+    .about-val a:hover { text-decoration: underline; }
+    .avail-badge { display: inline-flex; align-items: center; gap: 0.45rem; background: rgba(0,229,192,0.08); border: 1px solid rgba(0,229,192,0.2); color: var(--accent); font-family: var(--mono); font-size: 0.62rem; padding: 0.22rem 0.65rem; border-radius: 20px; letter-spacing: 0.06em; }
+
+    .hero-contact-bar { margin-top: 1.2rem; padding: 1.1rem 1.5rem; background: var(--bg3); border: 1px solid var(--border); border-radius: 6px; display: flex; flex-wrap: wrap; gap: 1.2rem; }
+    .contact-pill { font-family: var(--mono); font-size: 0.67rem; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 0.45rem; transition: color 0.2s; }
+    .contact-pill:hover { color: var(--accent); }
+    .cpill-icon { color: var(--accent); }
+
+    section { padding: 6rem 4rem; position: relative; z-index: 1; }
+    .section-eyebrow { font-family: var(--mono); font-size: 0.65rem; color: var(--accent); letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 0.7rem; display: flex; align-items: center; gap: 0.9rem; }
+    .section-eyebrow::after { content: ''; height: 1px; width: 50px; background: linear-gradient(90deg, var(--accent), transparent); }
+    .section-title { font-size: clamp(1.7rem, 2.8vw, 2.4rem); font-weight: 800; letter-spacing: -0.025em; margin-bottom: 3rem; line-height: 1.2; }
+
+    #skills { background: var(--bg2); }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1.5rem; }
+    .skill-group { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 2rem 1.8rem; transition: border-color 0.25s, transform 0.25s; }
+    .skill-group:hover { border-color: rgba(0,229,192,0.28); transform: translateY(-4px); }
+    .sg-header { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 1.4rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+    .sg-icon { font-size: 1.2rem; }
+    .sg-title { font-family: var(--mono) ; font-size: 0.72rem; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; }
+    .tag-wrap { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .tag { font-family: var(--mono); font-size: 0.65rem; padding: 0.28rem 0.65rem; border-radius: 2px; letter-spacing: 0.03em; }
+    .t-green  { background: rgba(0,229,192,0.07);  color: var(--accent); border: 1px solid rgba(0,229,192,0.18); }
+    .t-blue   { background: rgba(10,143,255,0.08); color: #5ab8ff;       border: 1px solid rgba(10,143,255,0.2);  }
+    .t-purple { background: rgba(139,92,246,0.09); color: #b08eff;        border: 1px solid rgba(139,92,246,0.22); }
+    .t-dim    { background: rgba(255,255,255,0.03); color: var(--muted);  border: 1px solid var(--border);         }
+
+    .exp-list { display: flex; flex-direction: column; gap: 1.5rem; }
+    .exp-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 2.4rem; position: relative; overflow: hidden; transition: border-color 0.25s; }
+    .exp-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, var(--accent), var(--accent2)); border-radius: 3px 0 0 3px; opacity: 0; transition: opacity 0.25s; }
+    .exp-card:hover { border-color: rgba(0,229,192,0.25); }
+    .exp-card:hover::before { opacity: 1; }
+    .exp-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 0.4rem; }
+    .exp-role { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.01em; }
+    .exp-badge { font-family: var(--mono); font-size: 0.62rem; padding: 0.22rem 0.6rem; background: rgba(0,229,192,0.1); color: var(--accent); border: 1px solid rgba(0,229,192,0.22); border-radius: 2px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .exp-badge.upwork { background: rgba(20,180,90,0.1); color: #14b45a; border-color: rgba(20,180,90,0.25); }
+    .exp-company { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); margin-bottom: 0.25rem; }
+    .exp-meta { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); margin-bottom: 1.6rem; }
+    .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+    .exp-bullets li { font-size: 0.88rem; color: #7a9ab8; padding-left: 1.3rem; position: relative; line-height: 1.65; }
+    .exp-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); opacity: 0.6; font-size: 0.72rem; top: 0.18em; }
+
+    #repos { background: var(--bg2); }
+    .repos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 1.5rem; }
+    .repo-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1.9rem; text-decoration: none; display: flex; flex-direction: column; transition: all 0.25s; position: relative; overflow: hidden; }
+    .repo-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
+    .repo-card:hover { border-color: rgba(0,229,192,0.28); transform: translateY(-5px); box-shadow: 0 24px 50px rgba(0,0,0,0.45); }
+    .repo-card:hover::after { transform: scaleX(1); }
+    .repo-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
+    .repo-icon { font-size: 1.6rem; }
+    .repo-label { font-family: var(--mono); font-size: 0.6rem; padding: 0.2rem 0.55rem; border-radius: 2px; letter-spacing: 0.07em; text-transform: uppercase; }
+    .rl-new    { background: rgba(0,229,192,0.1);  color: var(--accent); border: 1px solid rgba(0,229,192,0.2);   }
+    .rl-ai     { background: rgba(139,92,246,0.1); color: #b08eff;       border: 1px solid rgba(139,92,246,0.22); }
+    .rl-perf   { background: rgba(10,143,255,0.1); color: #5ab8ff;       border: 1px solid rgba(10,143,255,0.2);  }
+    .rl-docs   { background: rgba(255,255,255,0.04); color: var(--muted); border: 1px solid var(--border);         }
+    .repo-name { font-family: var(--mono); font-size: 0.82rem; color: var(--accent); margin-bottom: 0.65rem; letter-spacing: 0.02em; }
+    .repo-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.65; margin-bottom: 1.4rem; flex: 1; }
+    .repo-stack { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+    .domains-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 1rem; }
+    .domain-card { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 1.1rem 1.4rem; display: flex; align-items: center; gap: 0.8rem; font-size: 0.85rem; transition: all 0.22s; }
+    .domain-card:hover { border-color: rgba(0,229,192,0.28); background: var(--bg3); transform: translateX(5px); }
+
+    #certifications { background: var(--bg2); }
+    .certs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
+    .cert-card { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 1.3rem 1.5rem; display: flex; flex-direction: column; gap: 0.45rem; transition: all 0.22s; }
+    .cert-card:hover { border-color: rgba(0,229,192,0.22); transform: translateY(-2px); }
+    .cert-issuer { font-family: var(--mono); font-size: 0.62rem; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; }
+    .cert-name { font-size: 0.84rem; font-weight: 600; line-height: 1.4; color: var(--text); }
+    .cert-date { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); }
+
+    #contact { text-align: center; }
+    .contact-inner { max-width: 620px; margin: 0 auto; }
+    .contact-inner p { font-size: 0.96rem; color: var(--muted); line-height: 1.85; margin-top: -1rem; }
+    .contact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 2.8rem; }
+    .clink { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 1.3rem 1.5rem; text-decoration: none; display: flex; align-items: center; gap: 0.8rem; transition: all 0.22s; }
+    .clink:hover { border-color: rgba(0,229,192,0.3); background: var(--bg3); transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,0.35); }
+    .clink-icon { font-size: 1.2rem; }
+    .clink-body { text-align: left; }
+    .clink-label { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+    .clink-val { font-size: 0.84rem; font-weight: 600; color: var(--text); margin-top: 0.15rem; }
+
+    footer { border-top: 1px solid var(--border); padding: 1.8rem 4rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    footer span { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); }
+    .footer-badge { display: flex; align-items: center; gap: 0.5rem; font-family: var(--mono); font-size: 0.68rem; color: var(--accent); }
+
+    @keyframes slideIn { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+
+    @media (max-width: 960px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links, .nav-cta { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; gap: 3rem; }
+      .hero-right { display: none; }
+      section { padding: 4rem 1.5rem; }
+      .contact-grid { grid-template-columns: 1fr; }
+      footer { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">
+    <div class="nav-dot"></div>
+    <span class="nav-logo">Talha Khan · Senior QA Engineer</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#repos">Portfolio</a></li>
+    <li><a href="#certifications">Certs</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:contact.talhakhattak@gmail.com" class="nav-cta">Hire Me</a>
+</nav>
+
+<section class="hero">
+  <div class="glow-tr"></div>
+  <div class="glow-bl"></div>
+
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <span class="blink-dot"></span>
+      Open to Remote &amp; Freelance Work
+    </div>
+    <h1 class="hero-name">Talha<br /><em>Khan</em></h1>
+    <p class="hero-title">Senior Software Quality Assurance Engineer</p>
+    <p class="hero-bio">
+      A <strong>detail-obsessed QA engineer</strong> with 5+ years of experience breaking software — intentionally. I specialise in <strong>manual, automation &amp; AI-focused quality assurance</strong> across web, mobile, SaaS, and AI-enabled platforms. I catch bugs before users do, validate LLMs before they go rogue, and build automation pipelines that run while you sleep. Comfortable writing a 50-page test plan or setting up an <strong>AI agent-driven test infrastructure</strong> from scratch.
+    </p>
+    <div class="hero-actions">
+      <a href="#repos" class="btn btn-primary">View Portfolio</a>
+      <a href="#contact" class="btn btn-outline">Get In Touch</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="about-card">
+      <div class="about-card-header">
+        <div class="dot dot-red"></div>
+        <div class="dot dot-yellow"></div>
+        <div class="dot dot-green"></div>
+        <span>talha-khan.profile</span>
+      </div>
+      <div class="about-card-body">
+        <div class="about-row">
+          <div class="about-key">Status</div>
+          <div class="about-val"><span class="avail-badge"><span class="blink-dot"></span>Available Now</span></div>
+        </div>
+        <div class="about-row">
+          <div class="about-key">Experience</div>
+          <div class="about-val">5+ Years in Software QA</div>
+        </div>
+        <div class="about-row">
+          <div class="about-key">Focus</div>
+          <div class="about-val">Manual · Automation · AI/LLM Testing</div>
+        </div>
+        <div class="about-row">
+          <div class="about-key">Domains</div>
+          <div class="about-val">18+ Industries Tested</div>
+        </div>
+        <div class="about-row">
+          <div class="about-key">Platform</div>
+          <div class="about-val"><a href="https://upwork.com" target="_blank">Upwork — Freelance QA Engineer</a></div>
+        </div>
+        <div class="about-row">
+          <div class="about-key">Location</div>
+          <div class="about-val">Lahore, Pakistan · Remote Ready 🌍</div>
+        </div>
+        <div class="about-row">
+          <div class="about-key">Education</div>
+          <div class="about-val">BS Computer Science · University of South Asia</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-contact-bar">
+      <a href="mailto:contact.talhakhattak@gmail.com" class="contact-pill"><span class="cpill-icon">✉</span>contact.talhakhattak@gmail.com</a>
+      <a href="https://linkedin.com/in/talha-khan-khattak/" target="_blank" class="contact-pill"><span class="cpill-icon">↗</span>LinkedIn</a>
+      <a href="https://wa.me/923494578579" target="_blank" class="contact-pill"><span class="cpill-icon">💬</span>+92 349 457 8579</a>
+    </div>
   </div>
 </section>
 
-<!-- REPOS -->
-<section id="repos">
-  <div class="section-eyebrow">04 � Portfolio</div>
-  <h2 class="section-title">GitHub Projects</h2>
-
-  <!-- MANUAL TESTING � FEATURED FIRST -->
-  <div style="margin-bottom:1.5rem;">
-    <div style="font-family:var(--mono);font-size:0.65rem;color:var(--accent);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:0.7rem;">
-      <span style="width:6px;height:6px;border-radius:50%;background:var(--accent);display:inline-block;"></span>
-      Manual QA � Documentation Library
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-eyebrow">02 — Expertise</div>
+  <h2 class="section-title">Skills &amp; Tools</h2>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="sg-header"><span class="sg-icon">🔬</span><span class="sg-title">Manual QA</span></div>
+      <div class="tag-wrap">
+        <span class="tag t-green">Functional Testing</span><span class="tag t-green">Regression Testing</span>
+        <span class="tag t-dim">UAT</span><span class="tag t-dim">Exploratory Testing</span>
+        <span class="tag t-dim">Integration Testing</span><span class="tag t-dim">Risk-Based Testing</span>
+        <span class="tag t-dim">Cross-Browser</span><span class="tag t-dim">Cross-Device</span>
+        <span class="tag t-dim">Test Plans &amp; RTMs</span><span class="tag t-dim">Bug Reports</span>
+      </div>
     </div>
-    <a href="https://github.com/talha10/manual-qa-documentation-library" target="_blank" class="repo-card" style="border-color:rgba(0,229,192,0.22);background:linear-gradient(135deg,#0e1a28,#0e1520);">
-      <div class="repo-top">
-        <div class="repo-icon">??</div>
-        <span class="repo-label rl-new" style="font-size:0.65rem;padding:0.25rem 0.8rem;">Manual QA � Featured</span>
+    <div class="skill-group">
+      <div class="sg-header"><span class="sg-icon">⚙️</span><span class="sg-title">Automation &amp; Performance</span></div>
+      <div class="tag-wrap">
+        <span class="tag t-blue">Playwright (Python)</span><span class="tag t-blue">Cypress (JS)</span>
+        <span class="tag t-blue">Postman / Newman</span><span class="tag t-blue">Apache JMeter</span>
+        <span class="tag t-dim">DataDog</span><span class="tag t-dim">Testim</span>
+        <span class="tag t-dim">Rainforest QA</span><span class="tag t-dim">SQL Server</span>
+        <span class="tag t-dim">Docker</span><span class="tag t-dim">GitHub Actions</span>
       </div>
-      <div class="repo-name" style="font-size:0.9rem;margin-bottom:0.5rem;">manual-qa-documentation-library</div>
-      <div class="repo-desc" style="font-size:0.85rem;margin-bottom:1.5rem;">
-        A complete, production-ready manual QA documentation suite � everything a QA engineer produces throughout the full testing lifecycle. Built from real-world templates refined over 4+ years across 8 industries.
+    </div>
+    <div class="skill-group">
+      <div class="sg-header"><span class="sg-icon">🤖</span><span class="sg-title">AI &amp; Modern QA</span></div>
+      <div class="tag-wrap">
+        <span class="tag t-purple">LLM Validation</span><span class="tag t-purple">AI Platform Testing</span>
+        <span class="tag t-purple">Voice Agent Testing</span><span class="tag t-purple">Chat Agent Testing</span>
+        <span class="tag t-purple">Hallucination Testing</span><span class="tag t-purple">Prompt Behavior QA</span>
+        <span class="tag t-purple">Agentic Workflows</span><span class="tag t-dim">n8n Flows</span>
+        <span class="tag t-dim">Local LLM Setup</span><span class="tag t-dim">AI Test Generation</span>
       </div>
-      <!-- DOCUMENT TYPES GRID -->
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:0.75rem;margin-bottom:1.2rem;">
-        <div style="background:rgba(0,229,192,0.05);border:1px solid rgba(0,229,192,0.15);border-radius:5px;padding:0.9rem 1rem;">
-          <div style="font-family:var(--mono);font-size:0.62rem;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.4rem;">?? Bug Reports</div>
-          <div style="font-size:0.78rem;color:var(--muted);line-height:1.5;">Severity-classified defect reports with steps to reproduce, environment details, screenshots, and expected vs actual results.</div>
-        </div>
-        <div style="background:rgba(0,229,192,0.05);border:1px solid rgba(0,229,192,0.15);border-radius:5px;padding:0.9rem 1rem;">
-          <div style="font-family:var(--mono);font-size:0.62rem;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.4rem;">?? Test Plans</div>
-          <div style="font-size:0.78rem;color:var(--muted);line-height:1.5;">Comprehensive test strategy documents covering scope, objectives, approach, schedule, resources, risks, and exit criteria.</div>
-        </div>
-        <div style="background:rgba(0,229,192,0.05);border:1px solid rgba(0,229,192,0.15);border-radius:5px;padding:0.9rem 1rem;">
-          <div style="font-family:var(--mono);font-size:0.62rem;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.4rem;">?? Test Cases</div>
-          <div style="font-size:0.78rem;color:var(--muted);line-height:1.5;">Structured test case sheets with preconditions, step-by-step actions, expected results, priority, and traceability to requirements.</div>
-        </div>
-        <div style="background:rgba(0,229,192,0.05);border:1px solid rgba(0,229,192,0.15);border-radius:5px;padding:0.9rem 1rem;">
-          <div style="font-family:var(--mono);font-size:0.62rem;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.4rem;">?? Requirement Docs</div>
-          <div style="font-size:0.78rem;color:var(--muted);line-height:1.5;">Requirement analysis documents reviewing user stories, acceptance criteria gaps, and testability notes.</div>
-        </div>
-        <div style="background:rgba(0,229,192,0.05);border:1px solid rgba(0,229,192,0.15);border-radius:5px;padding:0.9rem 1rem;">
-          <div style="font-family:var(--mono);font-size:0.62rem;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.4rem;">?? RTM</div>
-          <div style="font-size:0.78rem;color:var(--muted);line-height:1.5;">Requirements Traceability Matrix mapping every requirement to its test cases, ensuring full coverage.</div>
-        </div>
-        <div style="background:rgba(0,229,192,0.05);border:1px solid rgba(0,229,192,0.15);border-radius:5px;padding:0.9rem 1rem;">
-          <div style="font-family:var(--mono);font-size:0.62rem;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.4rem;">? Checklists</div>
-          <div style="font-size:0.78rem;color:var(--muted);line-height:1.5;">Quick-reference testing checklists for smoke tests, regression cycles, UI/UX reviews, and release readiness gates.</div>
-        </div>
-        <div style="background:rgba(0,229,192,0.05);border:1px solid rgba(0,229,192,0.15);border-radius:5px;padding:0.9rem 1rem;">
-          <div style="font-family:var(--mono);font-size:0.62rem;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.4rem;">?? Test Reports</div>
-          <div style="font-size:0.78rem;color:var(--muted);line-height:1.5;">Sprint and release-level QA summary reports with pass/fail metrics, defect density, and test coverage.</div>
-        </div>
-        <div style="background:rgba(0,229,192,0.05);border:1px solid rgba(0,229,192,0.15);border-radius:5px;padding:0.9rem 1rem;">
-          <div style="font-family:var(--mono);font-size:0.62rem;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.4rem;">?? Exploratory Charters</div>
-          <div style="font-size:0.78rem;color:var(--muted);line-height:1.5;">Session-based exploratory testing charters defining mission, target areas, time-box, and structured observation notes.</div>
-        </div>
-        <div style="background:rgba(0,229,192,0.05);border:1px solid rgba(0,229,192,0.15);border-radius:5px;padding:0.9rem 1rem;">
-          <div style="font-family:var(--mono);font-size:0.62rem;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.4rem;">?? UAT Sign-off Docs</div>
-          <div style="font-size:0.78rem;color:var(--muted);line-height:1.5;">User Acceptance Testing documents including UAT plan, tester assignments, sign-off criteria, and formal client approval records.</div>
-        </div>
-        <div style="background:rgba(0,229,192,0.05);border:1px solid rgba(0,229,192,0.15);border-radius:5px;padding:0.9rem 1rem;">
-          <div style="font-family:var(--mono);font-size:0.62rem;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.4rem;">??? Test Data Docs</div>
-          <div style="font-size:0.78rem;color:var(--muted);line-height:1.5;">Test data preparation guides defining valid/invalid input sets, boundary values, equivalence partitions, and edge case data.</div>
-        </div>
-        <div style="background:rgba(0,229,192,0.05);border:1px solid rgba(0,229,192,0.15);border-radius:5px;padding:0.9rem 1rem;">
-          <div style="font-family:var(--mono);font-size:0.62rem;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.4rem;">?? Test Closure Reports</div>
-          <div style="font-size:0.78rem;color:var(--muted);line-height:1.5;">End-of-phase closure documents summarising total effort, defect lifecycle, lessons learned, and outstanding risk items for handover.</div>
-        </div>
-        <div style="background:rgba(0,229,192,0.05);border:1px solid rgba(0,229,192,0.15);border-radius:5px;padding:0.9rem 1rem;">
-          <div style="font-family:var(--mono);font-size:0.62rem;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.4rem;">?? QA Metrics Dashboard</div>
-          <div style="font-size:0.78rem;color:var(--muted);line-height:1.5;">Sprint-level quality metrics tracking defect detection rate, test execution progress, escaped bugs, and regression stability over time.</div>
-        </div>
+    </div>
+    <div class="skill-group">
+      <div class="sg-header"><span class="sg-icon">🛠️</span><span class="sg-title">Tools &amp; Platforms</span></div>
+      <div class="tag-wrap">
+        <span class="tag t-dim">Ollama</span><span class="tag t-dim">VAPI</span><span class="tag t-dim">ElevenLabs</span><span class="tag t-dim">n8n</span>
+        <span class="tag t-dim">Jira</span><span class="tag t-dim">TestRail</span><span class="tag t-dim">X-Ray</span><span class="tag t-dim">Zephyr</span>
+        <span class="tag t-dim">BrowserStack</span><span class="tag t-dim">TestFlight</span><span class="tag t-dim">GitLab</span><span class="tag t-dim">Confluence</span>
+        <span class="tag t-dim">Notion</span><span class="tag t-dim">Power BI</span><span class="tag t-dim">Bloomreach</span><span class="tag t-dim">Linear · Monday · Coda</span>
       </div>
-      <div class="repo-stack">
-        <span class="tag t-green">Bug Reports</span><span class="tag t-green">Test Plans</span>
-        <span class="tag t-green">Test Cases</span><span class="tag t-green">RTM</span>
-        <span class="tag t-dim">UAT Docs</span><span class="tag t-dim">Exploratory Charters</span>
-        <span class="tag t-dim">QA Reports</span><span class="tag t-dim">Test Closure</span>
-        <span class="tag t-dim">Checklists</span><span class="tag t-dim">Test Data</span>
-      </div>
-    </a>
+    </div>
   </div>
+</section>
 
-  <!-- OTHER PROJECTS -->
-  <div style="font-family:var(--mono);font-size:0.65rem;color:var(--muted);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:0.7rem;">
-    <span style="width:6px;height:6px;border-radius:50%;background:var(--muted);display:inline-block;"></span>
-    Automation, Performance &amp; AI Projects
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-eyebrow">03 — Career</div>
+  <h2 class="section-title">Work Experience</h2>
+  <div class="exp-list">
+    <div class="exp-card">
+      <div class="exp-top">
+        <div class="exp-role">Senior QA Engineer — Freelance</div>
+        <div class="exp-badge upwork">Current · Upwork</div>
+      </div>
+      <div class="exp-company">Self-Employed via Upwork</div>
+      <div class="exp-meta">Jan 2026 – Present &nbsp;·&nbsp; Remote (Worldwide)</div>
+      <ul class="exp-bullets">
+        <li>Delivering end-to-end QA services to international clients across web, mobile, SaaS, and AI-enabled platforms</li>
+        <li>Providing manual testing, Playwright (Python) automation, API testing, and AI/LLM feature validation</li>
+        <li>Building custom test documentation — test plans, test cases, RTMs, bug reports — tailored to client needs</li>
+        <li>Conducting performance and load testing using Apache JMeter for client web applications</li>
+        <li>Consulting on QA strategy, process setup, and test coverage optimisation in Agile environments</li>
+      </ul>
+    </div>
+    <div class="exp-card">
+      <div class="exp-top"><div class="exp-role">Senior Software Quality Assurance Engineer</div></div>
+      <div class="exp-company">ISoft Technologies</div>
+      <div class="exp-meta">Dec 2024 – Dec 2025 &nbsp;·&nbsp; Lahore, Pakistan</div>
+      <ul class="exp-bullets">
+        <li>Led end-to-end QA activities for web, mobile, SaaS, and AI-enabled products</li>
+        <li>Developed and maintained test plans, test cases, and QA reports aligned with business requirements</li>
+        <li>Performed in-depth manual, regression, and cross-browser testing across multiple environments</li>
+        <li>Drove continuous improvement in QA processes to enhance release stability</li>
+        <li>Supported automation and AI-testing initiatives by identifying high-value scenarios for automation</li>
+      </ul>
+    </div>
+    <div class="exp-card">
+      <div class="exp-top"><div class="exp-role">Senior Software Quality Assurance Engineer</div></div>
+      <div class="exp-company">Black Box Labs</div>
+      <div class="exp-meta">Jan 2022 – Dec 2024 &nbsp;·&nbsp; Lahore, Pakistan</div>
+      <ul class="exp-bullets">
+        <li>Built and maintained Cypress &amp; Playwright (Python) automation for critical workflows — auth, dashboards, checkout</li>
+        <li>Integrated regression tests with CI pipelines, reducing regression execution time by 40%</li>
+        <li>Validated AI-assisted features by testing response accuracy, edge cases, and error handling</li>
+        <li>Executed functional, regression, API, and UAT testing across Agile sprints</li>
+        <li>Participated in Scrum ceremonies including sprint planning, reviews, and retrospectives</li>
+      </ul>
+    </div>
+    <div class="exp-card">
+      <div class="exp-top"><div class="exp-role">Software Quality Assurance Engineer</div></div>
+      <div class="exp-company">Uservic3</div>
+      <div class="exp-meta">Jan 2021 – Sep 2021 &nbsp;·&nbsp; Lahore, Pakistan</div>
+      <ul class="exp-bullets">
+        <li>Created and executed test cases for web and mobile applications based on requirements and user stories</li>
+        <li>Conducted exploratory and UI/UX testing to identify user experience issues</li>
+        <li>Logged, tracked, and verified defects to support high-quality and timely releases</li>
+      </ul>
+    </div>
   </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="repos">
+  <div class="section-eyebrow">04 — Portfolio</div>
+  <h2 class="section-title">Featured Projects</h2>
   <div class="repos-grid">
-
-    <!-- USER'S PROVIDED AI AGENT REPO -->
+    <!-- PROJECT 1: MANUAL QA -->
+    <a href="https://github.com/talha10/manual-qa-documentation-library" target="_blank" class="repo-card">
+      <div class="repo-top"><div class="repo-icon">📋</div><span class="repo-label rl-docs">Manual QA</span></div>
+      <div class="repo-name">manual-qa-documentation-library</div>
+      <div class="repo-desc">A complete QA documentation suite covering Test Plans, RTMs, Test Cases, and Bug Reports. Refined over 5 years across 18 industries.</div>
+      <div class="repo-stack"><span class="tag t-blue">Test Plans</span><span class="tag t-blue">RTM</span><span class="tag t-dim">Bug Reports</span></div>
+    </a>
+    <!-- PROJECT 2: AI AGENT -->
     <a href="https://github.com/talha10/ai-agent-test-automation" target="_blank" class="repo-card">
-      <div class="repo-top"><div class="repo-icon">??</div><span class="repo-label rl-ai">AI Agent</span></div>
+      <div class="repo-top"><div class="repo-icon">🤖</div><span class="repo-label rl-ai">AI Agent</span></div>
       <div class="repo-name">ai-agent-test-automation</div>
-      <div class="repo-desc">Multi-agent QA pipeline using Claude Code + Playwright (Python). Agents analyse features, auto-generate test scripts, self-heal broken locators, and push test PRs � zero manual kickoff. Built inside a local VirtualBox environment with full CI integration.</div>
-      <div class="repo-stack"><span class="tag t-purple">Claude Code</span><span class="tag t-blue">Playwright</span><span class="tag t-dim">Python</span><span class="tag t-dim">GitHub Actions</span><span class="tag t-dim">VirtualBox</span></div>
+      <div class="repo-desc">Multi-agent QA pipeline using Claude Code + Playwright. Agents analyze features, generate scripts, and self-heal broken locators.</div>
+      <div class="repo-stack"><span class="tag t-purple">Claude Code</span><span class="tag t-blue">Playwright</span><span class="tag t-dim">CI/CD</span></div>
     </a>
-
-    <!-- REPO 2: PLAYWRIGHT -->
+    <!-- PROJECT 3: PLAYWRIGHT -->
     <a href="https://github.com/talha10/playwright-python-automation" target="_blank" class="repo-card">
-      <div class="repo-top"><div class="repo-icon">??</div><span class="repo-label rl-ai">Python</span></div>
+      <div class="repo-top"><div class="repo-icon">🎭</div><span class="repo-label rl-new">Python</span></div>
       <div class="repo-name">playwright-python-automation</div>
-      <div class="repo-desc">End-to-end framework leveraging Pytest and the Page Object Model. Complete with GitHub Actions CI/CD workflows and multiple scenario validations.</div>
-      <div class="repo-stack"><span class="tag t-purple">Playwright</span><span class="tag t-blue">Python</span><span class="tag t-dim">pytest</span><span class="tag t-dim">GitHub Actions</span></div>
+      <div class="repo-desc">End-to-end framework leveraging Pytest and POM. Includes automated HTML reports and GitHub Actions integration.</div>
+      <div class="repo-stack"><span class="tag t-blue">Playwright</span><span class="tag t-blue">Python</span><span class="tag t-dim">pytest</span></div>
     </a>
-    
-    <!-- REPO 3: CYPRESS -->
+    <!-- PROJECT 4: CYPRESS -->
     <a href="https://github.com/talha10/cypress-regression-suite" target="_blank" class="repo-card">
-      <div class="repo-top"><div class="repo-icon">??</div><span class="repo-label rl-ai">JavaScript</span></div>
+      <div class="repo-top"><div class="repo-icon">🌲</div><span class="repo-label rl-new">JavaScript</span></div>
       <div class="repo-name">cypress-regression-suite</div>
-      <div class="repo-desc">Structured Cypress regression suite testing e-commerce checkout flows, UI interactions, and managing test data fixtures. Integrated with GitHub Actions.</div>
-      <div class="repo-stack"><span class="tag t-purple">Cypress</span><span class="tag t-blue">JavaScript</span><span class="tag t-dim">Mocha</span><span class="tag t-dim">CI/CD</span></div>
+      <div class="repo-desc">Structured Cypress regression suite with Mochawesome reporting and automated CI/CD integration.</div>
+      <div class="repo-stack"><span class="tag t-blue">Cypress</span><span class="tag t-dim">JS</span><span class="tag t-dim">Mochawesome</span></div>
     </a>
-
-    <!-- REPO 6: APPIUM -->
+    <!-- PROJECT 5: APPIUM MOBILE -->
     <a href="https://github.com/talha10/mobile-qa-portfolio-appium" target="_blank" class="repo-card">
-      <div class="repo-top"><div class="repo-icon">??</div><span class="repo-label rl-new">Mobile</span></div>
+      <div class="repo-top"><div class="repo-icon">📱</div><span class="repo-label rl-new">Mobile</span></div>
       <div class="repo-name">mobile-qa-portfolio-appium</div>
-      <div class="repo-desc">Cross-platform test scripts for iOS and Android utilizing Appium. Wait helper classes, environment capabilities setups, and pytest suites.</div>
+      <div class="repo-desc">Cross-platform test scripts for iOS and Android utilizing Appium. Includes wait helper classes and caps setup.</div>
       <div class="repo-stack"><span class="tag t-purple">Appium</span><span class="tag t-blue">Python</span><span class="tag t-dim">iOS</span><span class="tag t-dim">Android</span></div>
     </a>
-
-    <!-- REPO 4: POSTMAN/NEWMAN -->
-    <a href="https://github.com/talha10/api-testing-postman-newman" target="_blank" class="repo-card">
-      <div class="repo-top"><div class="repo-icon">??</div><span class="repo-label rl-new">API</span></div>
-      <div class="repo-name">api-testing-postman-newman</div>
-      <div class="repo-desc">Postman collections for REST API testing including dynamic environment variables, parameterized requests, and Newman CLI integration for automated CI execution.</div>
-      <div class="repo-stack"><span class="tag t-blue">Postman</span><span class="tag t-dim">Newman</span><span class="tag t-dim">REST API</span></div>
+    <!-- PROJECT 6: K6 PERFORMANCE -->
+    <a href="https://github.com/talha10/k6-performance-testing" target="_blank" class="repo-card">
+      <div class="repo-top"><div class="repo-icon">📊</div><span class="repo-label rl-perf">Performance</span></div>
+      <div class="repo-name">k6-performance-testing</div>
+      <div class="repo-desc">Backend load testing covering standard patterns, spike behavior, stress limits, and soak tests.</div>
+      <div class="repo-stack"><span class="tag t-blue">k6</span><span class="tag t-dim">Load Testing</span><span class="tag t-dim">JS</span></div>
     </a>
-
-    <!-- REPO 8: CONTRACT POSTMAN -->
-    <a href="https://github.com/talha10/api-contract-testing-postman" target="_blank" class="repo-card">
-      <div class="repo-top"><div class="repo-icon">??</div><span class="repo-label rl-new">API</span></div>
-      <div class="repo-name">api-contract-testing-postman</div>
-      <div class="repo-desc">Dedicated backend schema testing suite using tv4 validation logic to assert data types and missing structures per Swagger documentation.</div>
-      <div class="repo-stack"><span class="tag t-blue">Postman</span><span class="tag t-dim">Contract Testing</span><span class="tag t-dim">Schema Validation</span></div>
+    <!-- PROJECT 7: SQL DATABASE -->
+    <a href="https://github.com/talha10/sql-database-testing" target="_blank" class="repo-card">
+      <div class="repo-top"><div class="repo-icon">🗄️</div><span class="repo-label rl-docs">Database</span></div>
+      <div class="repo-name">sql-database-testing</div>
+      <div class="repo-desc">Backend validation tests interacting with PostgreSQL testing complex joins, deletions, and query plans.</div>
+      <div class="repo-stack"><span class="tag t-blue">PostgreSQL</span><span class="tag t-dim">SQL</span><span class="tag t-dim">Backend QA</span></div>
     </a>
-
+    <!-- PROJECT 8: A11Y AXE -->
+    <a href="https://github.com/talha10/accessibility-testing-axe" target="_blank" class="repo-card">
+      <div class="repo-top"><div class="repo-icon">👁️</div><span class="repo-label rl-new">A11y</span></div>
+      <div class="repo-name">accessibility-testing-axe</div>
+      <div class="repo-desc">Programmatic audits for WCAG compliance using axe-core and headless Puppeteer.</div>
+      <div class="repo-stack"><span class="tag t-purple">Axe-Core</span><span class="tag t-blue">Puppeteer</span><span class="tag t-dim">Node.js</span></div>
+    </a>
+    <!-- PROJECT 9: DOCKER SELENIUM -->
+    <a href="https://github.com/talha10/docker-selenium-grid-base" target="_blank" class="repo-card">
+      <div class="repo-top"><div class="repo-icon">🐳</div><span class="repo-label rl-perf">Infrastructure</span></div>
+      <div class="repo-name">docker-selenium-grid-base</div>
+      <div class="repo-desc">Scalable Docker architecture for Selenium Grid Hub and concurrent browser execution nodes.</div>
+      <div class="repo-stack"><span class="tag t-blue">Docker</span><span class="tag t-dim">Selenium Grid</span><span class="tag t-dim">DevOps</span></div>
+    </a>
+    <!-- PROJECT 10: JMETER -->
+    <a href="https://github.com/talha10/performance-testing-jmeter" target="_blank" class="repo-card">
+      <div class="repo-top"><div class="repo-icon">⚡</div><span class="repo-label rl-perf">JMeter</span></div>
+      <div class="repo-name">performance-testing-jmeter</div>
+      <div class="repo-desc">Load and stress test plans with thread groups, ramp-up curves, and result analysis.</div>
+      <div class="repo-stack"><span class="tag t-blue">JMeter</span><span class="tag t-dim">Load Testing</span><span class="tag t-dim">Stress</span></div>
+    </a>
+    <!-- PROJECT 11: LLM QA -->
+    <a href="https://github.com/talha10/llm-ai-testing-framework" target="_blank" class="repo-card">
+      <div class="repo-top"><div class="repo-icon">🧠</div><span class="repo-label rl-ai">LLM QA</span></div>
+      <div class="repo-name">llm-ai-testing-framework</div>
+      <div class="repo-desc">Framework for validating AI platforms, voice agents, and hallucination detection.</div>
+      <div class="repo-stack"><span class="tag t-purple">LLM Testing</span><span class="tag t-dim">Prompt Engineering</span><span class="tag t-dim">AI QA</span></div>
+    </a>
+    <!-- PROJECT 12: API POSTMAN collections -->
+    <a href="https://github.com/talha10/api-testing-postman-collections" target="_blank" class="repo-card">
+      <div class="repo-top"><div class="repo-icon">📮</div><span class="repo-label rl-new">API</span></div>
+      <div class="repo-name">api-testing-postman-collections</div>
+      <div class="repo-desc">Postman collections for REST API testing including CRUD, negative tests, and schema validation.</div>
+      <div class="repo-stack"><span class="tag t-blue">Postman</span><span class="tag t-dim">Newman</span><span class="tag t-dim">REST</span></div>
+    </a>
   </div>
+</section>
 
-  <!-- DOMAINS -->
-  <section id="domains">
-    <div class="section-eyebrow">05 � Industry</div>
-    <h2 class="section-title">Domain Experience</h2>
-    <div class="domains-grid">
-      <div class="domain-card"><span>??</span>E-Commerce &amp; Payment Gateways</div>
-      <div class="domain-card"><span>??</span>AI, LLM &amp; Automation Platforms</div>
-      <div class="domain-card"><span>??</span>Banking, Finance &amp; FinTech (BFSI)</div>
-      <div class="domain-card"><span>??</span>HealthTech &amp; Medical Applications</div>
-      <div class="domain-card"><span>??</span>Education, LMS &amp; EdTech Platforms</div>
-      <div class="domain-card"><span>??</span>Real Estate &amp; PropTech Systems</div>
-      <div class="domain-card"><span>??</span>Cybersecurity &amp; Compliance Tools</div>
-      <div class="domain-card"><span>??</span>SaaS &amp; Enterprise Cloud Platforms</div>
-      <div class="domain-card"><span>???</span>Event Management &amp; Ticketing</div>
-      <div class="domain-card"><span>??</span>Mobile Apps (iOS &amp; Android)</div>
-      <div class="domain-card"><span>???</span>Marketplace &amp; Multi-vendor Platforms</div>
-      <div class="domain-card"><span>??</span>Logistics, Supply Chain &amp; Last-Mile</div>
-      <div class="domain-card"><span>??</span>Gaming &amp; Interactive Entertainment</div>
-      <div class="domain-card"><span>??</span>Telecom &amp; Communication Platforms</div>
-      <div class="domain-card"><span>????</span>HR, Recruitment &amp; Workforce Tools</div>
-      <div class="domain-card"><span>??</span>Analytics, BI &amp; Data Dashboards</div>
-      <div class="domain-card"><span>??</span>CRM, CMS &amp; Admin Portals</div>
-      <div class="domain-card"><span>??</span>API-First &amp; Microservices Platforms</div>
-    </div>
-  </section>
+<!-- DOMAINS -->
+<section id="domains">
+  <div class="section-eyebrow">05 — Industry</div>
+  <h2 class="section-title">Domain Experience</h2>
+  <div class="domains-grid">
+    <div class="domain-card"><span>🛒</span>E-Commerce &amp; Payment Gateways</div>
+    <div class="domain-card"><span>🤖</span>AI, LLM &amp; Automation Platforms</div>
+    <div class="domain-card"><span>🏦</span>Banking, Finance &amp; FinTech (BFSI)</div>
+    <div class="domain-card"><span>🏥</span>HealthTech &amp; Medical Applications</div>
+    <div class="domain-card"><span>🎓</span>Education, LMS &amp; EdTech Platforms</div>
+    <div class="domain-card"><span>🏠</span>Real Estate &amp; PropTech Systems</div>
+    <div class="domain-card"><span>🔐</span>Cybersecurity &amp; Compliance Tools</div>
+    <div class="domain-card"><span>☁️</span>SaaS &amp; Enterprise Cloud Platforms</div>
+    <div class="domain-card"><span>🎟️</span>Event Management &amp; Ticketing</div>
+    <div class="domain-card"><span>📱</span>Mobile Apps (iOS &amp; Android)</div>
+    <div class="domain-card"><span>🛍️</span>Marketplace &amp; Multi-vendor Platforms</div>
+    <div class="domain-card"><span>🚚</span>Logistics, Supply Chain &amp; Last-Mile</div>
+    <div class="domain-card"><span>🎮</span>Gaming &amp; Interactive Entertainment</div>
+    <div class="domain-card"><span>📡</span>Telecom &amp; Communication Platforms</div>
+    <div class="domain-card"><span>🧑💼</span>HR, Recruitment &amp; Workforce Tools</div>
+    <div class="domain-card"><span>📊</span>Analytics, BI &amp; Data Dashboards</div>
+    <div class="domain-card"><span>🤝</span>CRM, CMS &amp; Admin Portals</div>
+    <div class="domain-card"><span>🔗</span>API-First &amp; Microservices Platforms</div>
+  </div>
+</section>
 
-  <!-- CERTIFICATIONS -->
-  <section id="certifications">
-    <div class="section-eyebrow">06 � Credentials</div>
-    <h2 class="section-title">Certifications &amp; Licences</h2>
-    <div class="certs-grid">
-      <div class="cert-card"><div class="cert-issuer">Atlassian</div><div class="cert-name">Agile Project Management Professional Certificate</div><div class="cert-date">Dec 2025</div></div>
-      <div class="cert-card"><div class="cert-issuer">LambdaTest</div><div class="cert-name">Test Automation Professional Certificate</div><div class="cert-date">Dec 2025</div></div>
-      <div class="cert-card"><div class="cert-issuer">LambdaTest</div><div class="cert-name">Software Testing Professional Certificate</div><div class="cert-date">Dec 2024</div></div>
-      <div class="cert-card"><div class="cert-issuer">Snowflake</div><div class="cert-name">Generative AI Professional Certificate</div><div class="cert-date">Dec 2025</div></div>
-      <div class="cert-card"><div class="cert-issuer">Microsoft</div><div class="cert-name">Career Essentials in Generative AI</div><div class="cert-date">Dec 2025</div></div>
-      <div class="cert-card"><div class="cert-issuer">GitHub</div><div class="cert-name">Career Essentials in GitHub Copilot</div><div class="cert-date">Dec 2025</div></div>
-      <div class="cert-card"><div class="cert-issuer">Docker, Inc</div><div class="cert-name">Docker Foundations Professional Certificate</div><div class="cert-date">Dec 2024</div></div>
-      <div class="cert-card"><div class="cert-issuer">Project Management Institute</div><div class="cert-name">Scrum: The Basics</div><div class="cert-date">Dec 2024</div></div>
-      <div class="cert-card"><div class="cert-issuer">IIBA</div><div class="cert-name">Agile Foundations</div><div class="cert-date">Dec 2024</div></div>
-      <div class="cert-card"><div class="cert-issuer">NASBA</div><div class="cert-name">Mistakes to Avoid in Agile Project Management</div><div class="cert-date">Dec 2025</div></div>
-      <div class="cert-card"><div class="cert-issuer">Project Management Institute</div><div class="cert-name">Agile Project Management with Jira Cloud (3 Parts)</div><div class="cert-date">Nov 2024</div></div>
-      <div class="cert-card"><div class="cert-issuer">LinkedIn</div><div class="cert-name">JMeter: Performance and Load Testing</div><div class="cert-date">Nov 2024</div></div>
-      <div class="cert-card"><div class="cert-issuer">LinkedIn</div><div class="cert-name">SQL for Testers</div><div class="cert-date">Nov 2024</div></div>
-      <div class="cert-card"><div class="cert-issuer">LinkedIn</div><div class="cert-name">Programming Foundations: Software Testing / QA</div><div class="cert-date">Dec 2025</div></div>
-      <div class="cert-card"><div class="cert-issuer">LinkedIn</div><div class="cert-name">Agile Testing</div><div class="cert-date">Dec 2025</div></div>
-      <div class="cert-card"><div class="cert-issuer">LinkedIn</div><div class="cert-name">Succeeding in Software Testing</div><div class="cert-date">Dec 2025</div></div>
-      <div class="cert-card"><div class="cert-issuer">Urducourses Inc</div><div class="cert-name">CyberSavvy: Navigating Linux &amp; Essential Cybersecurity</div><div class="cert-date">Dec 2024</div></div>
-      <div class="cert-card"><div class="cert-issuer">OPSWAT Academy</div><div class="cert-name">Introduction to CIP (Critical Infrastructure Protection)</div><div class="cert-date">Nov 2024</div></div>
-    </div>
-  </section>
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-eyebrow">06 — Credentials</div>
+  <h2 class="section-title">Certifications &amp; Licences</h2>
+  <div class="certs-grid">
+    <div class="cert-card"><div class="cert-issuer">Atlassian</div><div class="cert-name">Agile Project Management Professional Certificate</div><div class="cert-date">Dec 2025</div></div>
+    <div class="cert-card"><div class="cert-issuer">LambdaTest</div><div class="cert-name">Test Automation Professional Certificate</div><div class="cert-date">Dec 2025</div></div>
+    <div class="cert-card"><div class="cert-issuer">LambdaTest</div><div class="cert-name">Software Testing Professional Certificate</div><div class="cert-date">Dec 2024</div></div>
+    <div class="cert-card"><div class="cert-issuer">Snowflake</div><div class="cert-name">Generative AI Professional Certificate</div><div class="cert-date">Dec 2025</div></div>
+    <div class="cert-card"><div class="cert-issuer">Microsoft</div><div class="cert-name">Career Essentials in Generative AI</div><div class="cert-date">Dec 2025</div></div>
+    <div class="cert-card"><div class="cert-issuer">GitHub</div><div class="cert-name">Career Essentials in GitHub Copilot</div><div class="cert-date">Dec 2025</div></div>
+    <div class="cert-card"><div class="cert-issuer">Docker, Inc</div><div class="cert-name">Docker Foundations Professional Certificate</div><div class="cert-date">Dec 2024</div></div>
+    <div class="cert-card"><div class="cert-issuer">Project Management Institute</div><div class="cert-name">Scrum: The Basics</div><div class="cert-date">Dec 2024</div></div>
+    <div class="cert-card"><div class="cert-issuer">IIBA</div><div class="cert-name">Agile Foundations</div><div class="cert-date">Dec 2024</div></div>
+    <div class="cert-card"><div class="cert-issuer">NASBA</div><div class="cert-name">Mistakes to Avoid in Agile Project Management</div><div class="cert-date">Dec 2025</div></div>
+    <div class="cert-card"><div class="cert-issuer">Project Management Institute</div><div class="cert-name">Agile Project Management with Jira Cloud</div><div class="cert-date">Nov 2024</div></div>
+    <div class="cert-card"><div class="cert-issuer">LinkedIn</div><div class="cert-name">JMeter: Performance and Load Testing</div><div class="cert-date">Nov 2024</div></div>
+    <div class="cert-card"><div class="cert-issuer">LinkedIn</div><div class="cert-name">SQL for Testers</div><div class="cert-date">Nov 2024</div></div>
+    <div class="cert-card"><div class="cert-issuer">LinkedIn</div><div class="cert-name">Programming Foundations: Software Testing / QA</div><div class="cert-date">Dec 2025</div></div>
+    <div class="cert-card"><div class="cert-issuer">LinkedIn</div><div class="cert-name">Agile Testing</div><div class="cert-date">Dec 2025</div></div>
+    <div class="cert-card"><div class="cert-issuer">LinkedIn</div><div class="cert-name">Succeeding in Software Testing</div><div class="cert-date">Dec 2025</div></div>
+    <div class="cert-card"><div class="cert-issuer">Urducourses Inc</div><div class="cert-name">CyberSavvy: Navigating Linux &amp; Cybersecurity</div><div class="cert-date">Dec 2024</div></div>
+    <div class="cert-card"><div class="cert-issuer">OPSWAT Academy</div><div class="cert-name">Introduction to CIP</div><div class="cert-date">Nov 2024</div></div>
+  </div>
+</section>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="contact-inner">
-      <div class="section-eyebrow" style="justify-content:center;">07 � Let's Connect</div>
-      <h2 class="section-title">Work With Me</h2>
-      <p>Available for freelance contracts, remote QA roles, and long-term collaborations. I work with startups, agencies, and product teams globally � delivering quality that ships with confidence.</p>
-      <div class="contact-grid">
-        <a href="mailto:contact.talhakhattak@gmail.com" class="clink">
-          <span class="clink-icon">??</span>
-          <div class="clink-body"><div class="clink-label">Email</div><div class="clink-val">contact.talhakhattak@gmail.com</div></div>
-        </a>
-        <a href="https://wa.me/923494578579" target="_blank" class="clink">
-          <span class="clink-icon">??</span>
-          <div class="clink-body"><div class="clink-label">WhatsApp</div><div class="clink-val">+92 349 457 8579</div></div>
-        </a>
-        <a href="https://linkedin.com/in/talha-khan-khattak/" target="_blank" class="clink">
-          <span class="clink-icon">??</span>
-          <div class="clink-body"><div class="clink-label">LinkedIn</div><div class="clink-val">talha-khan-khattak</div></div>
-        </a>
-        <a href="https://github.com/talha10" target="_blank" class="clink">
-          <span class="clink-icon">?</span>
-          <div class="clink-body"><div class="clink-label">GitHub</div><div class="clink-val">talha10</div></div>
-        </a>
-      </div>
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-eyebrow" style="justify-content:center;">07 — Let's Connect</div>
+    <h2 class="section-title">Work With Me</h2>
+    <p>Available for freelance contracts, remote QA roles, and long-term collaborations.</p>
+    <div class="contact-grid">
+      <a href="mailto:contact.talhakhattak@gmail.com" class="clink">
+        <span class="clink-icon">✉️</span>
+        <div class="clink-body"><div class="clink-label">Email</div><div class="clink-val">contact.talhakhattak@gmail.com</div></div>
+      </a>
+      <a href="https://wa.me/923494578579" target="_blank" class="clink">
+        <span class="clink-icon">💬</span>
+        <div class="clink-body"><div class="clink-label">WhatsApp</div><div class="clink-val">+92 349 457 8579</div></div>
+      </a>
+      <a href="https://linkedin.com/in/talha-khan-khattak/" target="_blank" class="clink">
+        <span class="clink-icon">🔗</span>
+        <div class="clink-body"><div class="clink-label">LinkedIn</div><div class="clink-val">talha-khan-khattak</div></div>
+      </a>
+      <a href="https://github.com/talha10" target="_blank" class="clink">
+        <span class="clink-icon">⬡</span>
+        <div class="clink-body"><div class="clink-label">GitHub</div><div class="clink-val">talha10</div></div>
+      </a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <footer>
-    <div class="footer-badge">
-      <div class="dot dot-green"></div> Active &amp; Open to Offers
-    </div>
-    <span>� 2026 Talha Khan. Specializing in QA Architecture &amp; Automation.</span>
-  </footer>
+<footer>
+  <div class="footer-badge">
+    <div class="dot dot-green"></div> Active &amp; Open to Offers
+  </div>
+  <span>© 2026 Talha Khan. Specializing in QA Architecture &amp; Automation.</span>
+</footer>
 
 </body>
 </html>

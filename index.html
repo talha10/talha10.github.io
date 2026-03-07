@@ -1,620 +1,367 @@
-﻿# ðŸ¤– AI AGENT INSTRUCTIONS â€” TALHA KHAN | GitHub Portfolio Builder
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Talha Khan | Senior QA Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#080b0f;--bg2:#0c1017;--bg3:#10161f;--card:#0e1520;--border:#192233;--b2:#1e2d42;--accent:#00e5c0;--blue:#0a8fff;--purple:#8b5cf6;--green:#14b45a;--text:#ddeaf7;--muted:#5c7a96;--mono:'Space Mono',monospace;--sans:'Syne',sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.7;overflow-x:hidden}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.35}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 4rem;background:rgba(8,11,15,.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.nav-brand{display:flex;align-items:center;gap:.8rem}
+.nav-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:blink 2.4s ease-in-out infinite}
+.nav-logo{font-family:var(--mono);font-size:.8rem;color:var(--text);letter-spacing:.06em}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-family:var(--mono);font-size:.7rem;color:var(--muted);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--accent)}
+.nav-cta{font-family:var(--mono);font-size:.7rem;padding:.5rem 1.1rem;background:transparent;border:1px solid rgba(0,229,192,.35);color:var(--accent);border-radius:3px;text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:all .2s}
+.nav-cta:hover{background:rgba(0,229,192,.08);border-color:var(--accent)}
+
+.hero{min-height:100vh;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;padding:8rem 4rem 5rem;position:relative;overflow:hidden;gap:5rem}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,229,192,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,192,.025) 1px,transparent 1px);background-size:64px 64px;pointer-events:none}
+.glow-tr{position:absolute;top:10%;right:0;width:600px;height:600px;background:radial-gradient(ellipse at top right,rgba(0,229,192,.07) 0%,transparent 65%);pointer-events:none}
+.glow-bl{position:absolute;bottom:0;left:5%;width:450px;height:450px;background:radial-gradient(ellipse at bottom left,rgba(10,143,255,.06) 0%,transparent 65%);pointer-events:none}
+.hero-left{position:relative;z-index:1}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--mono);font-size:.68rem;color:var(--accent);border:1px solid rgba(0,229,192,.25);padding:.35rem .9rem;border-radius:2px;margin-bottom:2rem;letter-spacing:.12em;text-transform:uppercase;animation:slideIn .7s ease both}
+.blink-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:blink 1.8s infinite;flex-shrink:0}
+.hero-name{font-size:clamp(3rem,5.5vw,5rem);font-weight:800;line-height:1.05;letter-spacing:-.03em;margin-bottom:.6rem;animation:slideIn .7s .1s ease both}
+.hero-name em{font-style:normal;-webkit-text-stroke:1.5px var(--accent);color:transparent}
+.hero-title{font-family:var(--mono);font-size:.82rem;color:var(--muted);letter-spacing:.06em;margin-bottom:2.2rem;animation:slideIn .7s .18s ease both}
+.hero-bio{font-size:.98rem;color:#7a9ab8;max-width:510px;line-height:1.85;margin-bottom:2.4rem;animation:slideIn .7s .26s ease both}
+.hero-bio strong{color:var(--text);font-weight:600}
+
+.hero-counters{display:flex;margin-bottom:2.4rem;animation:slideIn .7s .3s ease both;border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.hctr{padding:1rem 1.4rem;border-right:1px solid var(--border);flex:1;text-align:center}
+.hctr:last-child{border-right:none}
+.hctr-n{font-size:1.7rem;font-weight:800;color:var(--accent);line-height:1;display:block}
+.hctr-l{font-family:var(--mono);font-size:.58rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:.2rem;display:block}
+
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;animation:slideIn .7s .36s ease both}
+.btn{font-family:var(--mono);font-size:.75rem;padding:.8rem 1.8rem;border-radius:3px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;cursor:pointer;border:none;transition:all .22s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-primary{background:var(--accent);color:#070a0e;font-weight:700}
+.btn-primary:hover{background:#1affd9;transform:translateY(-2px);box-shadow:0 10px 35px rgba(0,229,192,.28)}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--b2)}
+.btn-outline:hover{border-color:rgba(0,229,192,.4);color:var(--accent);transform:translateY(-2px)}
+
+.hero-right{position:relative;z-index:1;animation:slideIn .8s .2s ease both}
+.about-card{background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.about-card-header{padding:1.1rem 1.6rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.6rem}
+.dot{width:10px;height:10px;border-radius:50%}
+.dot-red{background:#ff5f57}.dot-yellow{background:#febc2e}.dot-green{background:#28c840}
+.about-card-header span{font-family:var(--mono);font-size:.68rem;color:var(--muted);margin-left:auto;letter-spacing:.06em}
+.about-card-body{padding:1.6rem}
+.about-row{display:flex;gap:1rem;padding:.8rem 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.about-row:last-child{border-bottom:none;padding-bottom:0}
+.about-key{font-family:var(--mono);font-size:.62rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;min-width:90px;padding-top:.1rem;flex-shrink:0}
+.about-val{font-size:.86rem;color:var(--text);line-height:1.5}
+.about-val a{color:var(--blue);text-decoration:none}
+.about-val a:hover{text-decoration:underline}
+.avail-badge{display:inline-flex;align-items:center;gap:.45rem;background:rgba(0,229,192,.08);border:1px solid rgba(0,229,192,.2);color:var(--accent);font-family:var(--mono);font-size:.62rem;padding:.22rem .65rem;border-radius:20px;letter-spacing:.06em}
+.upwork-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(20,180,90,.08);border:1px solid rgba(20,180,90,.22);color:#4ade80;font-family:var(--mono);font-size:.62rem;padding:.22rem .65rem;border-radius:20px;letter-spacing:.06em}
+
+.hero-contact-bar{margin-top:1.2rem;padding:1.1rem 1.5rem;background:var(--bg3);border:1px solid var(--border);border-radius:6px;display:flex;flex-wrap:wrap;gap:1.2rem}
+.contact-pill{font-family:var(--mono);font-size:.67rem;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:.45rem;transition:color .2s}
+.contact-pill:hover{color:var(--accent)}
+.cpill-icon{color:var(--accent)}
+
+section{padding:6rem 4rem;position:relative;z-index:1}
+.section-eyebrow{font-family:var(--mono);font-size:.65rem;color:var(--accent);letter-spacing:.22em;text-transform:uppercase;margin-bottom:.7rem;display:flex;align-items:center;gap:.9rem}
+.section-eyebrow::after{content:'';height:1px;width:50px;background:linear-gradient(90deg,var(--accent),transparent)}
+.section-title{font-size:clamp(1.7rem,2.8vw,2.4rem);font-weight:800;letter-spacing:-.025em;margin-bottom:3rem;line-height:1.2}
+
+#skills{background:var(--bg2)}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.5rem}
+.skill-group{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:2rem 1.8rem;transition:border-color .25s,transform .25s}
+.skill-group:hover{border-color:rgba(0,229,192,.28);transform:translateY(-4px)}
+.sg-header{display:flex;align-items:center;gap:.7rem;margin-bottom:1.4rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.sg-icon{font-size:1.2rem}
+.sg-title{font-family:var(--mono);font-size:.72rem;color:var(--accent);letter-spacing:.1em;text-transform:uppercase}
+.tag-wrap{display:flex;flex-wrap:wrap;gap:.45rem}
+.tag{font-family:var(--mono);font-size:.65rem;padding:.28rem .65rem;border-radius:2px;letter-spacing:.03em}
+.t-green{background:rgba(0,229,192,.07);color:var(--accent);border:1px solid rgba(0,229,192,.18)}
+.t-blue{background:rgba(10,143,255,.08);color:#5ab8ff;border:1px solid rgba(10,143,255,.2)}
+.t-purple{background:rgba(139,92,246,.09);color:#b08eff;border:1px solid rgba(139,92,246,.22)}
+.t-dim{background:rgba(255,255,255,.03);color:var(--muted);border:1px solid var(--border)}
+.t-teal{background:rgba(20,180,90,.08);color:#4ade80;border:1px solid rgba(20,180,90,.2)}
+
+.exp-list{display:flex;flex-direction:column;gap:1.5rem}
+.exp-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:2.4rem;position:relative;overflow:hidden;transition:border-color .25s}
+.exp-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--accent),var(--blue));border-radius:3px 0 0 3px;opacity:0;transition:opacity .25s}
+.exp-card:hover{border-color:rgba(0,229,192,.25)}
+.exp-card:hover::before{opacity:1}
+.exp-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.6rem;margin-bottom:.4rem}
+.exp-role{font-size:1.05rem;font-weight:700;letter-spacing:-.01em}
+.exp-badge{font-family:var(--mono);font-size:.62rem;padding:.22rem .6rem;background:rgba(0,229,192,.1);color:var(--accent);border:1px solid rgba(0,229,192,.22);border-radius:2px;letter-spacing:.08em;text-transform:uppercase}
+.exp-badge.upwork{background:rgba(20,180,90,.1);color:#14b45a;border-color:rgba(20,180,90,.25)}
+.exp-company{font-family:var(--mono);font-size:.78rem;color:var(--accent);margin-bottom:.25rem}
+.exp-meta{font-family:var(--mono);font-size:.68rem;color:var(--muted);margin-bottom:1.6rem}
+.exp-bullets{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.exp-bullets li{font-size:.88rem;color:#7a9ab8;padding-left:1.3rem;position:relative;line-height:1.65}
+.exp-bullets li::before{content:'▸';position:absolute;left:0;color:var(--accent);opacity:.6;font-size:.72rem;top:.18em}
+
+#repos{background:var(--bg2)}
+.sub-label{font-family:var(--mono);font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:.7rem}
+.sub-dot{width:6px;height:6px;border-radius:50%;display:inline-block;flex-shrink:0}
+.repos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:1.5rem}
+.repo-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.9rem;text-decoration:none;display:flex;flex-direction:column;transition:all .25s;position:relative;overflow:hidden}
+.repo-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--blue));transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+.repo-card:hover{border-color:rgba(0,229,192,.28);transform:translateY(-5px);box-shadow:0 24px 50px rgba(0,0,0,.45)}
+.repo-card:hover::after{transform:scaleX(1)}
+.repo-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem}
+.repo-icon{font-size:1.6rem}
+.repo-label{font-family:var(--mono);font-size:.6rem;padding:.2rem .55rem;border-radius:2px;letter-spacing:.07em;text-transform:uppercase}
+.rl-green{background:rgba(0,229,192,.1);color:var(--accent);border:1px solid rgba(0,229,192,.2)}
+.rl-ai{background:rgba(139,92,246,.1);color:#b08eff;border:1px solid rgba(139,92,246,.22)}
+.rl-blue{background:rgba(10,143,255,.1);color:#5ab8ff;border:1px solid rgba(10,143,255,.2)}
+.rl-dim{background:rgba(255,255,255,.04);color:var(--muted);border:1px solid var(--border)}
+.rl-teal{background:rgba(20,180,90,.1);color:#4ade80;border:1px solid rgba(20,180,90,.2)}
+.repo-name{font-family:var(--mono);font-size:.82rem;color:var(--accent);margin-bottom:.65rem;letter-spacing:.02em}
+.repo-desc{font-size:.83rem;color:var(--muted);line-height:1.65;margin-bottom:1.4rem;flex:1}
+.repo-stack{display:flex;gap:.4rem;flex-wrap:wrap}
+
+.feat-card{border:1px solid rgba(0,229,192,.22);background:linear-gradient(135deg,#0e1a28,#0e1520);border-radius:8px;padding:2rem;text-decoration:none;display:block;transition:all .25s;margin-bottom:1.5rem}
+.feat-card:hover{border-color:rgba(0,229,192,.4);box-shadow:0 24px 50px rgba(0,0,0,.5)}
+.doc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:.75rem;margin:1.3rem 0}
+.doc-box{background:rgba(0,229,192,.05);border:1px solid rgba(0,229,192,.15);border-radius:5px;padding:.9rem 1rem;transition:background .2s}
+.doc-box:hover{background:rgba(0,229,192,.09)}
+.doc-ttl{font-family:var(--mono);font-size:.62rem;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem}
+.doc-txt{font-size:.78rem;color:var(--muted);line-height:1.5}
+
+.domains-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:1rem}
+.domain-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1.1rem 1.4rem;display:flex;align-items:center;gap:.8rem;font-size:.85rem;transition:all .22s}
+.domain-card:hover{border-color:rgba(0,229,192,.28);background:var(--bg3);transform:translateX(5px)}
+
+#certifications{background:var(--bg2)}
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(265px,1fr));gap:1rem}
+.cert-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1.3rem 1.5rem;display:flex;flex-direction:column;gap:.45rem;transition:all .22s}
+.cert-card:hover{border-color:rgba(0,229,192,.22);transform:translateY(-2px)}
+.cert-issuer{font-family:var(--mono);font-size:.62rem;color:var(--accent);letter-spacing:.1em;text-transform:uppercase}
+.cert-name{font-size:.84rem;font-weight:600;line-height:1.4;color:var(--text)}
+.cert-date{font-family:var(--mono);font-size:.62rem;color:var(--muted)}
+
+#contact{text-align:center}
+.contact-inner{max-width:620px;margin:0 auto}
+.contact-inner p{font-size:.96rem;color:var(--muted);line-height:1.85;margin-top:-1rem}
+.contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:2.8rem}
+.clink{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1.3rem 1.5rem;text-decoration:none;display:flex;align-items:center;gap:.8rem;transition:all .22s}
+.clink:hover{border-color:rgba(0,229,192,.3);background:var(--bg3);transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.35)}
+.clink-icon{font-size:1.2rem}
+.clink-body{text-align:left}
+.clink-label{font-family:var(--mono);font-size:.62rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+.clink-val{font-size:.84rem;font-weight:600;color:var(--text);margin-top:.15rem}
+
+footer{border-top:1px solid var(--border);padding:1.8rem 4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+footer span{font-family:var(--mono);font-size:.68rem;color:var(--muted)}
+.footer-badge{display:flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:.68rem;color:var(--accent)}
+
+@keyframes slideIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+
+@media(max-width:960px){
+  nav{padding:1rem 1.5rem}
+  .nav-links,.nav-cta{display:none}
+  .hero{grid-template-columns:1fr;padding:6rem 1.5rem 3rem;gap:3rem}
+  .hero-right{display:none}
+  .hero-counters{flex-wrap:wrap}
+  section{padding:4rem 1.5rem}
+  .contact-grid{grid-template-columns:1fr}
+  footer{padding:1.5rem}
+}
+</style>
+</head>
+<body>
+
+<!-- PORTFOLIO -->
+<section id="repos">
+  <div class="section-eyebrow">04 &mdash; Portfolio</div>
+  <h2 class="section-title">GitHub Projects</h2>
+
+  <!-- MANUAL QA FEATURED -->
+  <div class="sub-label" style="color:var(--accent)"><span class="sub-dot" style="background:var(--accent)"></span>Manual QA &mdash; Documentation Library</div>
+  <a href="https://github.com/talha10/manual-qa-documentation-library" target="_blank" class="feat-card">
+    <div class="repo-top">
+      <div class="repo-icon">&#x1f4cb;</div>
+      <span class="repo-label rl-green" style="font-size:.65rem;padding:.25rem .8rem;">Manual QA &middot; Featured</span>
+    </div>
+    <div class="repo-name" style="font-size:.9rem;margin-bottom:.5rem;">manual-qa-documentation-library</div>
+    <div class="repo-desc" style="font-size:.85rem;margin-bottom:0;">
+      A complete, production-ready manual QA documentation suite &mdash; every artifact a Senior QA Engineer produces across the full testing lifecycle. Refined over 5 years across 18 industries.
+    </div>
+    <div class="doc-grid">
+      <div class="doc-box"><div class="doc-ttl">&#x1f41b; Bug Reports</div><div class="doc-txt">Severity-classified defect reports with steps to reproduce, environment details, screenshots, and expected vs actual results.</div></div>
+      <div class="doc-box"><div class="doc-ttl">&#x1f4dd; Test Plans</div><div class="doc-txt">Comprehensive test strategy documents covering scope, objectives, approach, schedule, resources, risks, and exit criteria.</div></div>
+      <div class="doc-box"><div class="doc-ttl">&#x1f4d0; Test Cases</div><div class="doc-txt">Structured test case sheets with preconditions, step-by-step actions, expected results, priority, and traceability to requirements.</div></div>
+      <div class="doc-box"><div class="doc-ttl">&#x1f4cc; Requirement Docs</div><div class="doc-txt">Requirement analysis documents reviewing user stories, acceptance criteria gaps, and testability notes before development starts.</div></div>
+      <div class="doc-box"><div class="doc-ttl">&#x1f517; RTM</div><div class="doc-txt">Requirements Traceability Matrix mapping every requirement to its test cases, ensuring full coverage and zero missed functionality.</div></div>
+      <div class="doc-box"><div class="doc-ttl">&#x2705; Checklists</div><div class="doc-txt">Quick-reference checklists for smoke tests, regression cycles, UI/UX reviews, cross-browser, and release readiness gates.</div></div>
+      <div class="doc-box"><div class="doc-ttl">&#x1f4ca; Test Reports</div><div class="doc-txt">Sprint and release-level QA summary reports with pass/fail metrics, defect density, test coverage, and go/no-go decisions.</div></div>
+      <div class="doc-box"><div class="doc-ttl">&#x1f50d; Exploratory Charters</div><div class="doc-txt">Session-based charters defining mission, target areas, time-box, and structured observation notes for risk discovery.</div></div>
+      <div class="doc-box"><div class="doc-ttl">&#x1f6a6; UAT Sign-off Docs</div><div class="doc-txt">UAT plans, tester assignments, sign-off criteria, and formal client approval records for production release.</div></div>
+      <div class="doc-box"><div class="doc-ttl">&#x1f5c3;&#xfe0f; Test Data Docs</div><div class="doc-txt">Test data guides defining valid/invalid input sets, boundary values, equivalence partitions, and edge case data.</div></div>
+      <div class="doc-box"><div class="doc-ttl">&#x1f3c1; Test Closure Reports</div><div class="doc-txt">End-of-phase closure documents summarising total effort, defect lifecycle, lessons learned, and risk items for handover.</div></div>
+      <div class="doc-box"><div class="doc-ttl">&#x1f4c8; QA Metrics Dashboard</div><div class="doc-txt">Sprint-level quality metrics tracking defect detection rate, execution progress, escaped bugs, and regression stability.</div></div>
+    </div>
+    <div class="repo-stack">
+      <span class="tag t-green">Bug Reports</span><span class="tag t-green">Test Plans</span><span class="tag t-green">Test Cases</span><span class="tag t-green">RTM</span>
+      <span class="tag t-dim">UAT Docs</span><span class="tag t-dim">Exploratory Charters</span><span class="tag t-dim">QA Reports</span><span class="tag t-dim">Test Closure</span><span class="tag t-dim">Checklists</span>
+    </div>
+  </a>
+
+  <!-- AI PROJECTS -->
+  <div class="sub-label" style="color:#b08eff;margin-top:2.5rem"><span class="sub-dot" style="background:#b08eff"></span>AI-Driven &amp; Advanced Automation</div>
+  <div class="repos-grid" style="margin-bottom:2rem">
+    <a href="https://github.com/talha10/ai-agent-test-automation" target="_blank" class="repo-card">
+      <div class="repo-top"><div class="repo-icon">&#x1f916;</div><span class="repo-label rl-ai">AI Agent &middot; Flagship</span></div>
+      <div class="repo-name">ai-agent-test-automation</div>
+      <div class="repo-desc">Multi-agent QA pipeline using Claude Code + Playwright (Python). Agents analyse features, auto-generate test scripts, self-heal broken locators, and push PRs &mdash; zero manual kickoff. Full CI integration with GitHub Actions.</div>
+      <div class="repo-stack"><span class="tag t-purple">Claude Code</span><span class="tag t-blue">Playwright</span><span class="tag t-dim">Python</span><span class="tag t-dim">GitHub Actions</span></div>
+    </a>
+    <a href="https://github.com/talha10/llm-ai-testing-framework" target="_blank" class="repo-card">
+      <div class="repo-top"><div class="repo-icon">&#x1f9e0;</div><span class="repo-label rl-ai">LLM QA</span></div>
+      <div class="repo-name">llm-ai-testing-framework</div>
+      <div class="repo-desc">Framework and checklists for validating AI platforms, LLMs, voice agents, and chat agents. Covers prompt consistency, hallucination detection, bias testing, and non-deterministic output evaluation.</div>
+      <div class="repo-stack"><span class="tag t-purple">LLM Testing</span><span class="tag t-purple">Voice Agent QA</span><span class="tag t-dim">Prompt Testing</span><span class="tag t-dim">AI Evaluation</span></div>
+    </a>
+  </div>
+
+  <!-- AUTOMATION / INFRA PROJECTS -->
+  <div class="sub-label" style="color:var(--blue)"><span class="sub-dot" style="background:var(--blue)"></span>Automation, API, Performance &amp; Infrastructure</div>
+  <div class="repos-grid">
+    <a href="https://github.com/talha10/playwright-python-automation" target="_blank" class="repo-card">
+      <div class="repo-top"><div class="repo-icon">&#x1f3ad;</div><span class="repo-label rl-blue">Python &middot; E2E</span></div>
+      <div class="repo-name">playwright-python-automation</div>
+      <div class="repo-desc">End-to-end Playwright + Python suite using Page Object Model and pytest. Covers auth, search, checkout, and dashboard flows with automated HTML reports via GitHub Actions CI/CD.</div>
+      <div class="repo-stack"><span class="tag t-blue">Playwright</span><span class="tag t-dim">Python</span><span class="tag t-dim">pytest</span><span class="tag t-dim">GitHub Actions</span></div>
+    </a>
+    <a href="https://github.com/talha10/cypress-regression-suite" target="_blank" class="repo-card">
+      <div class="repo-top"><div class="repo-icon">&#x1f332;</div><span class="repo-label rl-blue">JavaScript &middot; E2E</span></div>
+      <div class="repo-name">cypress-regression-suite</div>
+      <div class="repo-desc">JS regression suite with custom commands, Page Object Model, and Mochawesome HTML reports. Full e-commerce checkout flow coverage with GitHub Actions for automated regression on every push.</div>
+      <div class="repo-stack"><span class="tag t-blue">Cypress</span><span class="tag t-dim">JavaScript</span><span class="tag t-dim">Mocha</span><span class="tag t-dim">CI/CD</span></div>
+    </a>
+    <a href="https://github.com/talha10/mobile-qa-portfolio-appium" target="_blank" class="repo-card">
+      <div class="repo-top"><div class="repo-icon">&#x1f4f1;</div><span class="repo-label rl-blue">Mobile</span></div>
+      <div class="repo-name">mobile-qa-portfolio-appium</div>
+      <div class="repo-desc">Cross-platform mobile test scripts for iOS and Android using Appium + Python. Includes wait helpers, capability configs, and pytest suites for real device and emulator environments.</div>
+      <div class="repo-stack"><span class="tag t-blue">Appium</span><span class="tag t-dim">Python</span><span class="tag t-dim">iOS</span><span class="tag t-dim">Android</span></div>
+    </a>
+    <a href="https://github.com/talha10/api-testing-postman-newman" target="_blank" class="repo-card">
+      <div class="repo-top"><div class="repo-icon">&#x1f4ee;</div><span class="repo-label rl-green">API &middot; Functional</span></div>
+      <div class="repo-name">api-testing-postman-newman</div>
+      <div class="repo-desc">Postman collections for REST API testing &mdash; auth flows, CRUD, negative tests, and schema validation. Newman CLI enables automated API test execution inside CI pipelines.</div>
+      <div class="repo-stack"><span class="tag t-blue">Postman</span><span class="tag t-dim">Newman</span><span class="tag t-dim">REST API</span><span class="tag t-dim">JSON Schema</span></div>
+    </a>
+    <a href="https://github.com/talha10/api-contract-testing-postman" target="_blank" class="repo-card">
+      <div class="repo-top"><div class="repo-icon">&#x1f4c3;</div><span class="repo-label rl-green">API &middot; Contract</span></div>
+      <div class="repo-name">api-contract-testing-postman</div>
+      <div class="repo-desc">Backend schema testing suite using tv4 validation to assert data types, required fields, and structures per Swagger documentation. Prevents API contract breakage across releases.</div>
+      <div class="repo-stack"><span class="tag t-blue">Postman</span><span class="tag t-dim">Contract Testing</span><span class="tag t-dim">Schema Validation</span><span class="tag t-dim">Swagger</span></div>
+    </a>
+    <a href="https://github.com/talha10/k6-performance-testing" target="_blank" class="repo-card">
+      <div class="repo-top"><div class="repo-icon">&#x26a1;</div><span class="repo-label rl-blue">Performance &middot; k6</span></div>
+      <div class="repo-name">k6-performance-testing</div>
+      <div class="repo-desc">Load testing using k6 &mdash; standard load, spike, stress, and soak patterns. Includes threshold definitions, custom metrics, and detailed HTML result reports for each scenario.</div>
+      <div class="repo-stack"><span class="tag t-blue">k6</span><span class="tag t-dim">JavaScript</span><span class="tag t-dim">Load Testing</span><span class="tag t-dim">Stress Testing</span></div>
+    </a>
+    <a href="https://github.com/talha10/sql-database-testing" target="_blank" class="repo-card">
+      <div class="repo-top"><div class="repo-icon">&#x1f5c4;&#xfe0f;</div><span class="repo-label rl-dim">Database</span></div>
+      <div class="repo-name">sql-database-testing</div>
+      <div class="repo-desc">Backend validation tests against PostgreSQL &mdash; multi-table joins, cascaded deletions, index query planner execution, and data integrity checks for production-grade databases.</div>
+      <div class="repo-stack"><span class="tag t-dim">PostgreSQL</span><span class="tag t-dim">SQL</span><span class="tag t-dim">Backend QA</span><span class="tag t-dim">Data Integrity</span></div>
+    </a>
+    <a href="https://github.com/talha10/accessibility-testing-axe" target="_blank" class="repo-card">
+      <div class="repo-top"><div class="repo-icon">&#x1f441;&#xfe0f;</div><span class="repo-label rl-dim">Accessibility</span></div>
+      <div class="repo-name">accessibility-testing-axe</div>
+      <div class="repo-desc">Automated WCAG 2.1 audits using axe-core and headless Puppeteer. Flags contrast violations, missing ARIA labels, and semantic HTML issues programmatically across full page scans.</div>
+      <div class="repo-stack"><span class="tag t-blue">Axe-Core</span><span class="tag t-dim">Puppeteer</span><span class="tag t-dim">WCAG 2.1</span><span class="tag t-dim">Node.js</span></div>
+    </a>
+    <a href="https://github.com/talha10/docker-selenium-grid-base" target="_blank" class="repo-card">
+      <div class="repo-top"><div class="repo-icon">&#x1f433;</div><span class="repo-label rl-teal">Infrastructure</span></div>
+      <div class="repo-name">docker-selenium-grid-base</div>
+      <div class="repo-desc">Scalable Docker Compose architecture spinning up a Selenium Grid Hub with concurrent browser nodes &mdash; enabling parallel cross-browser test execution for large regression suites.</div>
+      <div class="repo-stack"><span class="tag t-teal">Docker</span><span class="tag t-blue">Selenium Grid</span><span class="tag t-dim">DevOps</span><span class="tag t-dim">Parallel Testing</span></div>
+    </a>
+  </div>
+</section>
+
+<!-- DOMAINS -->
+<section id="domains">
+  <div class="section-eyebrow">05 &mdash; Industry</div>
+  <h2 class="section-title">Domain Experience</h2>
+  <div class="domains-grid">
+    <div class="domain-card"><span>&#x1f6d2;</span>E-Commerce &amp; Payment Gateways</div>
+    <div class="domain-card"><span>&#x1f916;</span>AI, LLM &amp; Automation Platforms</div>
+    <div class="domain-card"><span>&#x1f3e6;</span>Banking, Finance &amp; FinTech (BFSI)</div>
+    <div class="domain-card"><span>&#x1f3e5;</span>HealthTech &amp; Medical Applications</div>
+    <div class="domain-card"><span>&#x1f393;</span>Education, LMS &amp; EdTech Platforms</div>
+    <div class="domain-card"><span>&#x1f3e0;</span>Real Estate &amp; PropTech Systems</div>
+    <div class="domain-card"><span>&#x1f510;</span>Cybersecurity &amp; Compliance Tools</div>
+    <div class="domain-card"><span>&#x2601;&#xfe0f;</span>SaaS &amp; Enterprise Cloud Platforms</div>
+    <div class="domain-card"><span>&#x1f39f;&#xfe0f;</span>Event Management &amp; Ticketing</div>
+    <div class="domain-card"><span>&#x1f4f1;</span>Mobile Apps (iOS &amp; Android)</div>
+    <div class="domain-card"><span>&#x1f6cd;&#xfe0f;</span>Marketplace &amp; Multi-vendor Platforms</div>
+    <div class="domain-card"><span>&#x1f69a;</span>Logistics, Supply Chain &amp; Last-Mile</div>
+    <div class="domain-card"><span>&#x1f3ae;</span>Gaming &amp; Interactive Entertainment</div>
+    <div class="domain-card"><span>&#x1f4e1;</span>Telecom &amp; Communication Platforms</div>
+    <div class="domain-card"><span>&#x1f9d1;&#x200d;&#x1f4bc;</span>HR, Recruitment &amp; Workforce Tools</div>
+    <div class="domain-card"><span>&#x1f4ca;</span>Analytics, BI &amp; Data Dashboards</div>
+    <div class="domain-card"><span>&#x1f91d;</span>CRM, CMS &amp; Admin Portals</div>
+    <div class="domain-card"><span>&#x1f517;</span>API-First &amp; Microservices Platforms</div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-eyebrow">06 &mdash; Credentials</div>
+  <h2 class="section-title">Certifications &amp; Licences</h2>
+  <div class="certs-grid">
+    <div class="cert-card"><div class="cert-issuer">Atlassian</div><div class="cert-name">Agile Project Management Professional Certificate</div><div class="cert-date">Dec 2025</div></div>
+    <div class="cert-card"><div class="cert-issuer">LambdaTest</div><div class="cert-name">Test Automation Professional Certificate</div><div class="cert-date">Dec 2025</div></div>
+    <div class="cert-card"><div class="cert-issuer">LambdaTest</div><div class="cert-name">Software Testing Professional Certificate</div><div class="cert-date">Dec 2024</div></div>
+    <div class="cert-card"><div class="cert-issuer">Snowflake</div><div class="cert-name">Generative AI Professional Certificate</div><div class="cert-date">Dec 2025</div></div>
+    <div class="cert-card"><div class="cert-issuer">Microsoft</div><div class="cert-name">Career Essentials in Generative AI</div><div class="cert-date">Dec 2025</div></div>
+    <div class="cert-card"><div class="cert-issuer">GitHub</div><div class="cert-name">Career Essentials in GitHub Copilot</div><div class="cert-date">Dec 2025</div></div>
+    <div class="cert-card"><div class="cert-issuer">Docker, Inc</div><div class="cert-name">Docker Foundations Professional Certificate</div><div class="cert-date">Dec 2024</div></div>
+    <div class="cert-card"><div class="cert-issuer">Project Management Institute</div><div class="cert-name">Scrum: The Basics</div><div class="cert-date">Dec 2024</div></div>
+    <div class="cert-card"><div class="cert-issuer">IIBA</div><div class="cert-name">Agile Foundations</div><div class="cert-date">Dec 2024</div></div>
+    <div class="cert-card"><div class="cert-issuer">NASBA</div><div class="cert-name">Mistakes to Avoid in Agile Project Management</div><div class="cert-date">Dec 2025</div></div>
+    <div class="cert-card"><div class="cert-issuer">Project Management Institute</div><div class="cert-name">Agile Project Management with Jira Cloud (3 Parts)</div><div class="cert-date">Nov 2024</div></div>
+    <div class="cert-card"><div class="cert-issuer">LinkedIn</div><div class="cert-name">JMeter: Performance and Load Testing</div><div class="cert-date">Nov 2024</div></div>
+    <div class="cert-card"><div class="cert-issuer">LinkedIn</div><div class="cert-name">SQL for Testers</div><div class="cert-date">Nov 2024</div></div>
+    <div class="cert-card"><div class="cert-issuer">LinkedIn</div><div class="cert-name">Programming Foundations: Software Testing / QA</div><div class="cert-date">Dec 2025</div></div>
+    <div class="cert-card"><div class="cert-issuer">LinkedIn</div><div class="cert-name">Agile Testing</div><div class="cert-date">Dec 2025</div></div>
+    <div class="cert-card"><div class="cert-issuer">LinkedIn</div><div class="cert-name">Succeeding in Software Testing</div><div class="cert-date">Dec 2025</div></div>
+    <div class="cert-card"><div class="cert-issuer">Urducourses Inc</div><div class="cert-name">CyberSavvy: Navigating Linux &amp; Essential Cybersecurity</div><div class="cert-date">Dec 2024</div></div>
+    <div class="cert-card"><div class="cert-issuer">OPSWAT Academy</div><div class="cert-name">Introduction to CIP (Critical Infrastructure Protection)</div><div class="cert-date">Nov 2024</div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-eyebrow" style="justify-content:center">07 &mdash; Let's Connect</div>
+    <h2 class="section-title">Work With Me</h2>
+    <p>Available for freelance contracts, remote QA roles, and long-term collaborations. I work with startups, agencies, and product teams globally &mdash; delivering quality that ships with confidence.</p>
+    <div class="contact-grid">
+      <a href="mailto:contact.talhakhattak@gmail.com" class="clink"><span class="clink-icon">&#x2709;&#xfe0f;</span><div class="clink-body"><div class="clink-label">Email</div><div class="clink-val">contact.talhakhattak@gmail.com</div></div></a>
+      <a href="https://wa.me/923494578579" target="_blank" class="clink"><span class="clink-icon">&#x1f4ac;</span><div class="clink-body"><div class="clink-label">WhatsApp</div><div class="clink-val">+92 349 457 8579</div></div></a>
+      <a href="https://linkedin.com/in/talha-khan-khattak/" target="_blank" class="clink"><span class="clink-icon">&#x1f517;</span><div class="clink-body"><div class="clink-label">LinkedIn</div><div class="clink-val">talha-khan-khattak</div></div></a>
+      <a href="https://github.com/talha10" target="_blank" class="clink"><span class="clink-icon">&#x2b21;</span><div class="clink-body"><div class="clink-label">GitHub</div><div class="clink-val">talha10</div></div></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-badge"><div class="dot dot-green"></div> Active &amp; Open to Offers</div>
+  <span>&copy; 2026 Talha Khan. Specializing in QA Architecture &amp; Automation.</span>
+</footer>
+
+</body>
+</html>
 
-> **HOW TO USE THIS FILE:**
-> Paste this entire file into Gemini (Google AI Studio), Claude, ChatGPT, or any AI agent.
-> The agent will read the full context and generate every file, folder, and document listed below.
-> Work repo by repo â€” ask the agent: _"Start with Repo 1 and generate all files inside it."_
-
----
-
-## ðŸ‘¤ ABOUT THE PERSON â€” READ THIS FIRST
-
-**Full Name:** Talha Khan
-**Role:** Senior Software Quality Assurance Engineer
-**Experience:** 4+ years
-**Location:** Lahore, Pakistan (Remote-first, available worldwide)
-**Email:** Talhakhattak101@gmail.com
-**LinkedIn:** linkedin.com/in/talha-khan-khattak/
-**WhatsApp:** +92 349 457 8579
-**GitHub Username:** talhakhattak (replace with actual if different)
-**Upwork:** Freelance QA Engineer (Jan 2026 â€“ Present)
-
-### Work History
-| Company | Role | Period |
-|---|---|---|
-| Self-Employed (Upwork) | Senior QA Engineer â€” Freelance | Jan 2026 â€“ Present |
-| ISoft Technologies | Senior QA Engineer | Dec 2024 â€“ Dec 2025 |
-| Black Box Labs | Senior QA Engineer | Jan 2022 â€“ Dec 2024 |
-| Uservic3 | QA Engineer | Jan 2021 â€“ Sep 2021 |
-
-### Core Skills
-- **Manual QA:** Functional, Regression, UAT, Exploratory, Integration, Risk-Based, Cross-Browser
-- **Automation:** Playwright (Python), Cypress (JavaScript), pytest, CI/CD via GitHub Actions
-- **API Testing:** Postman, Newman CLI, REST API, JSON Schema validation
-- **Performance:** Apache JMeter â€” load, stress, spike, soak testing
-- **AI/LLM QA:** LLM validation, hallucination testing, prompt behavior QA, voice agent testing, chat agent testing, agentic workflow testing, local LLM setup
-- **Tools:** Jira, TestRail, X-Ray, Zephyr, BrowserStack, TestFlight, DataDog, Confluence, Notion, Docker, SQL Server
-- **Other:** n8n flows, Clawdbot, local LLM setup (Ollama, Open WebUI), VirtualBox environments
-
-### Domain Experience (18 Industries)
-E-Commerce, AI/LLM Platforms, FinTech/BFSI, HealthTech, EdTech/LMS, Real Estate/PropTech, Cybersecurity, SaaS/Enterprise, Event Management, Mobile Apps, Marketplace/Multi-vendor, Logistics/Supply Chain, Gaming, Telecom, HR/Recruitment, Analytics/BI, CRM/CMS, API-First/Microservices
-
-### Certifications (18+)
-Atlassian Agile PM Â· LambdaTest Automation Â· LambdaTest Software Testing Â· Snowflake Generative AI Â· Microsoft Generative AI Â· GitHub Copilot Â· Docker Foundations Â· Scrum Basics (PMI) Â· Agile Foundations (IIBA) Â· NASBA Agile PM Â· Jira Cloud Agile PM x3 (PMI) Â· JMeter LinkedIn Â· SQL for Testers LinkedIn Â· Programming Foundations QA LinkedIn Â· Agile Testing LinkedIn Â· Succeeding in Software Testing LinkedIn Â· CyberSavvy Linux (Urducourses) Â· OPSWAT CIP
-
----
-
-## ðŸ“ FULL REPOSITORY LIST â€” GENERATE EACH ONE
-
-Below are **7 GitHub repositories** to create. For each repo, generate ALL files listed with full, realistic, professional content. Do not use placeholder text. Make every file look like it was produced by a real Senior QA Engineer with 4+ years of experience.
-
----
-
-## ðŸ“¦ REPO 1 â€” `manual-qa-documentation-library`
-
-**Description:** A complete manual QA documentation suite â€” all artifacts a Senior QA Engineer produces across the full testing lifecycle. Based on a fictional demo e-commerce web app called **"ShopEase"** (a multi-vendor e-commerce platform with user accounts, product listings, cart, checkout, payment gateway, order tracking, and admin panel).
-
-**README.md** â€” Write a professional README with:
-- Project overview and purpose
-- List of all documents included and what each covers
-- How to use/adapt these templates for real projects
-- Tech stack of the fictional test target (ShopEase)
-- Author section with Talha Khan's details and LinkedIn
-
----
-
-### Files to generate inside `manual-qa-documentation-library/`:
-
-#### `/docs/01_test-plan.md`
-Write a complete, professional Test Plan for **ShopEase v2.1 Release** including:
-- Document purpose, scope, and objectives
-- Features to be tested (login, registration, product search, cart, checkout, payment, order history, admin panel)
-- Features NOT in scope
-- Test approach (functional, regression, exploratory, UAT, cross-browser)
-- Test environments (browsers: Chrome, Firefox, Safari, Edge; devices: desktop, tablet, mobile)
-- Test data requirements
-- Entry and exit criteria
-- Suspension and resumption criteria
-- Deliverables list
-- Resource planning and roles
-- Schedule/timeline (sprint-based)
-- Risk register with mitigation strategies
-- Approval section
-
-#### `/docs/02_test-cases.md`
-Write 30+ structured test cases for ShopEase covering:
-- User Registration (valid, invalid, duplicate email, password rules)
-- Login / Logout (valid credentials, wrong password, account lockout, remember me)
-- Product Search (keyword, filter by category/price, sort, no results)
-- Shopping Cart (add item, update qty, remove item, empty cart, max qty limit)
-- Checkout & Payment (successful payment, failed payment, invalid card, promo code valid/invalid)
-- Order Tracking (status updates, order history)
-- Admin Panel (add product, edit product, deactivate user)
-
-Format each test case as a table with columns: **TC_ID | Module | Test Case Title | Preconditions | Test Steps | Expected Result | Actual Result | Status | Priority**
-
-#### `/docs/03_bug-reports.md`
-Write 15 realistic, detailed bug reports for ShopEase covering various modules. Each bug report must include:
-- Bug ID (e.g., BUG-001)
-- Title (clear, descriptive)
-- Severity (Critical / High / Medium / Low)
-- Priority (P1 / P2 / P3)
-- Module / Component
-- Environment (OS, Browser, Version)
-- Reporter and Date
-- Steps to Reproduce (numbered, precise)
-- Expected Result
-- Actual Result
-- Attachments note (e.g., "Screenshot_BUG001.png")
-- Root Cause (if known)
-- Status (Open / In Progress / Fixed / Verified)
-
-Include bugs like: payment not processing, cart total miscalculation, broken product image, login session expiry too short, admin CSV export failure, mobile nav menu not closing, promo code applied twice, order email not sent, etc.
-
-#### `/docs/04_rtm.md`
-Write a Requirements Traceability Matrix (RTM) for ShopEase. Include:
-- Introduction explaining what an RTM is and why it's used
-- Full RTM table with columns: **Req_ID | Requirement Description | Priority | Test Case IDs | Test Status | Coverage %**
-- Minimum 25 requirements mapped to test cases
-- Summary coverage report at the bottom
-
-#### `/docs/05_exploratory-testing-charters.md`
-Write 8 exploratory testing session charters for ShopEase including:
-- Charter ID and Title
-- Mission / Goal
-- Target Area (feature/module)
-- Time Box (e.g., 60 minutes)
-- Tester Notes format
-- Risk and concerns to investigate
-- Session findings section template
-
-Cover areas: payment edge cases, mobile responsiveness, search performance under load, admin role permissions, accessibility, third-party integrations, data validation, error message quality.
-
-#### `/docs/06_uat-plan-and-signoff.md`
-Write a complete UAT (User Acceptance Testing) document for ShopEase including:
-- UAT objectives and scope
-- Participants (business stakeholders, end users)
-- UAT test scenarios (10 end-to-end user journeys)
-- Acceptance criteria
-- UAT schedule
-- Issue logging process
-- Sign-off form template (with signature fields)
-
-#### `/docs/07_test-data-guide.md`
-Write a test data preparation guide for ShopEase including:
-- Valid/invalid email formats table
-- Password boundary value analysis
-- Product price boundary testing (0, negative, max, decimal)
-- Credit card test numbers (use standard test card numbers like Stripe test cards)
-- Promo code test data (valid, expired, wrong format, max uses reached)
-- Equivalence partitioning tables for search filters
-- SQL queries to seed test database (users, products, orders tables)
-
-#### `/docs/08_checklists.md`
-Write the following checklists:
-1. **Smoke Test Checklist** (15 items) â€” critical paths only
-2. **Regression Test Checklist** (25 items) â€” all major features
-3. **UI/UX Review Checklist** (20 items) â€” consistency, responsiveness, accessibility
-4. **Cross-Browser Testing Checklist** (Chrome, Firefox, Safari, Edge, Mobile Chrome, Mobile Safari)
-5. **Release Readiness Checklist** (20 items) â€” pre-deployment gates
-6. **API Sanity Checklist** (10 items) â€” endpoint status checks
-
-#### `/docs/09_test-report-sprint.md`
-Write a Sprint 14 QA Test Execution Report for ShopEase including:
-- Sprint summary and dates
-- Test execution summary table (total cases, passed, failed, blocked, not run)
-- Defect summary (critical, high, medium, low counts)
-- Test coverage % by module
-- Key findings and risks
-- Defects raised this sprint (reference to bug IDs)
-- Go / No-Go recommendation
-- Sign-off section
-
-#### `/docs/10_test-closure-report.md`
-Write a Test Closure Report for ShopEase v2.1 Release including:
-- Project summary
-- Test scope recap
-- Total test execution metrics (across all sprints)
-- Defect lifecycle summary (raised, fixed, verified, deferred, rejected)
-- Quality metrics (defect density, test effectiveness, escaped defects)
-- Lessons learned (3 what went well, 3 what could improve)
-- Open risks carried forward
-- Final sign-off
-
-#### `/docs/11_requirement-analysis.md`
-Write a Requirements Analysis & Testability Review document for ShopEase Sprint 15 (new features: Wishlist, Product Reviews, Referral Program). For each feature:
-- Original user story (write a realistic one)
-- Acceptance criteria review (gaps, ambiguities found)
-- Testability assessment
-- Recommended clarifications (as questions to the product owner)
-- Risk assessment
-- Edge cases to consider
-- Suggested test types
-
-#### `/docs/12_qa-metrics-dashboard.md`
-Write a QA Metrics Report for ShopEase Q4 2024 including:
-- Defect Detection Rate by sprint (table + trend description)
-- Test Case Execution Rate per sprint
-- Defect Leakage Rate (bugs found post-release)
-- Defect Fix Rate by severity
-- Automation vs Manual test coverage ratio
-- Test Effort Distribution (planning, execution, reporting)
-- Quality trend analysis narrative
-- Recommendations for Q1 2025
-
----
-
-## ðŸ“¦ REPO 2 â€” `playwright-python-automation`
-
-**Target app:** https://automationexercise.com (free public e-commerce demo site â€” use this as the real target)
-
-**README.md** â€” Professional README with:
-- Project overview
-- Tech stack (Playwright, Python, pytest, GitHub Actions)
-- Folder structure diagram
-- How to install and run locally
-- How to run in CI
-- Test report location
-- Author info
-
-**Folder structure to generate:**
-```
-playwright-python-automation/
-â”œâ”€â”€ tests/
-â”‚   â”œâ”€â”€ test_login.py
-â”‚   â”œâ”€â”€ test_registration.py
-â”‚   â”œâ”€â”€ test_product_search.py
-â”‚   â”œâ”€â”€ test_cart.py
-â”‚   â”œâ”€â”€ test_checkout.py
-â”‚   â””â”€â”€ test_contact_form.py
-â”œâ”€â”€ pages/
-â”‚   â”œâ”€â”€ base_page.py
-â”‚   â”œâ”€â”€ login_page.py
-â”‚   â”œâ”€â”€ home_page.py
-â”‚   â”œâ”€â”€ product_page.py
-â”‚   â””â”€â”€ cart_page.py
-â”œâ”€â”€ utils/
-â”‚   â”œâ”€â”€ config.py
-â”‚   â””â”€â”€ helpers.py
-â”œâ”€â”€ conftest.py
-â”œâ”€â”€ pytest.ini
-â”œâ”€â”€ requirements.txt
-â””â”€â”€ .github/
-    â””â”€â”€ workflows/
-        â””â”€â”€ playwright-tests.yml
-```
-
-**Generate ALL files with full working code:**
-
-- `pages/base_page.py` â€” BasePage class with common methods (navigate, click, fill, wait_for_element, take_screenshot, is_visible)
-- `pages/login_page.py` â€” LoginPage extending BasePage with locators and methods (enter_email, enter_password, click_login, get_error_message)
-- `pages/home_page.py` â€” HomePage with nav links, search bar, product grid methods
-- `pages/product_page.py` â€” ProductPage with add_to_cart, get_price, get_product_name methods
-- `pages/cart_page.py` â€” CartPage with get_items, update_quantity, remove_item, get_total methods
-- `tests/test_login.py` â€” 8 test cases (valid login, invalid password, empty fields, SQL injection attempt, very long input, special chars, remember me, logout)
-- `tests/test_registration.py` â€” 6 test cases (successful registration, duplicate email, weak password, missing required field, invalid email format, successful with all optional fields)
-- `tests/test_product_search.py` â€” 5 test cases (search existing product, search non-existent, search with special chars, filter by category, sort by price)
-- `tests/test_cart.py` â€” 6 test cases (add single item, add multiple items, update quantity, remove item, cart persists after page refresh, empty cart state)
-- `tests/test_checkout.py` â€” 4 test cases (checkout flow full journey, checkout without login redirect, verify order summary, apply invalid coupon)
-- `tests/test_contact_form.py` â€” 3 test cases (submit valid form, submit with missing fields, verify confirmation message)
-- `conftest.py` â€” pytest fixtures (browser, page, base_url, authenticated_page)
-- `utils/config.py` â€” Config class loading from environment variables (BASE_URL, HEADLESS, SLOW_MO, BROWSER_TYPE)
-- `utils/helpers.py` â€” Helper functions (generate_random_email, generate_random_string, read_test_data_from_json)
-- `pytest.ini` â€” pytest configuration with markers, log settings
-- `requirements.txt` â€” playwright, pytest, pytest-playwright, pytest-html, python-dotenv
-- `.github/workflows/playwright-tests.yml` â€” Full CI workflow: install Python, install deps, install playwright browsers, run tests, upload HTML report as artifact
-
----
-
-## ðŸ“¦ REPO 3 â€” `cypress-regression-suite`
-
-**Target app:** https://www.saucedemo.com (free public demo site for test automation)
-
-**README.md** â€” Professional README with project overview, folder structure, setup, run commands, CI badge
-
-**Folder structure:**
-```
-cypress-regression-suite/
-â”œâ”€â”€ cypress/
-â”‚   â”œâ”€â”€ e2e/
-â”‚   â”‚   â”œâ”€â”€ login.cy.js
-â”‚   â”‚   â”œâ”€â”€ inventory.cy.js
-â”‚   â”‚   â”œâ”€â”€ cart.cy.js
-â”‚   â”‚   â”œâ”€â”€ checkout.cy.js
-â”‚   â”‚   â””â”€â”€ navigation.cy.js
-â”‚   â”œâ”€â”€ pages/
-â”‚   â”‚   â”œâ”€â”€ LoginPage.js
-â”‚   â”‚   â”œâ”€â”€ InventoryPage.js
-â”‚   â”‚   â”œâ”€â”€ CartPage.js
-â”‚   â”‚   â””â”€â”€ CheckoutPage.js
-â”‚   â”œâ”€â”€ fixtures/
-â”‚   â”‚   â””â”€â”€ users.json
-â”‚   â””â”€â”€ support/
-â”‚       â”œâ”€â”€ commands.js
-â”‚       â””â”€â”€ e2e.js
-â”œâ”€â”€ cypress.config.js
-â”œâ”€â”€ package.json
-â””â”€â”€ .github/
-    â””â”€â”€ workflows/
-        â””â”€â”€ cypress-tests.yml
-```
-
-**Generate ALL files with full working Cypress code:**
-
-- `cypress/pages/LoginPage.js` â€” Page Object with locators and methods (visit, enterUsername, enterPassword, clickLogin, getErrorMessage)
-- `cypress/pages/InventoryPage.js` â€” methods (getProductList, sortBy, addToCart, getCartCount)
-- `cypress/pages/CartPage.js` â€” methods (getItems, removeItem, proceedToCheckout)
-- `cypress/pages/CheckoutPage.js` â€” methods (fillShippingInfo, finish, getConfirmationMessage)
-- `cypress/fixtures/users.json` â€” test users data (standard_user, locked_out_user, problem_user with passwords)
-- `cypress/support/commands.js` â€” custom commands: cy.login(username, password), cy.addItemToCart(itemName), cy.clearCart()
-- `cypress/support/e2e.js` â€” global hooks and imports
-- `cypress/e2e/login.cy.js` â€” 7 test cases with full describe/it blocks
-- `cypress/e2e/inventory.cy.js` â€” 5 test cases (view products, sort, add to cart, badge counter)
-- `cypress/e2e/cart.cy.js` â€” 5 test cases
-- `cypress/e2e/checkout.cy.js` â€” 6 test cases (full checkout, missing fields, continue shopping)
-- `cypress/e2e/navigation.cy.js` â€” 4 test cases (burger menu, back to products, footer links)
-- `cypress.config.js` â€” full config with baseUrl, viewportWidth/Height, video, screenshots, reporter setup
-- `package.json` â€” with cypress, mochawesome, mochawesome-merge, mochawesome-report-generator
-- `.github/workflows/cypress-tests.yml` â€” CI workflow with Node setup, install, run, merge reports, upload artifact
-
----
-
-## ðŸ“¦ REPO 4 â€” `api-testing-postman-collections`
-
-**Target API:** https://restful-booker.herokuapp.com (free public booking API â€” has auth, CRUD endpoints, real documentation)
-
-**README.md** â€” Professional README with API overview, collection structure, how to import into Postman, how to run with Newman, environment variables setup, sample Newman CI command
-
-**Files to generate:**
-
-#### `collections/restful-booker-full-suite.json`
-Generate a complete, valid Postman Collection v2.1 JSON file with:
-- **Auth folder:** POST /auth â€” get token (positive + negative: wrong credentials)
-- **Bookings â€” GET folder:** GET /booking (get all IDs), GET /booking/:id (valid ID, invalid ID, non-existent ID), GET with filters (firstname, lastname, checkin, checkout)
-- **Bookings â€” CREATE folder:** POST /booking (valid payload, missing required fields, invalid date format, extra fields)
-- **Bookings â€” UPDATE folder:** PUT /booking/:id (full update with auth, without auth = 403), PATCH /booking/:id (partial update firstname only, partial update dates)
-- **Bookings â€” DELETE folder:** DELETE /booking/:id (with valid token, with invalid token, non-existent ID)
-
-For each request include:
-- Pre-request scripts where relevant
-- Test scripts checking: status code, response time < 2000ms, response body schema, specific field values, content-type header
-
-#### `environments/restful-booker-env.json`
-Postman environment file with variables: base_url, token, booking_id, firstname, lastname
-
-#### `newman/run-tests.sh`
-Shell script to run full collection via Newman with HTML reporter output
-
-#### `.github/workflows/api-tests.yml`
-GitHub Actions workflow: install newman and htmlextra reporter, run collection, upload HTML report
-
-#### `docs/api-test-strategy.md`
-Write a short API Test Strategy document covering:
-- Scope (endpoints tested)
-- Test types (functional, negative, boundary, security basics)
-- Test data approach
-- Assertions strategy
-- CI integration plan
-
----
-
-## ðŸ“¦ REPO 5 â€” `performance-testing-jmeter`
-
-**Target:** https://blazedemo.com (Phoenix to Rome flight booking â€” free public demo site for JMeter practice)
-
-**README.md** â€” Professional README with project overview, JMeter version, test scenarios explained, how to run, how to read results, folder structure
-
-**Files to generate:**
-
-#### `test-plans/01_baseline_load_test.jmx`
-Generate a complete, valid JMeter `.jmx` XML file for a baseline load test:
-- 50 concurrent users, ramp-up 60 seconds, duration 5 minutes
-- HTTP Request Defaults (blazedemo.com)
-- Thread Group properly configured
-- Requests: GET /index.php (homepage), POST /reserve.php (select flight), POST /purchase.php (book flight)
-- HTTP Header Manager with Accept and Content-Type
-- Response Assertion on each request (status 200, response contains expected text)
-- View Results Tree listener
-- Summary Report listener
-- Aggregate Report listener
-- Think time: Uniform Random Timer 1000-3000ms
-
-#### `test-plans/02_stress_test.jmx`
-Stress test JMX â€” 200 users, ramp-up 120 seconds, duration 10 minutes, same endpoints
-
-#### `test-plans/03_spike_test.jmx`
-Spike test JMX â€” two thread groups: 10 users baseline, then sudden spike to 200 users for 2 minutes, back to 10
-
-#### `results/baseline-test-summary.md`
-Write a realistic performance test results analysis document including:
-- Test scenario summary
-- Key metrics table (Average Response Time, 90th Percentile, 95th Percentile, Error Rate, Throughput req/sec)
-- Observations (what performed well, where degradation was seen)
-- Bottleneck analysis
-- Recommendations
-- Pass/Fail verdict against performance SLAs
-
-#### `docs/performance-test-strategy.md`
-Performance test strategy document covering:
-- Objectives
-- Test types (load, stress, spike, soak) with definitions
-- SLA targets (response time thresholds, error rate limits, throughput goals)
-- Tools and environment
-- Monitoring approach (what metrics to watch)
-- Reporting format
-
----
-
-## ðŸ“¦ REPO 6 â€” `llm-ai-testing-framework`
-
-**README.md** â€” Professional README explaining the framework, who it's for, what it covers, folder structure, how to use the templates
-
-**Files to generate:**
-
-#### `frameworks/llm-testing-strategy.md`
-Comprehensive LLM/AI Testing Strategy document covering:
-- What makes AI testing different from traditional QA
-- Key testing dimensions: functional accuracy, consistency, hallucination, bias, toxicity, latency, context retention
-- Test types: black-box functional, regression, adversarial, boundary, performance
-- How to define "pass" and "fail" for non-deterministic outputs
-- Tools and approaches (prompt logging, response comparison, scoring rubrics)
-
-#### `checklists/llm-validation-checklist.md`
-Detailed checklist (50+ items) covering:
-- **Prompt Behavior:** does the model follow instructions, handle ambiguity, stay on topic
-- **Response Accuracy:** factual correctness, appropriate caveats, source attribution
-- **Hallucination Testing:** claims about people, dates, URLs that don't exist, made-up statistics
-- **Consistency Testing:** same prompt â†’ similar output across 10 runs
-- **Edge Cases:** empty input, very long input, code injection in prompt, conflicting instructions, multi-turn context
-- **Safety & Bias:** demographic bias, political neutrality, harmful content refusal, PII handling
-- **Performance:** response latency, timeout handling, rate limiting behavior
-
-#### `checklists/voice-agent-testing-checklist.md`
-Checklist (30+ items) for testing voice agents (e.g., built on ElevenLabs, Vapi, Twilio):
-- STT accuracy (various accents, noise conditions, overlapping speech)
-- TTS naturalness and pronunciation
-- Intent recognition accuracy
-- Multi-turn conversation context retention
-- Interrupt handling (user speaks mid-response)
-- Silence/timeout handling
-- Fallback behavior when intent not recognised
-- DTMF handling
-- Call transfer flows
-- PII scrubbing in transcripts
-- End-of-call summary accuracy
-
-#### `checklists/chat-agent-testing-checklist.md`
-Checklist (30+ items) for testing chat agents / chatbots:
-- Greeting and onboarding flow
-- Intent matching accuracy
-- Out-of-scope query handling
-- Typo and abbreviation tolerance
-- Multi-language input handling
-- Conversation context across 5+ turns
-- Handoff to human agent trigger
-- Quick reply button functionality
-- Rich media rendering
-- Rate limiting / spam handling
-- Session timeout and resume behavior
-- Accessibility (screen reader compatibility)
-
-#### `checklists/agentic-workflow-testing-checklist.md`
-Checklist (25+ items) for testing agentic AI workflows (n8n, Zapier, custom agents):
-- Trigger conditions (correct firing, no false triggers)
-- Data mapping between nodes
-- Error handling and retry logic
-- Timeout scenarios
-- Partial failure recovery
-- Loop and branch logic validation
-- External API failure simulation
-- Data type coercion edge cases
-- Webhook payload validation
-- Execution logs and audit trail
-- Rate limit handling for downstream APIs
-
-#### `test-cases/hallucination-test-suite.md`
-30 structured hallucination test cases in table format: **TC_ID | Prompt | Expected Behavior | Failure Pattern to Watch | Severity**
-Cover: made-up book titles, fake scientific studies, wrong historical dates, non-existent URLs, incorrect code syntax claimed as valid, false product features, incorrect legal/medical information.
-
-#### `test-cases/prompt-injection-tests.md`
-20 prompt injection and adversarial test cases covering:
-- Direct injection: "Ignore previous instructions and..."
-- Indirect injection via user-provided content
-- Role-play manipulation attempts
-- System prompt extraction attempts
-- Token smuggling patterns
-- Jailbreak via hypothetical framing
-
-#### `docs/local-llm-setup-guide.md`
-Write a practical guide to setting up a local LLM testing environment covering:
-- Installing Ollama on Windows/Linux
-- Pulling models (llama3, mistral, gemma)
-- Setting up Open WebUI via Docker
-- Connecting Postman to local Ollama API for automated prompt testing
-- Using n8n locally to build test workflow pipelines
-- Tips for reproducible testing (seeding, temperature=0)
-- VirtualBox setup for isolated test environments
-
----
-
-## ðŸ“¦ REPO 7 â€” `ai-agent-test-automation`
-
-**README.md** â€” Professional README explaining the concept: using AI agents (Claude Code, Cursor, Aider) to autonomously generate, run, and maintain test suites. Positioned as a cutting-edge QA engineering project.
-
-**Files to generate:**
-
-#### `docs/concept-and-architecture.md`
-Explain the multi-agent QA pipeline architecture:
-- Agent 1 â€” Feature Analyser: reads GitHub PR diffs or feature specs and identifies what needs testing
-- Agent 2 â€” Test Generator: generates Playwright Python test scripts for identified scenarios
-- Agent 3 â€” Test Executor: runs tests via pytest and captures results
-- Agent 4 â€” Self-Healer: detects broken locators and suggests fixes using DOM snapshot analysis
-- Agent 5 â€” Reporter: generates markdown summary and posts as GitHub PR comment
-- Diagram the flow using ASCII art or Mermaid diagram syntax
-
-#### `agents/feature_analyzer.py`
-Python script that:
-- Reads a feature description from a markdown file (feature_spec.md)
-- Uses the Anthropic Claude API to analyse the feature and output a JSON list of test scenarios
-- Saves output to `generated/test_scenarios.json`
-Include proper error handling, API key from env variable, logging
-
-#### `agents/test_generator.py`
-Python script that:
-- Reads `generated/test_scenarios.json`
-- For each scenario, calls Claude API to generate a Playwright Python test function
-- Assembles all functions into a single `generated/test_generated.py` file
-- Adds proper imports, fixtures, and page object references
-
-#### `agents/self_healer.py`
-Python script that:
-- Reads pytest failure output (stdin or file)
-- Identifies which locators failed
-- Uses Claude API to suggest alternative CSS/XPath selectors based on the error message context
-- Outputs suggested fixes as a markdown report
-
-#### `workflows/github-actions-ai-pipeline.yml`
-Complete GitHub Actions workflow:
-- Trigger: on pull_request
-- Step 1: Checkout code
-- Step 2: Install Python deps
-- Step 3: Run feature_analyzer.py on changed spec files
-- Step 4: Run test_generator.py
-- Step 5: Run generated tests via pytest
-- Step 6: If tests fail â†’ run self_healer.py
-- Step 7: Post test summary as PR comment using GitHub API
-
-#### `sample_specs/ecommerce_checkout_feature.md`
-A sample feature specification document for "ShopEase Guest Checkout" feature written like a real product spec, which the AI agent pipeline would use as input.
-
-#### `generated/test_scenarios.json`
-A sample output JSON from the Feature Analyser agent showing 10 test scenarios with fields: scenario_id, feature, description, test_type, priority, expected_outcome
-
-#### `generated/test_generated.py`
-A sample output from the Test Generator agent â€” a full Playwright Python test file with 8 auto-generated test functions based on the scenarios above. Include realistic page interactions, assertions, and comments marking them as AI-generated.
-
----
-
-## ðŸŒ REPO 0 (ALREADY BUILT) â€” `talhakhattak.github.io`
-
-This is the portfolio website (index.html). It has already been built. No action needed unless the agent is asked to update it.
-
----
-
-## ðŸ“‹ INSTRUCTIONS FOR THE AI AGENT
-
-When executing this file, follow this process:
-
-1. **Ask which repo to start with** â€” do not try to generate everything in one message
-2. **Generate complete files only** â€” no truncated content, no placeholder text like "add your content here"
-3. **Use realistic data throughout** â€” fictional but believable company names, user emails, product names, prices, bug descriptions
-4. **For code files** â€” ensure all code is syntactically correct and runnable
-5. **For JMX files** â€” generate valid XML that JMeter can open
-6. **For Postman JSON** â€” generate valid Postman Collection v2.1 format
-7. **After each repo is complete** â€” confirm what was generated and ask which repo to do next
-8. **Naming convention** â€” file names exactly as listed above
-9. **Tone for documentation** â€” professional, clear, concise. Write like a real Senior QA Engineer, not like AI-generated content
-
----
-
-## ðŸ—‚ï¸ FINAL GITHUB STRUCTURE OVERVIEW
-
-```
-github.com/talhakhattak/
-â”‚
-â”œâ”€â”€ talhakhattak.github.io/          â† Portfolio website (DONE)
-â”‚   â””â”€â”€ index.html
-â”‚
-â”œâ”€â”€ manual-qa-documentation-library/ â† Repo 1 â€” 12 documents
-â”‚   â”œâ”€â”€ README.md
-â”‚   â””â”€â”€ docs/
-â”‚       â”œâ”€â”€ 01_test-plan.md
-â”‚       â”œâ”€â”€ 02_test-cases.md
-â”‚       â”œâ”€â”€ 03_bug-reports.md
-â”‚       â”œâ”€â”€ 04_rtm.md
-â”‚       â”œâ”€â”€ 05_exploratory-testing-charters.md
-â”‚       â”œâ”€â”€ 06_uat-plan-and-signoff.md
-â”‚       â”œâ”€â”€ 07_test-data-guide.md
-â”‚       â”œâ”€â”€ 08_checklists.md
-â”‚       â”œâ”€â”€ 09_test-report-sprint.md
-â”‚       â”œâ”€â”€ 10_test-closure-report.md
-â”‚       â”œâ”€â”€ 11_requirement-analysis.md
-â”‚       â””â”€â”€ 12_qa-metrics-dashboard.md
-â”‚
-â”œâ”€â”€ playwright-python-automation/    â† Repo 2 â€” Full Playwright suite
-â”‚
-â”œâ”€â”€ cypress-regression-suite/        â† Repo 3 â€” Full Cypress suite
-â”‚
-â”œâ”€â”€ api-testing-postman-collections/ â† Repo 4 â€” Postman + Newman
-â”‚
-â”œâ”€â”€ performance-testing-jmeter/      â† Repo 5 â€” JMeter test plans
-â”‚
-â”œâ”€â”€ llm-ai-testing-framework/        â† Repo 6 â€” AI/LLM testing docs
-â”‚
-â””â”€â”€ ai-agent-test-automation/        â† Repo 7 â€” AI agent pipeline
-```
-
----
-
-*Generated for: Talha Khan | Senior QA Engineer | Lahore, Pakistan*
-*Contact: Talhakhattak101@gmail.com | linkedin.com/in/talha-khan-khattak/*

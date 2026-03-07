@@ -82,7 +82,7 @@ Write a complete, professional Test Plan for **ShopEase v2.1 Release** including
 - Approval section
 
 #### `/docs/02_test-cases.md`
-Write 30+ structured✦ Test Cases for ShopEase covering:
+Write 30+ structured test cases for ShopEase covering:
 - User Registration (valid, invalid, duplicate email, password rules)
 - Login / Logout (valid credentials, wrong password, account lockout, remember me)
 - Product Search (keyword, filter by category/price, sort, no results)
@@ -94,7 +94,7 @@ Write 30+ structured✦ Test Cases for ShopEase covering:
 Format each test case as a table with columns: **TC_ID | Module | Test Case Title | Preconditions | Test Steps | Expected Result | Actual Result | Status | Priority**
 
 #### `/docs/03_bug-reports.md`
-Write 15 realistic, detailed✦ Bug Reports for ShopEase covering various modules. Each bug report must include:
+Write 15 realistic, detailed bug reports for ShopEase covering various modules. Each bug report must include:
 - Bug ID (e.g., BUG-001)
 - Title (clear, descriptive)
 - Severity (Critical / High / Medium / Low)
@@ -115,7 +115,7 @@ Include bugs like: payment not processing, cart total miscalculation, broken pro
 Write a Requirements Traceability Matrix (RTM) for ShopEase. Include:
 - Introduction explaining what an RTM is and why it's used
 - Full RTM table with columns: **Req_ID | Requirement Description | Priority | Test Case IDs | Test Status | Coverage %**
-- Minimum 25 requirements mapped to✦ Test Cases
+- Minimum 25 requirements mapped to test cases
 - Summary coverage report at the bottom
 
 #### `/docs/05_exploratory-testing-charters.md`
@@ -251,12 +251,12 @@ playwright-python-automation/
 - `pages/home_page.py` â€” HomePage with nav links, search bar, product grid methods
 - `pages/product_page.py` â€” ProductPage with add_to_cart, get_price, get_product_name methods
 - `pages/cart_page.py` â€” CartPage with get_items, update_quantity, remove_item, get_total methods
-- `tests/test_login.py` â€” 8✦ Test Cases (valid login, invalid password, empty fields, SQL injection attempt, very long input, special chars, remember me, logout)
-- `tests/test_registration.py` â€” 6✦ Test Cases (successful registration, duplicate email, weak password, missing required field, invalid email format, successful with all optional fields)
-- `tests/test_product_search.py` â€” 5✦ Test Cases (search existing product, search non-existent, search with special chars, filter by category, sort by price)
-- `tests/test_cart.py` â€” 6✦ Test Cases (add single item, add multiple items, update quantity, remove item, cart persists after page refresh, empty cart state)
-- `tests/test_checkout.py` â€” 4✦ Test Cases (checkout flow full journey, checkout without login redirect, verify order summary, apply invalid coupon)
-- `tests/test_contact_form.py` â€” 3✦ Test Cases (submit valid form, submit with missing fields, verify confirmation message)
+- `tests/test_login.py` â€” 8 test cases (valid login, invalid password, empty fields, SQL injection attempt, very long input, special chars, remember me, logout)
+- `tests/test_registration.py` â€” 6 test cases (successful registration, duplicate email, weak password, missing required field, invalid email format, successful with all optional fields)
+- `tests/test_product_search.py` â€” 5 test cases (search existing product, search non-existent, search with special chars, filter by category, sort by price)
+- `tests/test_cart.py` â€” 6 test cases (add single item, add multiple items, update quantity, remove item, cart persists after page refresh, empty cart state)
+- `tests/test_checkout.py` â€” 4 test cases (checkout flow full journey, checkout without login redirect, verify order summary, apply invalid coupon)
+- `tests/test_contact_form.py` â€” 3 test cases (submit valid form, submit with missing fields, verify confirmation message)
 - `conftest.py` â€” pytest fixtures (browser, page, base_url, authenticated_page)
 - `utils/config.py` â€” Config class loading from environment variables (BASE_URL, HEADLESS, SLOW_MO, BROWSER_TYPE)
 - `utils/helpers.py` â€” Helper functions (generate_random_email, generate_random_string, read_test_data_from_json)
@@ -308,11 +308,11 @@ cypress-regression-suite/
 - `cypress/fixtures/users.json` â€” test users data (standard_user, locked_out_user, problem_user with passwords)
 - `cypress/support/commands.js` â€” custom commands: cy.login(username, password), cy.addItemToCart(itemName), cy.clearCart()
 - `cypress/support/e2e.js` â€” global hooks and imports
-- `cypress/e2e/login.cy.js` â€” 7✦ Test Cases with full describe/it blocks
-- `cypress/e2e/inventory.cy.js` â€” 5✦ Test Cases (view products, sort, add to cart, badge counter)
-- `cypress/e2e/cart.cy.js` â€” 5✦ Test Cases
-- `cypress/e2e/checkout.cy.js` â€” 6✦ Test Cases (full checkout, missing fields, continue shopping)
-- `cypress/e2e/navigation.cy.js` â€” 4✦ Test Cases (burger menu, back to products, footer links)
+- `cypress/e2e/login.cy.js` â€” 7 test cases with full describe/it blocks
+- `cypress/e2e/inventory.cy.js` â€” 5 test cases (view products, sort, add to cart, badge counter)
+- `cypress/e2e/cart.cy.js` â€” 5 test cases
+- `cypress/e2e/checkout.cy.js` â€” 6 test cases (full checkout, missing fields, continue shopping)
+- `cypress/e2e/navigation.cy.js` â€” 4 test cases (burger menu, back to products, footer links)
 - `cypress.config.js` â€” full config with baseUrl, viewportWidth/Height, video, screenshots, reporter setup
 - `package.json` â€” with cypress, mochawesome, mochawesome-merge, mochawesome-report-generator
 - `.github/workflows/cypress-tests.yml` â€” CI workflow with Node setup, install, run, merge reports, upload artifact
@@ -473,11 +473,11 @@ Checklist (25+ items) for testing agentic AI workflows (n8n, Zapier, custom agen
 - Rate limit handling for downstream APIs
 
 #### `test-cases/hallucination-test-suite.md`
-30 structured hallucination✦ Test Cases in table format: **TC_ID | Prompt | Expected Behavior | Failure Pattern to Watch | Severity**
+30 structured hallucination test cases in table format: **TC_ID | Prompt | Expected Behavior | Failure Pattern to Watch | Severity**
 Cover: made-up book titles, fake scientific studies, wrong historical dates, non-existent URLs, incorrect code syntax claimed as valid, false product features, incorrect legal/medical information.
 
 #### `test-cases/prompt-injection-tests.md`
-20 prompt injection and adversarial✦ Test Cases covering:
+20 prompt injection and adversarial test cases covering:
 - Direct injection: "Ignore previous instructions and..."
 - Indirect injection via user-provided content
 - Role-play manipulation attempts
@@ -607,7 +607,7 @@ github.com/talhakhattak/
 â”‚
 â”œâ”€â”€ api-testing-postman-collections/ â† Repo 4 â€” Postman + Newman
 â”‚
-â”œâ”€â”€ performance-testing-jmeter/      â† Repo 5 â€” JMeter✦ Test Plans
+â”œâ”€â”€ performance-testing-jmeter/      â† Repo 5 â€” JMeter test plans
 â”‚
 â”œâ”€â”€ llm-ai-testing-framework/        â† Repo 6 â€” AI/LLM testing docs
 â”‚

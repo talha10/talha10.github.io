@@ -786,24 +786,23 @@ footer span{font-family:var(--mono);font-size:.62rem;color:var(--sub)}
          📸 PROFILE PHOTO — FULLY FUNCTIONAL
          Click the circle → choose your photo → instant preview!
          ═══════════════════════════════════════ -->
-    <div class="photo-zone">
-      <div class="photo-ring-a"></div>
-      <div class="photo-ring-b"></div>
-      <div class="photo-circle" id="photo-circle">
-        <div class="photo-initials-main" id="photo-initials">TK</div>
-        <div class="photo-initials-hint">
-          <div class="photo-upload-icon">📷</div>
-          <div class="photo-upload-txt">Click to upload<br>your photo</div>
-        </div>
-        <input type="file" id="photo-input" accept="image/*" onchange="handlePhoto(this)"/>
-        <img id="photo-preview" alt="Profile photo"/>
-      </div>
-      <div class="orb o1"></div>
-      <div class="orb o2"></div>
-      <div class="orb o3"></div>
-      <div class="photo-avail"><div class="avail-dot"></div><span class="avail-txt">Available for work</span></div>
-    </div>
-    <div class="photo-tip" id="photo-tip">↑ Click circle to upload your photo</div>
+<div class="photo-zone">
+  <div class="photo-ring-a"></div>
+  <div class="photo-ring-b"></div>
+  <div class="photo-circle" id="photo-circle">
+    <img
+      id="photo-preview"
+      src="https://raw.githubusercontent.com/talha10/talha10.github.io/master/TalhaProfile-1.gif"
+      alt="Talha Profile photo"
+      style="display:block;width:100%;height:100%;object-fit:cover;border-radius:50%;"
+    />
+  </div>
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+  <div class="photo-avail"><div class="avail-dot"></div><span class="avail-txt">Available for work</span></div>
+</div>
+    <div class="photo-tip" id="photo-tip">Profile photo</div>
 
     <div class="pcard">
       <div class="pcard-header"><div class="wdot wr"></div><div class="wdot wy"></div><div class="wdot wg"></div><span class="pcard-file">talha.profile.json</span></div>
@@ -1074,20 +1073,7 @@ function closeLB(e){
 }
 
 /* ═══ PHOTO UPLOAD ═══ */
-function handlePhoto(input){
-  const file = input.files[0];
-  if(!file) return;
-  const reader = new FileReader();
-  reader.onload = (e)=>{
-    const img = document.getElementById('photo-preview');
-    img.src = e.target.result;
-    img.style.display = 'block';
-    document.getElementById('photo-initials').style.display = 'none';
-    document.getElementById('photo-tip').textContent = '✓ Photo uploaded! Looking great.';
-    document.getElementById('photo-tip').style.color = 'var(--a)';
-  };
-  reader.readAsDataURL(file);
-}
+
 
 /* ═══ AURORA CANVAS ═══ */
 (function aurora(){
